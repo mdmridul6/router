@@ -60,7 +60,7 @@ class PackagesController extends Controller
     }
 
     public function sellerPackage(){
-        dd(Packages::with(['seller'])->get());
+
         return view('backend.packages.sellerPackage');
     }
 

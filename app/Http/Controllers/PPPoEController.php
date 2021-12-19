@@ -62,6 +62,7 @@ class PPPoEController extends Controller
                         $pppoe->save();
                     }elseif($checkUsers->username == $users['name']){
                     continue;
+                    $pppoe = new PPPoE();
                     $pppoe->username = $users['name'];
                     $pppoe->password = $users['password'];
                     $pppoe->service = $users['service'];
