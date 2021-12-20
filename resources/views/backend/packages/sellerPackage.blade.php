@@ -7,9 +7,9 @@
                     Seller Packages
                 </div>
                 <div class="card-toolbar">
-                    <button  class="btn btn-sm btn-secondary" >
+                    <a href="{{route('admin.package.sellerPackageDedicate')}}" class="btn btn-sm btn-secondary" >
                         Set Package
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -18,14 +18,24 @@
                     <tr>
                         <th>Serial</th>
                         <th>Name</th>
-                        <th>Ip Address</th>
+                        <th>Packages</th>
+                        <th>Action</th>
 
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($data  as $details)
+                        <tr class="text-center">
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$details->userName}}</td>
+                            <td>
+                                @foreach($details->package as $packages)
+                                    <span class="badge badge-primary">{{$packages->name}}</span>
+                                @endforeach
+                            </td>
 
-
-
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

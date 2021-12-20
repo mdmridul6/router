@@ -16,7 +16,7 @@ class SellerPackages extends Migration
         Schema::create('seller_packages', function (Blueprint $table) {
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('packages_id');
-            $table->decimal('amount',8,2,true);
+            $table->decimal('amount',8,2,true)->nullable();
             $table->foreign('seller_id')->references('id')->on('sellers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('packages_id')->references('id')->on('packages')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

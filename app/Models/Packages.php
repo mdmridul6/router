@@ -18,6 +18,6 @@ class Packages extends Model
 
     public function seller(): BelongsToMany
     {
-        return $this->belongsToMany(Packages::class,'seller_packages','seller_id');
+        return $this->belongsToMany(Packages::class,'seller_packages',);
     }
 }
