@@ -6,6 +6,8 @@ use App\Helper\Connector;
 use App\Models\Packages;
 use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;
@@ -29,6 +31,13 @@ class PackagesController extends Controller
     }
 
 
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws QueryException
+     * @throws BadCredentialsException
+     * @throws ConfigException
+     */
     public function create(): JsonResponse
     {
         $client = Connector::Connector();
@@ -60,8 +69,32 @@ class PackagesController extends Controller
     }
 
     public function sellerPackage(){
+        $data=Seller::with('package')->get();
+        return view('backend.packages.sellerPackage',compact('data'));
+    }
 
-        return view('backend.packages.sellerPackage');
+
+    public function sellerPackageAssign(){
+        $seller=Seller::all();
+        $package=Packages::all();
+        $data=[
+            "seller"=>$seller,
+            "package"=>$package
+        ];
+
+        return view('backend.packages.sellerPackageAssign',compact('data'));
+
+    }
+
+    public function sellerPackageDedicate(Request $request): RedirectResponse
+    {
+        dd($request);
+        $seller=Seller::find($request->sellerid);
+
+
+        $seller->package()->sync();
+
+        return redirect()->back();
     }
 
 }

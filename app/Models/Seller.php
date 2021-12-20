@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @method static create(array $array, array $array1)
  * @method static insert(array[] $data)
+ * @method static find(int $int)
  */
 class Seller extends Model
 {
@@ -16,6 +17,6 @@ class Seller extends Model
 
     public function package(): BelongsToMany
     {
-        return $this->belongsToMany(Packages::class,'seller_packages','packages_id');
+        return $this->belongsToMany(Packages::class,'seller_packages');
     }
 }
