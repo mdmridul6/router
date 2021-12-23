@@ -19,8 +19,6 @@
                         <th>Serial</th>
                         <th>Name</th>
                         <th>Packages</th>
-                        <th>Action</th>
-
                     </tr>
                     </thead>
                     <tbody>

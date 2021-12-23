@@ -13,7 +13,7 @@
                     <div class="col-12 col-sm-12 col-ml-12 col-lg-12 col-xl-12">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-ml-6 col-lg-6 col-xl-6">
-                                <label for="seller">Select Seller</label>
+                                <label for="sellerId">Select Seller</label>
                                 <select name="seller" id="sellerId" class="form-select">
                                     @foreach($data['seller'] as $seller)
                                         <option value="{{$seller->id}}">{{$seller->userName}}</option>
@@ -35,7 +35,8 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-12 col-ml-6 col-lg-6 col-xl-6">
-                                            <input type="text" id="amountInput{{$package->id}}" name="amounts[]" id="amount[]" class="form-control form-control-sm" disabled>
+                                            <label for="amountInput{{$package->id}}"></label>
+                                            <input type="text" id="amountInput{{$package->id}}" name="amounts[]" class="form-control form-control-sm" disabled>
                                         </div>
                                         @endif
                                     @endforeach
