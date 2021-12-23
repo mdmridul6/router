@@ -17,6 +17,6 @@ class Seller extends Model
 
     public function package(): BelongsToMany
     {
-        return $this->belongsToMany(Packages::class,'seller_packages');
+        return $this->belongsToMany(Packages::class,'seller_packages')->withPivot('amount');
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;
@@ -56,15 +57,11 @@ class PackagesController extends Controller
                 $packageData->save();
             }
         }
-
-
-
         $data = [
             'status' => "Import Successful",
             'data' => "Import Successful",
             'icon' => 'success'
         ];
-
         return response()->json($data);
     }
 
@@ -88,13 +85,19 @@ class PackagesController extends Controller
 
     public function sellerPackageDedicate(Request $request): RedirectResponse
     {
-        dd($request);
-        $seller=Seller::find($request->sellerid);
 
+        $seller=Seller::find($request->seller);
 
-        $seller->package()->sync();
-
-        return redirect()->back();
+        //        Marge Package & Amount Array
+        $merged=collect($request->input('packages'))->zip($request->input('amounts'))->map(function ($value){
+            return [
+                'packages_id'=>$value[0],
+                'amount'=>$value[1]
+            ];
+        });
+        $seller->package()->sync($merged);
+        Session::flash('message',"Seller Package Assign Successful");
+        return redirect()->route('admin.package.sellerPackage');
     }
 
 }
