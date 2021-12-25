@@ -28,18 +28,9 @@
                             <td>{{$details->userName}}</td>
                             <td>
                                 @foreach($details->package as $packages)
-                                    <span class="badge badge-light-dark">
+
                                     <span class="badge badge-primary">{{$packages->name}}</span>
-                                    <span class="badge badge-danger">{{$packages->pivot->amount}}</span>
-                                    </span>
-
-{{--                                    <ul class="list-group list-group-horizontal-sm list-inline">--}}
-{{--                                        <li class="list-group-item">{{$packages->name}}</li>--}}
-
-{{--                                        @if(isset($packages->pivot->amount))--}}
-{{--                                            <li class="list-group-item">{{$packages->pivot->amount}}</li>--}}
-{{--                                        @endif--}}
-{{--                                    </ul>--}}
+                                    <span class="badge badge-danger">{{$packages->pivot->amount}}</span>&emsp;
                                 @endforeach
                             </td>
 

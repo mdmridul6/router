@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -32,7 +33,6 @@ class SellerController extends Controller
      */
     public function create()
     {
-
         return view('backend.seller.create');
 
     }
@@ -54,25 +54,21 @@ class SellerController extends Controller
             'nid' => 'required|max:19|unique:sellers',
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255',
+            'email' => 'required|max:255|unique:users,email',
             'address' => 'required||max:255',
 
         ]);
 
-
-
+        $user=new  User();
         $sellerData = new Seller();
-        $this->extracted($request, $sellerData);
+
+
+        $this->extracted($request, $user, $sellerData);
+
+
         Session::flash('message',"Seller Add Successfully");
         return  redirect()->route('admin.seller.index')->withInput();
 
-    }
-
-
-    public function show(Seller $seller)
-    {
-        Session::flash('error',"seller Delete Successful");
-        return redirect()->back();
     }
 
     public function edit(Seller $seller)
@@ -83,7 +79,7 @@ class SellerController extends Controller
     }
 
 
-    public function update(Request $request, Seller $seller)
+    public function update(Request $request, Seller $seller): RedirectResponse
     {
         $request->validate([
             'image' => 'image|mimes:jpg,jpeg,|max:2048|min:100',
@@ -93,7 +89,7 @@ class SellerController extends Controller
             'nid' => 'required|max:19|unique:sellers,nid,'.$seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255',
+            'email' => 'required|max:255|unique:users,email'.$seller->email,
             'address' => 'required||max:255',
 
         ]);
@@ -101,14 +97,15 @@ class SellerController extends Controller
 
 
         $sellerData =Seller::where('id',$seller->id)->first();
-        $this->extracted($request, $sellerData);
+        $user=User::where('id',$sellerData->user_id)->first();
+        $this->extracted($request, $user, $sellerData);
         Session::flash('message',"Seller Update Successfully");
         return  redirect()->route('admin.seller.index')->withInput();
 
     }
 
 
-    public function destroy(Seller $seller)
+    public function destroy(Seller $seller): RedirectResponse
     {
 
         Seller::destroy($seller->id);
@@ -118,19 +115,26 @@ class SellerController extends Controller
 
     /**
      * @param Request $request
-     * @param $seller
+     * @param $user
+     * @param $sellerData
      * @return void
      */
-    private function extracted(Request $request, $sellerData): void
+    private function extracted(Request $request, $user, $sellerData): void
     {
+        $user->name = $request->fullName;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = "Seller";
+        $user->save();
         $sellerData->userName = $request->userName;
-        $sellerData->password = Hash::make($request->password);
+        $sellerData->password = $request->password;
         $sellerData->fullName = $request->fullName;
         $sellerData->nid = $request->nid;
         $sellerData->phone = $request->phone;
         $sellerData->mobile = $request->mobile;
         $sellerData->email = $request->email;
         $sellerData->address = $request->address;
+        $sellerData->user_id = $user->id;
         if ($request->hasFile('image')) {
             $path = Helper::imageUploader($request);
             $sellerData->image = $path;
@@ -138,4 +142,6 @@ class SellerController extends Controller
 
         $sellerData->save();
     }
+
+
 }

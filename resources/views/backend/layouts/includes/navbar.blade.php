@@ -48,7 +48,7 @@
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px"
                              data-kt-menu-trigger="click" data-kt-menu-attach="parent"
                              data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-                            <img src="{{asset('backend/assets/media/avatars/150-26.jpg')}}" alt="metronic"/>
+                            <img src="{{(isset($seller->image)) ? asset($seller->image) : asset("backend/assets/media/avatars/blank.png") }}" alt="metronic"/>
                         </div>
                         <!--begin::Menu-->
                         <div
@@ -60,16 +60,16 @@
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px me-5">
                                         <img alt="Logo"
-                                             src="{{asset('backend/assets/media/avatars/150-26.jpg')}}"/>
+                                             src="{{(isset($seller->image)) ? asset($seller->image) : asset("backend/assets/media/avatars/blank.png") }}"/>
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
                                     <div class="d-flex flex-column">
-                                        <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                        <div class="fw-bolder d-flex align-items-center fs-5 text-capitalize">{{auth()->user()->name}}
                                             <span
-                                                class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
+                                                class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{auth()->user()->role}}</span>
                                         </div>
-                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
                                     </div>
                                     <!--end::Username-->
                                 </div>
