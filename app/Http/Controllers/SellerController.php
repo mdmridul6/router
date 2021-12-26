@@ -23,7 +23,7 @@ class SellerController extends Controller
     public function index()
     {
         $sellers=Seller::all();
-        return view('backend.seller.list',compact('sellers'));
+        return view('backend.admin.seller.list',compact('sellers'));
     }
 
     /**
@@ -33,7 +33,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('backend.seller.create');
+        return view('backend.admin.seller.create');
 
     }
 
@@ -74,7 +74,7 @@ class SellerController extends Controller
     public function edit(Seller $seller)
     {
         $data=Seller::where('id',$seller->id)->first();
-        return view('backend.seller.edit',compact('data'));
+        return view('backend.admin.seller.edit',compact('data'));
 
     }
 

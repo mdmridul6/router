@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Response;
+use App\Models\Seller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,18 +27,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return Application|Factory|View
-     */
-    public function registration()
-    {
-        return view('auth.registration');
-    }
 
 
-    public function postLogin(Request $request)
+    public function postLogin(Request $request): RedirectResponse
     {
 
         $credentials = $request->validate([
@@ -44,9 +37,14 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('admin.home');
+        if (Auth::attempt($credentials,$request->remember)) {
+            $user=User::where('email',$request->email)->first();
+            Auth::login($user);
+            if (Auth::user()->role == "Admin"){
+                return redirect()->route('admin.home');
+            }else{
+                return redirect()->route('seller.home');
+            }
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -60,40 +58,26 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        if (Auth::check()) {
-            return view('backend.home.home');
+        if (Auth::user()->role == "Admin"){
+            return view('backend.admin.home.home');
+        }else{
+            $seller=Seller::where('user_id',Auth::id())->first();
+            return view('backend.seller.home.home',compact('seller'));
         }
-        return redirect("login")->withSuccess('Opps! You do not have access');
-    }
-
-
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
+        return redirect("login")->with('You do not have access');
     }
 
 
 
     /**
-
      * Write code on Method
      *
-     * @return response()
+     * @return Application|RedirectResponse|Redirector
      */
     public function logout()
     {
-
         Session::flush();
         Auth::logout();
-        return Redirect('login');
+        return redirect()->route('login');
     }
 }

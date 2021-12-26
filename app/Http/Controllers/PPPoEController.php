@@ -28,17 +28,17 @@ class PPPoEController extends Controller
             $client = Connector::Connector();
             $data = $client->query('/ppp/secret/print')->read();
 
-            return view('backend.pppoe.list', compact('data'));
+            return view('backend.admin.pppoe.list', compact('data'));
         }
 
         public function isActive()
         {
-            return view('backend.pppoe.active' );
+            return view('backend.admin.pppoe.active' );
         }
 
         public function routerUser(){
             $data=PPPoE::all();
-            return view('backend.pppoe.userList',compact('data'));
+            return view('backend.admin.pppoe.userList',compact('data'));
         }
 
         public function import(): JsonResponse
@@ -142,7 +142,8 @@ class PPPoEController extends Controller
      * @throws BadCredentialsException
      * @throws ConfigException
      */
-    private function userCheck($request){
+    private function userCheck($request): bool
+    {
             $client = Connector::Connector();
 
             $query =

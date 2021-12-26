@@ -28,7 +28,7 @@ class PackagesController extends Controller
     public function index(){
         $client=Connector::Connector();
         $packages = $client->query('/ppp/profile/print')->read();
-        return view('backend.packages.list',compact('packages'));
+        return view('backend.admin.packages.list',compact('packages'));
     }
 
 
@@ -67,7 +67,7 @@ class PackagesController extends Controller
 
     public function sellerPackage(){
         $data=Seller::with('package')->get();
-        return view('backend.packages.sellerPackage',compact('data'));
+        return view('backend.admin.packages.sellerPackage',compact('data'));
     }
 
 
@@ -79,7 +79,7 @@ class PackagesController extends Controller
             "package"=>$package
         ];
 
-        return view('backend.packages.sellerPackageAssign',compact('data'));
+        return view('backend.admin.packages.sellerPackageAssign',compact('data'));
 
     }
 

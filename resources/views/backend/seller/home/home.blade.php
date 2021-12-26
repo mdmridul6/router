@@ -1,4 +1,4 @@
-@extends('backend.layouts.layout')
+@extends('backend.seller.layouts.layout')
 @section('content')
 
                 <!--begin::Container-->

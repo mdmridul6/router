@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-    @include('backend.layouts.includes.style')
+    @include('backend.admin.layouts.includes.style')
 
 </head>
 <!--end::Head-->
@@ -25,7 +25,7 @@
             <!--begin::Brand-->
             <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                 <!--begin::Logo-->
-                <a href="#">
+                <a href="{{route('admin.home')}}">
                     <img alt="Logo" src="{{asset('backend/assets/media/logos/logo-1-dark.svg')}}" class="h-15px logo"/>
                 </a>
                 <!--end::Logo-->
@@ -42,14 +42,14 @@
                 <!--end::Aside toggler-->
             </div>
             <!--end::Brand-->
-            @include('backend.layouts.includes.sidebar')
+            @include('backend.admin.layouts.includes.sidebar')
 
         </div>
         <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-        @include('backend.layouts.includes.navbar')
+        @include('backend.admin.layouts.includes.navbar')
         <!--begin::Content-->
 
             <!--begin::Post-->
@@ -72,7 +72,7 @@
 </div>
 <!--end::Scrolltop-->
 <!--end::Main-->
-@include('backend.layouts.includes.script')
+@include('backend.admin.layouts.includes.script')
 </body>
 <!--end::Body-->
 </html>
