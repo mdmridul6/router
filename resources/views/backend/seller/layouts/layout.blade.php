@@ -33,7 +33,7 @@
                 <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
                      data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
                      data-kt-toggle-name="aside-minimize">
-                    <!--begin::Svg Icon | path: icons/duotone/Navigation/Angle-double-left.svg-->
+
                     <span class="svg-icon svg-icon-1 rotate-180">
                             <i class="fas fa-angle-double-left"></i>
                         </span>
@@ -42,14 +42,14 @@
                 <!--end::Aside toggler-->
             </div>
             <!--end::Brand-->
-            @include('backend.admin.layouts.includes.sidebar')
+            @include('backend.seller.layouts.includes.sidebar')
 
         </div>
         <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-        @include('backend.admin.layouts.includes.navbar')
+        @include('backend.seller.layouts.includes.navbar')
         <!--begin::Content-->
 
             <!--begin::Post-->
@@ -72,7 +72,7 @@
 </div>
 <!--end::Scrolltop-->
 <!--end::Main-->
-@include('backend.admin.layouts.includes.script')
+@include('backend.seller.layouts.includes.script')
 </body>
 <!--end::Body-->
 </html>

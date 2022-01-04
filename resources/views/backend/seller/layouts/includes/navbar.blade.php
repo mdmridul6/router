@@ -41,8 +41,12 @@
             <div class="d-flex align-items-stretch flex-shrink-0">
                 <!--begin::Toolbar wrapper-->
                 <div class="d-flex align-items-stretch flex-shrink-0">
-
-
+                        <div class="d-flex align-items-center flex-shrink-4">
+                            <h5>
+                                <span class="text-center text-danger">Balance : </span>
+                                <span class="text-center text-info">{{auth()->user()->seller->balance}} </span>
+                            </h5>
+                        </div>
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px"

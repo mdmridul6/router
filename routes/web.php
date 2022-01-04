@@ -68,30 +68,16 @@ Route::middleware(['auth','seller'])->group(function () {
         Route::get('dashboard', [AuthController::class, 'dashboard'])->name('home');
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
-            Route::get('/routerUser', [PPPoEController::class, 'index'])->name('index');
-            Route::get('/', [PPPoEController::class, 'routerUser'])->name('routerUser');
+            Route::get('/', [PPPoEController::class, 'sellerPPPoeUsers'])->name('routerUser');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
-            Route::post('/import', [PPPoEController::class, 'import'])->name('import');
-            Route::get('/check', [PPPoEController::class, 'isActive'])->name('ActiveList');
-            Route::post('/check', [PPPoEController::class, 'activeCheck'])->name('activeList');
+            Route::get('/check', [PPPoEController::class, 'isActiveSeller'])->name('ActiveList');
+            Route::post('/check', [PPPoEController::class, 'activeCheckSeller'])->name('activeList');
         });
 
-        Route::prefix('sellers')->name('seller.')->group(function () {
-            Route::get('/',[SellerController::class,'index'])->name('index');
-            Route::get('/create',[SellerController::class,'create'])->name('create');
-            Route::post('/create',[SellerController::class,'store'])->name('store');
-            Route::get('/{seller}/show',[SellerController::class,'show'])->name('show');
-            Route::get('/{seller}/edit',[SellerController::class,'edit'])->name('edit');
-            Route::put('/{seller}/update',[SellerController::class,'update'])->name('update');
-            Route::delete('/delete/{seller}',[SellerController::class,'destroy'])->name('destroy');
-        });
+
         Route::prefix('package')->name('package.')->group(function () {
-            Route::get('/',[PackagesController::class,'index'])->name('index');
-            Route::post('/import',[PackagesController::class,'create'])->name('create');
-            Route::get('/seller',[PackagesController::class,'sellerPackage'])->name('sellerPackage');
-            Route::get('/seller/dedicate',[PackagesController::class,'sellerPackageAssign'])->name('sellerPackageDedicate');
-            Route::post('/seller/dedicate',[PackagesController::class,'sellerPackageDedicate'])->name('sellerPackageDedicate');
+            Route::get('/',[PackagesController::class,'sellerPackages'])->name('index');
         });
     });
 });

@@ -1,8 +1,8 @@
-@extends('backend.admin.layouts.layout')
+@extends('backend.seller.layouts.layout')
 
 
 @section('content')
-    <div id="kt_content_container" class="container">
+    <div id="kt_content_container" class="container-fluid">
 
         <div class="card">
             <div class="card-header">
@@ -44,10 +44,11 @@
             e.preventDefault();
             let name = $('#name').val();
 
-            axios.post("{{route('admin.pppoe.ActiveList')}}", {
+            axios.post("{{route('seller.pppoe.ActiveList')}}", {
                 name: name,
             }).then(function (response) {
                         let jsondata = response.data;
+                        console.log(jsondata);
                         Swal.fire(
                             jsondata.status,
                             '',

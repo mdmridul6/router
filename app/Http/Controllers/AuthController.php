@@ -8,10 +8,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -58,11 +56,11 @@ class AuthController extends Controller
 
     public function dashboard()
     {
+
         if (Auth::user()->role == "Admin"){
             return view('backend.admin.home.home');
         }else{
-            $seller=Seller::where('user_id',Auth::id())->first();
-            return view('backend.seller.home.home',compact('seller'));
+            return view('backend.seller.home.home');
         }
         return redirect("login")->with('You do not have access');
     }
@@ -72,9 +70,9 @@ class AuthController extends Controller
     /**
      * Write code on Method
      *
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Session::flush();
         Auth::logout();

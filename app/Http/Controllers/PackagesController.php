@@ -8,6 +8,7 @@ use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
@@ -25,10 +26,11 @@ class PackagesController extends Controller
      * @throws QueryException
      * @throws ConfigException
      */
-    public function index(){
-        $client=Connector::Connector();
+    public function index()
+    {
+        $client = Connector::Connector();
         $packages = $client->query('/ppp/profile/print')->read();
-        return view('backend.admin.packages.list',compact('packages'));
+        return view('backend.admin.packages.list', compact('packages'));
     }
 
 
@@ -44,13 +46,13 @@ class PackagesController extends Controller
         $client = Connector::Connector();
         $packages = $client->query('/ppp/profile/print')->read();
         foreach ($packages as $package) {
-            $checkPackage=Packages::where('name',$packages["name"])->first();
-            if (is_null($checkPackage)){
+            $checkPackage = Packages::where('name', $packages["name"])->first();
+            if (is_null($checkPackage)) {
                 $packageData = new Packages();
                 $packageData->name = $package['name'];
                 $packageData->ipAddress = $package['local-address'];
                 $packageData->save();
-            }elseif($checkPackage->name == $package['name']){
+            } elseif ($checkPackage->name == $package['name']) {
                 $packageData = new Packages();
                 $packageData->name = $package['name'];
                 $packageData->ipAddress = $package['local-address'];
@@ -65,39 +67,47 @@ class PackagesController extends Controller
         return response()->json($data);
     }
 
-    public function sellerPackage(){
-        $data=Seller::with('package')->get();
-        return view('backend.admin.packages.sellerPackage',compact('data'));
+    public function sellerPackage()
+    {
+        $data = Seller::with('package')->get();
+        return view('backend.admin.packages.sellerPackage', compact('data'));
     }
 
 
-    public function sellerPackageAssign(){
-        $seller=Seller::all();
-        $package=Packages::all();
-        $data=[
-            "seller"=>$seller,
-            "package"=>$package
+    public function sellerPackageAssign()
+    {
+        $seller = Seller::all();
+        $package = Packages::all();
+        $data = [
+            "seller" => $seller,
+            "package" => $package
         ];
 
-        return view('backend.admin.packages.sellerPackageAssign',compact('data'));
+        return view('backend.admin.packages.sellerPackageAssign', compact('data'));
 
     }
 
     public function sellerPackageDedicate(Request $request): RedirectResponse
     {
 
-        $seller=Seller::find($request->seller);
+        $seller = Seller::find($request->seller);
 
         //        Marge Package & Amount Array
-        $merged=collect($request->input('packages'))->zip($request->input('amounts'))->map(function ($value){
+        $merged = collect($request->input('packages'))->zip($request->input('amounts'))->map(function ($value) {
             return [
-                'packages_id'=>$value[0],
-                'amount'=>$value[1]
+                'packages_id' => $value[0],
+                'amount' => $value[1]
             ];
         });
         $seller->package()->sync($merged);
-        Session::flash('message',"Seller Package Assign Successful");
+        Session::flash('message', "Seller Package Assign Successful");
         return redirect()->route('admin.package.sellerPackage');
+    }
+
+    public function sellerPackages()
+    {
+        $packages=Seller::with('package')->where('user_id', Auth::id())->get();
+        return view('backend.seller.packages.list',compact('packages'));
     }
 
 }

@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="menu-item">
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{route('seller.home')}}">
 										<span class="menu-icon">
 											<span class="svg-icon svg-icon-2">
 												<i class="fas fa-home"></i>
@@ -44,24 +44,15 @@
 									</span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.package.index')}}">
+                        <a class="menu-link" href="{{route('seller.package.index')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-                            <span class="menu-title">Router Packages</span>
+                            <span class="menu-title">My Packages</span>
                         </a>
                     </div>
                 </div>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.package.sellerPackage')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                            <span class="menu-title">Seller Packages</span>
-                        </a>
-                    </div>
-                </div>
+
             </div>
 
             <div class="menu-item">
@@ -69,29 +60,7 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Users</span>
                 </div>
             </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<span class="menu-link">
-										<span class="menu-icon">
 
-											<span class="svg-icon svg-icon-2">
-												<i class="fas fa-user"></i>
-											</span>
-
-										</span>
-										<span class="menu-title">Seller</span>
-										<span class="menu-arrow"></span>
-									</span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.seller.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                            <span class="menu-title">All Seller</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -104,29 +73,10 @@
 										<span class="menu-title">PPPoE</span>
 										<span class="menu-arrow"></span>
 									</span>
+
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="#">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                            <span class="menu-title">Overview</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                            <span class="menu-title">Router Users</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.routerUser')}}">
+                        <a class="menu-link" href="{{route('seller.pppoe.routerUser')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -136,7 +86,7 @@
                 </div>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.ActiveList')}}">
+                        <a class="menu-link" href="{{route('seller.pppoe.ActiveList')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
