@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/user/router/
     - /bin/cp * $DEPLOYPATH
-    - - /bin/cp * $DEPLOYPATH
+    - /bin/cp * $DEPLOYPATH
