@@ -3,3 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/minjuonl/router/
     - /bin/cp * $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
