@@ -19,15 +19,16 @@ class PPPoESeeder extends Seeder
         $client = Connector::Connector();
         $data = $client->query('/ppp/secret/print')->read();
         foreach ($data as $users) {
-            $pppoe =new PPPoE();
+            $pppoe = new PPPoE();
             $pppoe->username = $users['name'];
             $pppoe->password = $users['password'];
             $pppoe->service = $users['service'];
             $pppoe->profile = $users['profile'];
             $pppoe->active_date = Carbon::now();
             $pppoe->package_active_date = Carbon::now();
-            $pppoe->package_expire_date = Carbon::now();
+            $pppoe->package_expire_date = Carbon::now()->addMonth(1);
             $pppoe->seller_id = null;
+            $pppoe->status = true;
             $pppoe->save();
         }
     }

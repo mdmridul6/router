@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @method static create(array $array)
  * @method static where(string $string, $user_id)
+ * @method static create(array $array)
  */
 class User extends Authenticatable
 {
@@ -50,6 +51,6 @@ class User extends Authenticatable
 
     public function seller(): HasOne
     {
-        return $this->hasOne(Seller::class,'user_id','id');
+        return $this->hasOne(Seller::class, 'user_id', 'id');
     }
 }

@@ -17,15 +17,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create( [
+        User::create([
             'name' => "Admin",
             'email' => "admin@gmail.com",
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make(123456), // password,
-            'role'=>'admin',
+            'role' => 'Admin',
             'remember_token' => Str::random(10),
         ]);
     }
-
-
 }
