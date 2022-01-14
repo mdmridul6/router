@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    @include('frontend.layoyts.style')
+    @include('frontend.layouts.style')
 
 </head>
 
@@ -15,6 +15,6 @@
     @yield('content')
 </body>
 
-@include('frontend.layoyts.script')
+@include('frontend.layouts.script')
 
 </html>

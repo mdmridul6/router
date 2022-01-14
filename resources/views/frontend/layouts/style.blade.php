@@ -1,0 +1,11 @@
+<link href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/fonts/themify-icons.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/fonts/etline.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/owl.theme.default.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/lightbox.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/owl.theme.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/animate.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('frontend/css/responsive.css')}}" rel="stylesheet" type="text/css" />

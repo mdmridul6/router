@@ -1,0 +1,29 @@
+@media only screen and (max-width: 991px){
+	.about_image{text-align: center;}
+	.owl-nav {display: none;}
+	.box{margin-bottom: 30px;}
+	.pricingTable{margin-bottom: 30px;}
+    .our-team{margin-bottom: 30px;}
+	.post-slide{margin-bottom : 30px;}
+}
+@media only screen and (max-width: 767px){
+	.navbar-brand p{font-size: 23px;}
+	.single-slide-item h1{font-size: 30px; margin-bottom: 10px;}
+	.single_slide_item_button{margin-top: 15px;}
+	.section_heading h2{font-size: 30px;}
+	.section_heading p{font-size: 14px;}
+	.single-slide-item p{font-size: 13px; margin-bottom: 10px;}
+	.about_content{margin-bottom: 30px;}
+	.about_content span{font-size: 13px;}
+	.about_content h3{font-size: 20px;}
+	.about_content p{font-size: 13px;}
+	.main_btn{padding: 9px 26px; font-size: 13px;}
+	.single_service{margin-bottom: 30px;}
+	.single_testimonial{text-align: center;}
+	.contact_details{margin-bottom: 30px;}
+	.actions{margin-top: 30px;}
+	.carousel-control{display: none;}
+	.owl-nav{margin: 0;}
+	.copy_text p{font-size: 13px;}
+	.topcontrol{display: none;}
+}
