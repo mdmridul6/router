@@ -6,14 +6,14 @@ Version      : 1.0
 
 (function($) {
 	'use strict';
-	
+
 	jQuery(document).ready(function(){
-	
+
 		/*PRELOADER JS*/
-			$(window).load(function() { 
+			$(window).load(function() {
 				$('.status').fadeOut();
-				$('.preloader').delay(350).fadeOut('slow'); 
-			}); 
+				$('.preloader').delay(350).fadeOut('slow');
+			});
 		/*END PRELOADER JS*/
 
 		/* START MENU JS */
@@ -23,9 +23,9 @@ Version      : 1.0
 					scrollTop: $(anchor.attr('href')).offset().top - 50
 				}, 1500);
 				e.preventDefault();
-			});		
+			});
 
-	
+
 			$(window).scroll(function() {
 			  if ($(this).scrollTop() >0) {
 				$('.menu-top').addClass('menu-shrink');
@@ -33,14 +33,14 @@ Version      : 1.0
 				$('.menu-top').removeClass('menu-shrink');
 			  }
 			});
-			
+
 			$(document).on('click','.navbar-collapse.in',function(e) {
 			if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
 				$(this).collapse('hide');
 			}
-			});				
+			});
 		/* END MENU JS */
-		
+
 		/* START ABOUT US */
 			$('.about_slider').owlCarousel({
 				loop:true,
@@ -48,7 +48,7 @@ Version      : 1.0
 				smartSpeed:450,
 				animateIn: 'fadeIn',
 				animateOut: 'fadeOut',
-				autoplay:true,  
+				autoplay:true,
 				autoplayTimeout:7000,
 				mouseDrag:true,
 				nav:true,
@@ -65,22 +65,22 @@ Version      : 1.0
 				}
 			})
 		/* END ABOUT US */
-		
+
 		/*START MIXITUP JS*/
-		
+
 			$('.portfolio_item_area').mixItUp();
-				
+
 		/*END MIXITUP JS*/
-		
+
 		/* START LIGHTBOX */
-		
+
 			lightbox.option({
 			  'resizeDuration': 200,
 			  'wrapAround': true
 			});
-		
+
 		/* END LIGHTBOX JS */
-		
+
 		/*START COUNDOWN JS*/
 		$('#counterup').on('inview', function(event, visible, visiblePartX, visiblePartY) {
 			if (visible) {
@@ -98,7 +98,7 @@ Version      : 1.0
 			}
 		});
 		/*END COUNDOWN JS */
-		
+
 		/* START TESTIMONIAL JS */
 			$(".testmonial_slider_area").owlCarousel({
 				autoPlay: true,
@@ -123,33 +123,33 @@ Version      : 1.0
 						items:3
 					}
 				}
-				
+
 			});
 		/* END TESTIMONIAL JS */
-		
+
 		/* START SCROLL TO */
-			$(window).on('scroll',function(){
-		    if($(this).scrollup() > 100){
-		        $('.scrollup').removeClass('not-visible');
-		    }
-		    else{
-		        $('.scrollup').addClass('not-visible');
-		    }
-			});
-			$('.scrollup').on('click',function (event){
-				$('html,body').animate({
-					scrollTop:0
-				},1000);
-			});
+			// $(window).on('scroll',function(){
+		    // if($(this).scrollup() > 100){
+		    //     $('.scrollup').removeClass('not-visible');
+		    // }
+		    // else{
+		    //     $('.scrollup').addClass('not-visible');
+		    // }
+			// });
+			// $('.scrollup').on('click',function (event){
+			// 	$('html,body').animate({
+			// 		scrollTop:0
+			// 	},1000);
+			// });
 		/* END SCROLL TO */
-		
-	});	
-	
+
+	});
+
 	/*  Stellar for background scrolling  */
 		(function () {
 
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			 
+
 			} else {
 				$(window).stellar({
 					horizontalScrolling: false,
@@ -159,9 +159,9 @@ Version      : 1.0
 
 		}());
 	/* End Stellar for background scrolling  */
-		
+
 	/*START WOW ANIMATION JS*/
-	  new WOW().init();	
+	  new WOW().init();
 	/*END WOW ANIMATION JS*/
-		
-})(jQuery);	
+
+})(jQuery);
