@@ -25,6 +25,7 @@
                         <th> User Entry Date</th>
                         <th>User Active Date</th>
                         <th>Next Expired Date</th>
+                        <th>Online</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -38,6 +39,13 @@
                         <td>{{ date('d-M-Y',strtotime($item->active_date)) }}</td>
                         <td>{{ date('d-M-Y',strtotime($item->package_active_date)) }}</td>
                         <td>{{ date('d-M-Y',strtotime($item->package_expire_date)) }}</td>
+                        <td>
+                            @if ($item->status == true)
+                            <span class="badge badge-success">Online</span>
+                            @else
+                            <span class="badge badge-danger">Offline</span>
+                            @endif
+                        </td>
                         <td class="d-flex justify-content-around">
                             <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" href="#"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Show"><span

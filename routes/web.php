@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\PPPoEController;
 use App\Http\Controllers\SellerController;
@@ -16,18 +17,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::middleware(['guest'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('login', [AuthController::class, 'index'])->name('login');
     Route::post('login', [AuthController::class, 'postLogin'])->name('login');
 });
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
 });
 
 
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -44,24 +46,24 @@ Route::middleware(['auth','admin'])->group(function () {
         });
 
         Route::prefix('sellers')->name('seller.')->group(function () {
-            Route::get('/',[SellerController::class,'index'])->name('index');
-            Route::get('/create',[SellerController::class,'create'])->name('create');
-            Route::post('/create',[SellerController::class,'store'])->name('store');
-            Route::get('/{seller}/show',[SellerController::class,'show'])->name('show');
-            Route::get('/{seller}/edit',[SellerController::class,'edit'])->name('edit');
-            Route::put('/{seller}/update',[SellerController::class,'update'])->name('update');
-            Route::delete('/delete/{seller}',[SellerController::class,'destroy'])->name('destroy');
+            Route::get('/', [SellerController::class, 'index'])->name('index');
+            Route::get('/create', [SellerController::class, 'create'])->name('create');
+            Route::post('/create', [SellerController::class, 'store'])->name('store');
+            Route::get('/{seller}/show', [SellerController::class, 'show'])->name('show');
+            Route::get('/{seller}/edit', [SellerController::class, 'edit'])->name('edit');
+            Route::put('/{seller}/update', [SellerController::class, 'update'])->name('update');
+            Route::delete('/delete/{seller}', [SellerController::class, 'destroy'])->name('destroy');
         });
         Route::prefix('package')->name('package.')->group(function () {
-            Route::get('/',[PackagesController::class,'index'])->name('index');
-            Route::post('/import',[PackagesController::class,'create'])->name('create');
-            Route::get('/seller',[PackagesController::class,'sellerPackage'])->name('sellerPackage');
-            Route::get('/seller/dedicate',[PackagesController::class,'sellerPackageAssign'])->name('sellerPackageDedicate');
-            Route::post('/seller/dedicate',[PackagesController::class,'sellerPackageDedicate'])->name('sellerPackageDedicate');
+            Route::get('/', [PackagesController::class, 'index'])->name('index');
+            Route::post('/import', [PackagesController::class, 'create'])->name('create');
+            Route::get('/seller', [PackagesController::class, 'sellerPackage'])->name('sellerPackage');
+            Route::get('/seller/dedicate', [PackagesController::class, 'sellerPackageAssign'])->name('sellerPackageDedicate');
+            Route::post('/seller/dedicate', [PackagesController::class, 'sellerPackageDedicate'])->name('sellerPackageDedicate');
         });
     });
 });
-Route::middleware(['auth','seller'])->group(function () {
+Route::middleware(['auth', 'seller'])->group(function () {
 
     Route::prefix('seller')->name('seller.')->group(function () {
 
@@ -77,7 +79,7 @@ Route::middleware(['auth','seller'])->group(function () {
 
 
         Route::prefix('package')->name('package.')->group(function () {
-            Route::get('/',[PackagesController::class,'sellerPackages'])->name('index');
+            Route::get('/', [PackagesController::class, 'sellerPackages'])->name('index');
         });
     });
 });
