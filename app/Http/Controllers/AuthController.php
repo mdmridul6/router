@@ -35,19 +35,18 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials,$request->remember)) {
-            $user=User::where('email',$request->email)->first();
+        if (Auth::attempt($credentials, $request->remember)) {
+            $user = User::where('email', $request->email)->first();
             Auth::login($user);
-            if (Auth::user()->role == "Admin"){
+            if (Auth::user()->role == "Admin") {
                 return redirect()->route('admin.home');
-            }else{
+            } else {
                 return redirect()->route('seller.home');
             }
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
-
     }
 
 
@@ -57,9 +56,9 @@ class AuthController extends Controller
     public function dashboard()
     {
 
-        if (Auth::user()->role == "Admin"){
+        if (Auth::user()->role == "Admin") {
             return view('backend.admin.home.home');
-        }else{
+        } else {
             return view('backend.seller.home.home');
         }
         return redirect("login")->with('You do not have access');
@@ -72,10 +71,14 @@ class AuthController extends Controller
      *
      * @return RedirectResponse
      */
-    public function logout(): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
-        Session::flush();
         Auth::logout();
-        return redirect()->route('login');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }
