@@ -20,8 +20,8 @@ class PppoeUser extends Migration
             $table->string('service');
             $table->string('profile');
             $table->date('active_date');
-            $table->date('package_active_date');
-            $table->date('package_expire_date');
+            $table->date('package_active_date')->nullable();
+            $table->date('package_expire_date')->nullable();
             $table->integer('seller_id')->nullable();
             $table->timestamps();
         });

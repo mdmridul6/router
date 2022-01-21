@@ -36,13 +36,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('dashboard', [AuthController::class, 'dashboard'])->name('home');
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
-            Route::get('/routerUser', [PPPoEController::class, 'index'])->name('index');
             Route::get('/', [PPPoEController::class, 'routerUser'])->name('routerUser');
+            Route::get('/routerUser', [PPPoEController::class, 'index'])->name('index');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
             Route::post('/import', [PPPoEController::class, 'import'])->name('import');
             Route::get('/check', [PPPoEController::class, 'isActive'])->name('ActiveList');
+            Route::post('/active/{id}', [PPPoEController::class, 'active'])->name('active');
+            Route::post('/deactive/{id}', [PPPoEController::class, 'deactive'])->name('deactive');
             Route::post('/check', [PPPoEController::class, 'activeCheck'])->name('activeList');
+            Route::post('/check/db', [PPPoEController::class, 'pppoeExistcheckDB'])->name('DbPPPoeCheck');
         });
 
         Route::prefix('sellers')->name('seller.')->group(function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Connector;
+use App\Models\Packages;
 use App\Models\PPPoE;
 use App\Models\Seller;
 use Carbon\Carbon;
@@ -35,7 +36,40 @@ class PPPoEController extends Controller
 
     public function create()
     {
-        return view('backend.admin.pppoe.create');
+        $packages = Packages::all();
+
+        return view('backend.admin.pppoe.create', compact('packages'));
+    }
+    public function store(Request $request)
+    {
+
+        $pppoe = new PPPoE();
+        $pppoe->username = $request->username;
+        $pppoe->password = $request->password;
+        $pppoe->service = "pppoe";
+        $pppoe->profile = $request->packages;
+        $pppoe->active_date = Carbon::now();
+        $pppoe->package_active_date = null;
+        $pppoe->package_expire_date = null;
+        if (Auth::user()->role == "Admin") {
+            $pppoe->seller_id = null;
+        } else {
+            $pppoe->seller_id = Seller::where('user_id', Auth::id())->get('id');
+        }
+        $pppoe->save();
+        return redirect()->route('admin.pppoe.routerUser');
+    }
+
+
+
+    public function active(int $id)
+    {
+        dd($id);
+    }
+
+
+    public function deactive(int $id)
+    {
     }
 
     public function isActive()
@@ -57,7 +91,7 @@ class PPPoEController extends Controller
         foreach ($data as $users) {
             $checkUsers = PPPoE::where('username', $users['name'])->first();
 
-            if (is_null($checkUsers)) {
+            if ($checkUsers->exist()) {
                 $pppoe = new PPPoE();
                 $pppoe->username = $users['name'];
                 $pppoe->password = $users['password'];
@@ -244,5 +278,14 @@ class PPPoEController extends Controller
         //        }
         //
         //        return response()->json($data);
+    }
+
+    public function pppoeExistcheckDB(Request $request)
+    {
+        if (PPPoE::where('username', $request->name)->exists()) {
+            return response()->json('true');
+        } else {
+            return response()->json('false');
+        }
     }
 }

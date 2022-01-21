@@ -29,7 +29,8 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Packages</span>
                 </div>
             </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion @if (Route::is('admin.package.*')) hover show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -41,7 +42,7 @@
                     <span class="menu-title">Packages</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.package.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('admin.package.index')}}">
                             <span class="menu-bullet">
@@ -68,7 +69,8 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Users</span>
                 </div>
             </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion @if (Route::is('admin.seller.*')) hover show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -80,7 +82,7 @@
                     <span class="menu-title">Seller</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.seller.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('admin.seller.index')}}">
                             <span class="menu-bullet">
@@ -91,7 +93,8 @@
                     </div>
                 </div>
             </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion @if (Route::is('admin.pppoe.*')) hover show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -103,7 +106,7 @@
                     <span class="menu-title">PPPoE</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.pppoe.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('admin.pppoe.index')}}">
                             <span class="menu-bullet">
