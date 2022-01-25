@@ -26,6 +26,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('routerinfo', [AuthController::class, 'routerinfo'])->name('routerinfo');
 });
 
 
@@ -34,12 +35,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('dashboard', [AuthController::class, 'dashboard'])->name('home');
+        Route::get('interface/data', [AuthController::class, 'interfaceData'])->name('interfaceData');
+
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
             Route::get('/', [PPPoEController::class, 'routerUser'])->name('routerUser');
             Route::get('/routerUser', [PPPoEController::class, 'index'])->name('index');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
+            Route::get('/view/{id}', [PPPoEController::class, 'view'])->name('view');
             Route::post('/import', [PPPoEController::class, 'import'])->name('import');
             Route::get('/check', [PPPoEController::class, 'isActive'])->name('ActiveList');
             Route::post('/active/{id}', [PPPoEController::class, 'active'])->name('active');

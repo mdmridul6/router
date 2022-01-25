@@ -22,6 +22,7 @@ class PppoeUser extends Migration
             $table->date('active_date');
             $table->date('package_active_date')->nullable();
             $table->date('package_expire_date')->nullable();
+            $table->boolean('status')->default(true);
             $table->integer('seller_id')->nullable();
             $table->timestamps();
         });

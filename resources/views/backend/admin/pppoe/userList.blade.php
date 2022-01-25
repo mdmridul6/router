@@ -66,9 +66,10 @@
 
                             @endif
 
-                            <a class="btn btn-icon btn-bg-light btn-color-primary btn-sm me-1" href="#"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Show"><span
-                                    class="svg-icon svg-icon-3"><i class="fas fa-eye"></i></span></a>
+                            <a class="btn btn-icon btn-bg-light btn-color-primary btn-sm me-1"
+                                href="{{route('admin.pppoe.view',['id'=>$item->id])}}" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Show"><span class="svg-icon svg-icon-3"><i
+                                        class="fas fa-eye"></i></span></a>
 
                             <a class="btn btn-icon btn-bg-light btn-color-info btn-sm me-1" href="#"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span

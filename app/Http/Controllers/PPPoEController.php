@@ -61,6 +61,13 @@ class PPPoEController extends Controller
     }
 
 
+    public function view($id)
+    {
+        $pppoeData = PPPoE::with('seller')->find($id)->first();
+        return view('backend.admin.pppoe.view', compact('pppoeData'));
+    }
+
+
 
     public function active(int $id)
     {
