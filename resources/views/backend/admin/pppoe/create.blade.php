@@ -8,29 +8,45 @@
             </div>
         </div>
         <div class="card-body">
-            
+
             <form action="{{route('admin.pppoe.create')}}" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                         <label for="username">User Name</label>
                         <input type="text" name="username" id="username" class="form-control" placeholder="User Name">
                         <span class="text-danger d-none" id="warning">User already exist</span>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                         <label for="username">Password</label>
                         <input type="text" name="password" id="password" class="form-control" placeholder="Password">
                     </div>
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                         <label for="packages">Package</label>
                         <select name="packages" id="packages" class="form-control">
                             <option value="" disabled selected> Select Packages</option>
-                            @foreach ($packages as $package)
+                            @foreach ($data['packages'] as $package)
                             @if($package->name !== 'default' and $package->name !== 'default-encryption')
                             <option value="{{$package->name}}">{{$package->name}}</option>
                             @endif
                             @endforeach
                         </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <label for="packages">Seller</label>
+                        <select name="seller" id="seller" class="form-control">
+                            <option value="0" selected> Select seller</option>
+                            @foreach ($data['seller'] as $seller)
+
+                            <option value="{{$seller->id}}">{{$seller->userName}}</option>
+
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <label for="seller">
+
+                        </label>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

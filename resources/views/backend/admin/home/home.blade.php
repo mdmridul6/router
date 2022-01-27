@@ -12,11 +12,10 @@
                 <!--begin::Body-->
                 <div class="card-body my-3">
                     <i class="fas fa-user text-light fa-3x"></i>
-                    <h1 class="card-title fw-bolder text-light fs-2 mb-3 d-block" id="identity">
-                        {{$data['identity'][0]['name']}}</h5>
-                        <div class="py-1">
-                            <span class="text-light fs-1 fw-bolder me-2"></span>
-                        </div>
+                    <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">&nbsp;</h3>
+                    <div class="py-1">
+                        <span class="text-light fs-2 fw-bolder me-2">{{$data['identity'][0]['name']}}</span>
+                    </div>
                 </div>
                 <!--end:: Body-->
             </div>
@@ -44,7 +43,7 @@
         </div>
         <div class="col-md-4">
             <!--begin: Statistics Widget 6-->
-            <div class="card bg-dark card-xl-stretch mb-xl-8">
+            <div class="card bg-info card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body my-3">
                     <i class="fas fa-hdd text-light fa-3x"></i>
@@ -65,52 +64,78 @@
 
 
     </div>
-    <!-- เปิดส่วน กรอปตารางแสดงความเร็วอินเตอร์เน็ต  -->
-    <div class="col-md-12">
-        <div class="card bg-secondary">
-            <div class="card-header">
-                <h3 class="card-title text-dark">Morniter Traffic</h3>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <!-- เปิดส่วน ตารางกราฟ -->
-            <div class="card-body">
-                <div class="col-md-12">
-                    <div class="chart">
-                        <div id="container-fluid"></div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="card bg-secondary">
+                <div class="card-header">
+                    <h3 class="card-title text-dark">Morniter Traffic</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <!-- เปิดส่วน ตารางกราฟ -->
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="chart">
+                            <div id="container-fluid"></div>
+                        </div>
+                        <label for="interface" class="text-dark mt-2">Select Interface</label>
+                        <select name="interface" id="interface" class="form-control">
+                            @foreach ($data['interface'] as $interface)
+                            <option value="{{$interface['name']}}">{{$interface['name']}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <label for="interface" class="text-dark mt-2">Select Interface</label>
-                    <select name="interface" id="interface" class="form-control">
-                        @foreach ($data['interface'] as $interface)
-                        <option value="{{$interface['name']}}">{{$interface['name']}}</option>
-                        @endforeach
-                    </select>
+                </div>
+
+                <div id="container1">
+                </div><!-- /.box-body -->
+
+                <!-- ปิดส่วน แสดงแถบไอคอน Appication -->
+
+
+                <!-- ปิดส่วน แสดงแถบไอคอน Appication -->
+            </div> <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <div class="card bg-primary card-xl-stretch mb-xl-8">
+                    <div class="card-body my-3">
+                        <h1 class="card-title fw-bolder text-light fs-2 mb-3 d-block">TX</h1>
+                        <div class=" py-1">
+                            <span class="text-light fs-1 fw-bolder me-2" id="tx"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="card bg-dark card-xl-stretch mb-xl-8">
+                        <div class="card-body my-3">
+                            <h1 class="card-title fw-bolder text-light fs-2 mb-3 d-block">RX</h1>
+                            <div class="py-1">
+                                <span class="text-light fs-1 fw-bolder me-2" id="rx"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
 
-            <div id="container1">
-            </div><!-- /.box-body -->
+        <!--end::Content-->
+        @endsection
 
-            <!-- ปิดส่วน แสดงแถบไอคอน Appication -->
-
-
-            <!-- ปิดส่วน แสดงแถบไอคอน Appication -->
-        </div> <!-- /.box -->
-    </div>
-
-    <!--end::Row-->
-</div>
-<!--end::Container-->
-
-<!--end::Content-->
-@endsection
-
-@section('js')
-<script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}"></script>
-<script>
-    var chart;
+        @section('js')
+        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
+        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}">
+        </script>
+        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}">
+        </script>
+        <script>
+            var chart;
 
     function requestDatta(interface) {
       $.ajax({
@@ -124,8 +149,10 @@
           if (midata.length > 0) {
             var TX = parseInt(midata[0].data);
             var RX = parseInt(midata[1].data);
+            $('#tx').html(formatBytes(parseInt(midata[0].data)));
+            $('#rx').html(formatBytes(parseInt(midata[1].data)));
             var x = (new Date()).getTime();
-            shift = chart.series[0].data.length > 19;
+            shift = chart.series[0].data.length > 20;
             chart.series[0].addPoint([x, TX], true, shift);
             chart.series[1].addPoint([x, RX], true, shift);
             // document.getElementById("trafico").innerHTML = TX + " / " + RX;
@@ -140,6 +167,12 @@
       });
     //   Make a request for a user with a given ID
 
+    }
+    function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals; const sizes=['Bytes', 'KB' , 'MB' , 'GB' , 'TB' , 'PB' , 'EB' , 'ZB' , 'YB' ];
+    const i=Math.floor(Math.log(bytes) / Math.log(k)); return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
     $(document).ready(function() {
@@ -159,7 +192,7 @@
             load: function() {
               setInterval(function() {
                 requestDatta(document.getElementById("interface").value);
-              }, 2000);
+              }, 1000);
             }
           }
         },
@@ -188,10 +221,10 @@
         }]
       });
 });
-</script>
+        </script>
 
-<script>
-    function popup(url, name, windowWidth, windowHeight) {
+        <script>
+            function popup(url, name, windowWidth, windowHeight) {
       myleft = (screen.width) ? (screen.width - windowWidth) / 2 : 100;
       mytop = (screen.height) ? (screen.height - windowHeight) / 2 : 100;
       properties = "width=" + windowWidth + ",height=" + windowHeight;
@@ -240,12 +273,12 @@
         return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
       }
     });
-</script>
+        </script>
 
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<!-- Script แสดงวันเวลา -->
-<script type="text/javascript">
-    function date_time(id) {
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- Script แสดงวันเวลา -->
+        <script type="text/javascript">
+            function date_time(id) {
       date = new Date;
       year = date.getFullYear();
       month = date.getMonth();
@@ -270,10 +303,10 @@
       setTimeout('date_time("' + id + '");', '1000');
       return true;
     }
-</script>
+        </script>
 
-<script TYPE="text/javascript">
-    function popup(mylink, windowname) {
+        <script TYPE="text/javascript">
+            function popup(mylink, windowname) {
       if (!window.focus) return true;
       var href;
       if (typeof(mylink) == 'string') href = mylink;
@@ -281,11 +314,11 @@
       window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
       return false;
     }
-</script>
+        </script>
 
 
-<script>
-    setInterval(() => {
+        <script>
+            setInterval(() => {
         $.ajax({
         url: "{{route('routerinfo')}}",
         datatype: "json",
@@ -312,5 +345,5 @@
     }, 1000);
 
 
-</script>
-@endsection
+        </script>
+        @endsection

@@ -20,7 +20,9 @@
             <div class="d-flex flex-column flex-column-fluid text-center p-10 py-lg-20">
                 <!--begin::Logo-->
                 <a href="index.html" class="mb-10 pt-lg-20">
-                    <img alt="Logo" src="{{asset('backend/assets/media/logos/logo-2-dark.svg')}}" class="h-50px mb-5" />
+                    {{-- <img alt="Logo" src="{{asset('backend/assets/media/logos/logo-2-dark.svg')}}"
+                        class="h-50px mb-5" /> --}}
+                    <h1>{{config('app.name')}}</h1>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Wrapper-->
@@ -29,7 +31,7 @@
                     <h1 class="fw-bolder fs-4x text-gray-700 mb-10">@yield('code')</h1>
                     <!--end::Logo-->
                     <!--begin::Message-->
-                    <div class="fw-bold fs-3 text-gray-400 mb-15">
+                    <div class="fw-bold fs-3 text-dark-800 mb-15">
                         @yield('message')
                     </div>
                     <!--end::Message-->

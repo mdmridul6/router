@@ -24,7 +24,8 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Id</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$pppoeData->id}}</p>
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['pppoeData']->id}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -36,7 +37,8 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">User Name</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$pppoeData->username}}
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['pppoeData']->username}}
                                     </p>
                                 </div>
                                 <!--end::Title-->
@@ -49,7 +51,8 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Password</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$pppoeData->password}}
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['pppoeData']->password}}
                                     </p>
                                 </div>
                                 <!--end::Title-->
@@ -62,7 +65,8 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Service</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$pppoeData->service}}
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['pppoeData']->service}}
                                     </p>
                                 </div>
                                 <!--end::Title-->
@@ -75,7 +79,22 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Profile</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$pppoeData->profile}}
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['pppoeData']->profile}}
+                                    </p>
+                                </div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-sm-center mb-7">
+                                <!--begin::Title-->
+                                <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                    <div class="flex-grow-1 me-2">
+                                        <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Remote Address</p>
+                                    </div>
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{$data['remoteLink']}}
                                     </p>
                                 </div>
                                 <!--end::Title-->
@@ -89,7 +108,7 @@
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Active Date</p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$pppoeData->active_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{$data['pppoeData']->active_date->isoFormat('D-MMM-YYYY')}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -103,7 +122,7 @@
                                         </p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$pppoeData->package_active_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{$data['pppoeData']->package_active_date->isoFormat('D-MMM-YYYY')}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -117,7 +136,7 @@
                                         </p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$pppoeData->package_expire_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{$data['pppoeData']->package_expire_date->isoFormat('D-MMM-YYYY')}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -129,7 +148,8 @@
                                     <div class="flex-grow-1 me-2">
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Status</p>
                                     </div>
-                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">{{($pppoeData->status ?
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
+                                        {{($data['pppoeData']->status ?
                                         "Active" : "Deactive" )}}</p>
                                 </div>
                                 <!--end::Title-->
@@ -143,7 +163,8 @@
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Seller Name</p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{isset($pppoeData->seller->userName) ? $pppoeData->seller->userName : "No
+                                        {{isset($data['pppoeData']->seller->userName) ?
+                                        $data['pppoeData']->seller->userName : "No
                                         Seller"}}
                                     </p>
                                 </div>
@@ -160,13 +181,42 @@
                     <div class="card bg-light-info">
                         <div class="card-header">
                             <h3 class="card-title text-info">Morniter Traffic</h3>
+                            <div class="card-toolbar">
+                                <a href="http://{{$data['remoteLink']}}" target="_blank"
+                                    class="btn btn-secondary">Remote
+                                    Link</a>
+                            </div>
                         </div>
+
                         <div class="card-body">
+                            <div class="d-flex align-items-sm-center mb-7">
+                                <!--begin::Title-->
+                                <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                    <div class="flex-grow-1 me-2">
+                                        <p class="text-gray-800 fw-bolder text-hover-primary fs-6">TX</p>
+                                    </div>
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6" id="tx"></p>
+                                </div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Item-->
+                            <div class="d-flex align-items-sm-center mb-7">
+                                <!--begin::Title-->
+                                <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                    <div class="flex-grow-1 me-2">
+                                        <p class="text-gray-800 fw-bolder text-hover-primary fs-6">RX</p>
+                                    </div>
+                                    <p class="text-gray-800 fw-bolder text-hover-primary fs-6" id="rx"></p>
+                                </div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Item-->
                             <div class="col-md-12">
                                 <div class="chart">
                                     <div id="container-fluid"></div>
                                 </div>
-                                <input type="hidden" name="" id="interface" value="<pppoe-{{$pppoeData->username}}>">
+                                <input type="hidden" name="" id="interface"
+                                    value="<pppoe-{{$data['pppoeData']->username}}>">
                             </div>
                         </div>
                     </div>
@@ -193,12 +243,15 @@
         success: function(data) {
           var midata = data;
           if (midata.length > 0) {
-            var TX = parseInt(midata[0].data);
-            var RX = parseInt(midata[1].data);
+            var TX = formatBytes(parseInt(midata[0].data));
+            var RX = formatBytes(parseInt(midata[1].data));
+
+            $('#tx').html(TX);
+            $('#rx').html(RX);
             var x = (new Date()).getTime();
-            shift = chart.series[0].data.length > 19;
-            chart.series[0].addPoint([x, TX], true, shift);
-            chart.series[1].addPoint([x, RX], true, shift);
+            shift = chart.series[0].data.length > 20;
+            chart.series[0].addPoint([x, parseInt(midata[0].data)], true, shift);
+            chart.series[1].addPoint([x, parseInt(midata[1].data)], true, shift);
             // document.getElementById("trafico").innerHTML = TX + " / " + RX;
           } else {
             // document.getElementById("trafico").innerHTML = "- / -";
@@ -213,6 +266,15 @@
 
     }
 
+
+    function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals; const sizes=['Bytes', 'KB' , 'MB' , 'GB' , 'TB' , 'PB' , 'EB' , 'ZB' , 'YB' ];
+        const i=Math.floor(Math.log(bytes) / Math.log(k)); return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' +
+        sizes[i]; }
+
     $(document).ready(function() {
       Highcharts.setOptions({
         global: {
@@ -226,11 +288,15 @@
           renderTo: 'container-fluid',
           animation: Highcharts.svg,
           type: 'spline',
+        scrollablePlotArea: {
+        minWidth: 600,
+        scrollPositionX: 1
+        },
           events: {
             load: function() {
               setInterval(function() {
                 requestDatta(document.getElementById("interface").value);
-              }, 2000);
+              }, 1000);
             }
           }
         },
@@ -249,6 +315,14 @@
             text: 'Mikrotik',
             margin: 5
           }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                enabled: true
+            },
+                enableMouseTracking: false
+            }
         },
         series: [{
           name: 'TX',

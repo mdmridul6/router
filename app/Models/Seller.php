@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static create(array $array, array $array1)
  * @method static insert(array[] $data)
  * @method static find(int $int)
- * @method static where(string $string)
+ * @method static where()
  * @property mixed $id
  * @property mixed $email
  */

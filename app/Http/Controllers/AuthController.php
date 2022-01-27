@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Connector;
-use App\Models\Seller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -11,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\Session;
 use \RouterOS\Query;
 
 class AuthController extends Controller
@@ -40,14 +41,16 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             Auth::login($user);
             if (Auth::user()->role == "Admin") {
+                Session::flash('success', "Wellcome back" . Auth::user()->name);
                 return redirect()->route('admin.home');
             } else {
+                Session::flash('success', "Wellcome back" . Auth::user()->name);
                 return redirect()->route('seller.home');
             }
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        Session::flash('error', "Credentials dosen't match");
+
+        return back();
     }
 
 
@@ -56,15 +59,21 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        $client = Connector::Connector();
-        $data['interface'] = $client->query('/interface/ethernet/print')->read();
-        $data['identity'] = $client->query('/system/identity/print')->read();
-        if (Auth::user()->role == "Admin") {
-            return view('backend.admin.home.home', compact('data'));
-        } else {
-            return view('backend.seller.home.home');
+        try {
+
+            $client = Connector::Connector();
+            $data['interface'] = $client->query('/interface/ethernet/print')->read();
+            $data['identity'] = $client->query('/system/identity/print')->read();
+
+            if (Auth::user()->role == "Admin") {
+                return view('backend.admin.home.home', compact('data'));
+            } else {
+                return view('backend.seller.home.home', compact('data'));
+            }
+            return redirect("login")->with('You do not have access');
+        } catch (Exception $th) {
+            return abort(404);
         }
-        return redirect("login")->with('You do not have access');
     }
 
 
@@ -79,6 +88,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Session::flash('error', "Logout Successfull");
         return redirect()->route('home');
     }
 
@@ -100,8 +110,8 @@ class AuthController extends Controller
 
 
         if (count($ARRAY) > 0) {
-            $rx = number_format($ARRAY[0]["rx-bits-per-second"] / 1024, 1);
-            $tx = number_format($ARRAY[0]["tx-bits-per-second"] / 1024, 1);
+            $rx = (int)$ARRAY[0]["rx-bits-per-second"];
+            $tx = (int)$ARRAY[0]["tx-bits-per-second"];
             $rows['name'] = 'Tx';
             $rows['data'][] = $tx;
             $rows2['name'] = 'Rx';

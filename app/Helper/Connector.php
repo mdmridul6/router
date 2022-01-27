@@ -19,15 +19,17 @@ class Connector extends Controller
      * @throws BadCredentialsException
      * @throws ConfigException
      */
-    public static function Connector(): Client
+    public static function Connector()
     {
-        return new Client(array(
-            'host' => '58.84.34.200',
-            'user' => 'maruf',
-            'pass' => 'haxorMs00',
-            'port' => 9320,
-        ));
+        try {
+            return new Client(array(
+                'host' => '58.84.34.200',
+                'user' => 'maruf',
+                'pass' => 'haxorMs00',
+                'port' => 9320,
+            ));
+        } catch (ConnectException $exception) {
+            return abort(400);
+        }
     }
-
-
 }

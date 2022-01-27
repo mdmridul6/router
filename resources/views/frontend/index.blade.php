@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="index.html" class="navbar-brand">
-                <p>{{$data->name}}</p>
+                <p>{{(isset($data->name) ? $data->name : "")}}</p>
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -170,8 +170,8 @@
             <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft">
                 <div class="about_content">
                     <span>About Consultary</span>
-                    <h3>{{$data->title}}</h3>
-                    <p>{{$data->description}}</p>
+                    <h3>{{(isset($data->title) ? $data->title : "")}}</h3>
+                    <p>{{(isset($data->description) ? $data->description : "")}}</p>
 
 
 
@@ -473,17 +473,17 @@
                     <div class="single_contact">
                         <i class="fa fa-map-marker"></i>
                         <h5>Address</h5>
-                        <p>{{$data->address}}</p>
+                        <p>{{(isset($data->address) ? $data->address : "")}}</p>
                     </div>
                     <div class="single_contact">
                         <i class="fa fa-envelope"></i>
                         <h5>Email</h5>
-                        <p>{{$data->email}}</p>
+                        <p>{{(isset($data->email) ? $data->email : "")}}</p>
                     </div>
                     <div class="single_contact">
                         <i class="fa fa-phone"></i>
                         <h5>Phone</h5>
-                        <p>+88 {{$data->phone}}</p>
+                        <p>+88 {{(isset($data->phone) ? $data->phone : "")}}</p>
                     </div>
                 </div>
             </div>
