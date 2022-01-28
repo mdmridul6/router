@@ -82,7 +82,7 @@ class SellerController extends Controller
     public function update(Request $request, Seller $seller): RedirectResponse
     {
         $request->validate([
-            'image' => 'image|mimes:jpg,jpeg,|max:2048|min:35',
+            // 'image' => 'image|mimes:jpg,jpeg,|max:2048|min:35',
             'userName' => 'required|max:255|unique:sellers,userName,' . $seller->id,
             'password' => 'required|',
             'fullName' => 'required|max:255',
