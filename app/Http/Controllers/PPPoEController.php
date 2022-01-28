@@ -30,7 +30,8 @@ class PPPoEController extends Controller
     public function index()
     {
         $client = Connector::Connector();
-        $data = $client->query('/ppp/secret/print')->read();
+        $data['pppoe'] = $client->query('/ppp/secret/print')->read();
+        $data['app'] = $this->app;
         return view('backend.admin.pppoe.list', compact('data'));
     }
 
@@ -38,6 +39,7 @@ class PPPoEController extends Controller
     {
         $data['packages'] = Packages::all();
         $data['seller']   = Seller::all();
+        $data['app']   = $this->app;
         return view('backend.admin.pppoe.create', compact('data'));
     }
 
@@ -82,6 +84,7 @@ class PPPoEController extends Controller
         // Send query and read response from RouterOS
         $response = $client->query($query)->read();
         $data['remoteLink'] = $response[0]['address'];
+        $data['app'] = $this->app;
 
         return view('backend.admin.pppoe.view', compact('data'));
     }
@@ -103,12 +106,14 @@ class PPPoEController extends Controller
 
     public function isActive()
     {
-        return view('backend.admin.pppoe.active');
+        $data['app'] = $this->app;
+        return view('backend.admin.pppoe.active', compact('data'));
     }
 
     public function routerUser()
     {
-        $data = PPPoE::all();
+        $data['pppoe'] = PPPoE::all();
+        $data['app'] = $this->app;
         return view('backend.admin.pppoe.userList', compact('data'));
     }
 

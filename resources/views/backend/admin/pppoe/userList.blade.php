@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $item)
+                    @foreach ($data['pppoe'] as $item)
                     <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->username }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Connector;
+use App\Models\AboutUs;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -41,15 +42,14 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             Auth::login($user);
             if (Auth::user()->role == "Admin") {
-                Session::flash('success', "Wellcome back" . Auth::user()->name);
+                Session::flash('message', "Wellcome back " . Auth::user()->name);
                 return redirect()->route('admin.home');
             } else {
-                Session::flash('success', "Wellcome back" . Auth::user()->name);
+                Session::flash('message', "Wellcome back " . Auth::user()->name);
                 return redirect()->route('seller.home');
             }
         }
-        Session::flash('error', "Credentials dosen't match");
-
+        Session::flash('error', "Your email or password doesn't match");
         return back();
     }
 
@@ -61,6 +61,7 @@ class AuthController extends Controller
     {
         try {
 
+            $data['app'] = $this->app;
             $client = Connector::Connector();
             $data['interface'] = $client->query('/interface/ethernet/print')->read();
             $data['identity'] = $client->query('/system/identity/print')->read();
@@ -88,14 +89,14 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        Session::flash('error', "Logout Successfull");
+        Session::flash('message', "Logout Successfull");
         return redirect()->route('home');
     }
 
 
     public function interfaceData(Request $request)
     {
-        // dd($request->interface);
+
         $rows = array();
         $rows2 = array();
         $client = Connector::Connector();

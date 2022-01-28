@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Connector;
+use App\Models\AboutUs;
 use App\Models\Packages;
 use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
@@ -29,8 +30,9 @@ class PackagesController extends Controller
     public function index()
     {
         $client = Connector::Connector();
-        $packages = $client->query('/ppp/profile/print')->read();
-        return view('backend.admin.packages.list', compact('packages'));
+        $data['packages'] = $client->query('/ppp/profile/print')->read();
+        $data['app'] = $this->app;
+        return view('backend.admin.packages.list', compact('data'));
     }
 
 
@@ -69,22 +71,21 @@ class PackagesController extends Controller
 
     public function sellerPackage()
     {
-        $data = Seller::with('package')->get();
+
+        $data['package'] = Seller::with('package')->get();
+        $data['app'] = $this->app;
         return view('backend.admin.packages.sellerPackage', compact('data'));
     }
 
 
     public function sellerPackageAssign()
     {
-        $seller = Seller::all();
-        $package = Packages::all();
-        $data = [
-            "seller" => $seller,
-            "package" => $package
-        ];
+        $data['app'] = $this->app;
+        $data['seller'] = Seller::all();
+        $data['package'] = Packages::all();
+
 
         return view('backend.admin.packages.sellerPackageAssign', compact('data'));
-
     }
 
     public function sellerPackageDedicate(Request $request): RedirectResponse
@@ -106,8 +107,7 @@ class PackagesController extends Controller
 
     public function sellerPackages()
     {
-        $packages=Seller::with('package')->where('user_id', Auth::id())->get();
-        return view('backend.seller.packages.list',compact('packages'));
+        $packages = Seller::with('package')->where('user_id', Auth::id())->get();
+        return view('backend.seller.packages.list', compact('packages'));
     }
-
 }

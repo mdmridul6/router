@@ -30,7 +30,14 @@
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="{{route('admin.home')}}" class="fs-2 fw-bolder">
-                        {{config('app.title')}}
+                        @if(isset($data['app']->image))
+                        <img class="h-15px logo" src="{{asset('uploads/images').$data['app']->image}}"
+                            alt="{{asset('uploads/images').$data['app']->image}}">
+                        @elseif (isset($data['app']->name))
+                        <h2 class="fs-2 text-gray ">{{$data['app']->name}}</h2>
+                        @else
+                        <h2 class="fs-2 text-gray ">{{config('app.title')}}</h2>
+                        @endisset
 
                     </a>
                     <!--end::Logo-->

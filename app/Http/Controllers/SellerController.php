@@ -22,8 +22,9 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $sellers=Seller::all();
-        return view('backend.admin.seller.list',compact('sellers'));
+        $data['sellers'] = Seller::all();
+        $data['app'] = $this->app;
+        return view('backend.admin.seller.list', compact('data'));
     }
 
     /**
@@ -33,8 +34,8 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('backend.admin.seller.create');
-
+        $data['app'] = $this->app;
+        return view('backend.admin.seller.create', compact('data'));
     }
 
     /**
@@ -46,8 +47,8 @@ class SellerController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-         $request->validate([
-            'image' => 'image|mimes:jpg,jpeg,|max:2048|min:100',
+        $request->validate([
+            // 'image' => 'image|mimes:jpg,jpeg,|max:2048|min:48',
             'userName' => 'required|unique:sellers|max:255',
             'password' => 'required|',
             'fullName' => 'required|max:255',
@@ -59,49 +60,47 @@ class SellerController extends Controller
 
         ]);
 
-        $user=new  User();
+        $user = new  User();
         $sellerData = new Seller();
 
 
         $this->extracted($request, $user, $sellerData);
 
 
-        Session::flash('message',"Seller Add Successfully");
+        Session::flash('message', "Seller Add Successfully");
         return  redirect()->route('admin.seller.index')->withInput();
-
     }
 
     public function edit(Seller $seller)
     {
-        $data=Seller::where('id',$seller->id)->first();
-        return view('backend.admin.seller.edit',compact('data'));
-
+        $data['sellerInfo'] = Seller::where('id', $seller->id)->first();
+        $data['app'] = $this->app;
+        return view('backend.admin.seller.edit', compact('data'));
     }
 
 
     public function update(Request $request, Seller $seller): RedirectResponse
     {
         $request->validate([
-            'image' => 'image|mimes:jpg,jpeg,|max:2048|min:100',
-            'userName' => 'required|max:255|unique:sellers,userName,'.$seller->id,
+            // 'image' => 'image|mimes:jpg,jpeg,|max:2048|min:48',
+            'userName' => 'required|max:255|unique:sellers,userName,' . $seller->id,
             'password' => 'required|',
             'fullName' => 'required|max:255',
-            'nid' => 'required|max:19|unique:sellers,nid,'.$seller->id,
+            'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255|unique:users,email'.$seller->email,
+            'email' => 'required|max:255|unique:users,email' . $seller->email,
             'address' => 'required||max:255',
 
         ]);
 
 
 
-        $sellerData =Seller::where('id',$seller->id)->first();
-        $user=User::where('id',$sellerData->user_id)->first();
+        $sellerData = Seller::where('id', $seller->id)->first();
+        $user = User::where('id', $sellerData->user_id)->first();
         $this->extracted($request, $user, $sellerData);
-        Session::flash('message',"Seller Update Successfully");
+        Session::flash('message', "Seller Update Successfully");
         return  redirect()->route('admin.seller.index')->withInput();
-
     }
 
 
@@ -109,7 +108,7 @@ class SellerController extends Controller
     {
 
         Seller::destroy($seller->id);
-        Session::flash('success',"Seller Delete Successful");
+        Session::flash('success', "Seller Delete Successful");
         return redirect()->back();
     }
 
@@ -142,6 +141,4 @@ class SellerController extends Controller
 
         $sellerData->save();
     }
-
-
 }

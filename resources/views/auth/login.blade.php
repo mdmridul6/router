@@ -119,6 +119,25 @@
 <script src="{{asset('backend/assets/js/scripts.bundle.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--end::Javascript-->
+<script>
+    @if(Session::has('message'))
+    toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+    toastr.success("{{ session('message') }}");
+    @endif
+
+    @if(Session::has('error'))
+    toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+    toastr.error("{{ session('error') }}");
+@endif
+</script>
 </body>
 <!--end::Body-->
 
