@@ -48,7 +48,7 @@ class SellerController extends Controller
     {
 
         $request->validate([
-            // 'image' => 'image|mimes:jpg,jpeg,|max:2048|min:48',
+            'image' => 'image|mimes:jpg,jpeg,|max:2048|min:35',
             'userName' => 'required|unique:sellers|max:255',
             'password' => 'required|',
             'fullName' => 'required|max:255',
@@ -82,14 +82,14 @@ class SellerController extends Controller
     public function update(Request $request, Seller $seller): RedirectResponse
     {
         $request->validate([
-            // 'image' => 'image|mimes:jpg,jpeg,|max:2048|min:48',
+            'image' => 'image|mimes:jpg,jpeg,|max:2048|min:35',
             'userName' => 'required|max:255|unique:sellers,userName,' . $seller->id,
             'password' => 'required|',
             'fullName' => 'required|max:255',
             'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255|unique:users,email' . $seller->email,
+            // 'email' => 'required|max:255|unique:users,email,' . $seller->email,
             'address' => 'required||max:255',
 
         ]);
