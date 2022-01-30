@@ -6,11 +6,6 @@
             <div class="card-title">
                 Seller Packages
             </div>
-            <div class="card-toolbar">
-                <a href="{{route('admin.package.sellerPackageDedicate')}}" class="btn btn-sm btn-secondary">
-                    Set Package
-                </a>
-            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -19,6 +14,7 @@
                         <th>Serial</th>
                         <th>Name</th>
                         <th>Packages</th>
+                        <th>Assign</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +29,15 @@
                             <span class="badge badge-danger">{{$packages->pivot->amount}}</span>&emsp;
                             @endforeach
                         </td>
+                        <td>
+                            <form action="{{route('admin.package.sellerPackageAssign',['id'=>$details->id])}}"
+                                method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-icon btn-success me-5"><i
+                                        class="far fa-play-circle fs-3"></i></button>
+                            </form>
 
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

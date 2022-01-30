@@ -61,11 +61,71 @@
             </div>
             <!--end: Statistics Widget 6-->
         </div>
+        <div class="col-md-4">
+            <!--begin: Statistics Widget 6-->
+            <div class="card bg-dark card-xl-stretch mb-xl-8">
+                <!--begin::Body-->
+                <div class="card-body my-3">
+                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total Seller</h3>
+                    <div class="py-1">
+                        <span class="text-light fs-1 fw-bolder me-2" id="ram"></span>
+                    </div>
+
+                    {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
+                        <div class="progress-bar bg-light" id="ramProgressbar" role="progressbar" style="width: 15%"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> --}}
+                </div>
+                <!--end:: Body-->
+            </div>
+            <!--end: Statistics Widget 6-->
+        </div>
+        <div class="col-md-4">
+            <!--begin: Statistics Widget 6-->
+            <div class="card bg-warning card-xl-stretch mb-xl-8">
+                <!--begin::Body-->
+                <div class="card-body my-3">
+                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total User</h3>
+                    <div class="py-1">
+                        <span class="text-light fs-1 fw-bolder me-2" id="ram"></span>
+                    </div>
+
+                    {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
+                        <div class="progress-bar bg-light" id="ramProgressbar" role="progressbar" style="width: 15%"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> --}}
+                </div>
+                <!--end:: Body-->
+            </div>
+            <!--end: Statistics Widget 6-->
+        </div>
+        <div class="col-md-4">
+            <!--begin: Statistics Widget 6-->
+            <div class="card bg-primary card-xl-stretch mb-xl-8">
+                <!--begin::Body-->
+                <div class="card-body my-3">
+                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total Active User</h3>
+                    <div class="py-1">
+                        <span class="text-light fs-1 fw-bolder me-2"></span>
+                    </div>
+
+                    {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
+                        <div class="progress-bar bg-light" id="ramProgressbar" role="progressbar" style="width: 15%"
+                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> --}}
+                </div>
+                <!--end:: Body-->
+            </div>
+            <!--end: Statistics Widget 6-->
+        </div>
 
 
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
 
         <div class="col-md-8">
             <div class="card bg-secondary">
@@ -124,18 +184,18 @@
             <!--end::Row-->
         </div>
         <!--end::Container-->
+    </div> --}}
+    <!--end::Content-->
+    @endsection
 
-        <!--end::Content-->
-        @endsection
-
-        @section('js')
-        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
-        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}">
-        </script>
-        <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}">
-        </script>
-        <script>
-            var chart;
+    @section('js')
+    {{-- <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}">
+    </script>
+    <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}">
+    </script>
+    <script>
+        var chart;
 
     function requestDatta(interface) {
       $.ajax({
@@ -221,10 +281,10 @@
         }]
       });
 });
-        </script>
+    </script>
 
-        <script>
-            function popup(url, name, windowWidth, windowHeight) {
+    <script>
+        function popup(url, name, windowWidth, windowHeight) {
       myleft = (screen.width) ? (screen.width - windowWidth) / 2 : 100;
       mytop = (screen.height) ? (screen.height - windowHeight) / 2 : 100;
       properties = "width=" + windowWidth + ",height=" + windowHeight;
@@ -273,12 +333,12 @@
         return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
       }
     });
-        </script>
+    </script>
 
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <!-- Script แสดงวันเวลา -->
-        <script type="text/javascript">
-            function date_time(id) {
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!-- Script แสดงวันเวลา -->
+    <script type="text/javascript">
+        function date_time(id) {
       date = new Date;
       year = date.getFullYear();
       month = date.getMonth();
@@ -303,10 +363,10 @@
       setTimeout('date_time("' + id + '");', '1000');
       return true;
     }
-        </script>
+    </script>
 
-        <script TYPE="text/javascript">
-            function popup(mylink, windowname) {
+    <script TYPE="text/javascript">
+        function popup(mylink, windowname) {
       if (!window.focus) return true;
       var href;
       if (typeof(mylink) == 'string') href = mylink;
@@ -314,11 +374,11 @@
       window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
       return false;
     }
-        </script>
+    </script> --}}
 
 
-        <script>
-            setInterval(() => {
+    <script>
+        setInterval(() => {
         $.ajax({
         url: "{{route('routerinfo')}}",
         datatype: "json",
@@ -345,5 +405,5 @@
     }, 1000);
 
 
-        </script>
-        @endsection
+    </script>
+    @endsection

@@ -112,7 +112,7 @@ class PPPoEController extends Controller
 
     public function routerUser()
     {
-        $data['pppoe'] = PPPoE::all();
+        $data['pppoe'] = PPPoE::orderBy('created_at', 'desc')->get();
         $data['app'] = $this->app;
         return view('backend.admin.pppoe.userList', compact('data'));
     }

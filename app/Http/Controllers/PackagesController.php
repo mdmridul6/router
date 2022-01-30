@@ -77,20 +77,25 @@ class PackagesController extends Controller
         return view('backend.admin.packages.sellerPackage', compact('data'));
     }
 
-
-    public function sellerPackageAssign()
+    public function sellerPackageById(Request  $request)
     {
+        return response()->json(Seller::with('package')->find($request->id));
+    }
+
+    public function sellerPackageAssign($id)
+    {
+
         $data['app'] = $this->app;
-        $data['seller'] = Seller::all();
-        $data['package'] = Packages::all();
+        $data['sellerId'] = Seller::with('package')->find($id);
+        $data['package'] = Packages::with('seller')->get();
+
 
 
         return view('backend.admin.packages.sellerPackageAssign', compact('data'));
     }
 
-    public function sellerPackageDedicate(Request $request): RedirectResponse
+    public function sellerPackageDedicate(Request $request)
     {
-
         $seller = Seller::find($request->seller);
 
         //        Marge Package & Amount Array
@@ -101,6 +106,8 @@ class PackagesController extends Controller
             ];
         });
         $seller->package()->sync($merged);
+
+        return response()->json("success", 200);
         Session::flash('message', "Seller Package Assign Successful");
         return redirect()->route('admin.package.sellerPackage');
     }

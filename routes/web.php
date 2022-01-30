@@ -65,7 +65,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/', [PackagesController::class, 'index'])->name('index');
             Route::post('/import', [PackagesController::class, 'create'])->name('create');
             Route::get('/seller', [PackagesController::class, 'sellerPackage'])->name('sellerPackage');
-            Route::get('/seller/dedicate', [PackagesController::class, 'sellerPackageAssign'])->name('sellerPackageDedicate');
+            Route::get('/seller/packege', [PackagesController::class, 'sellerPackageById'])->name('sellerPackageById');
+            Route::post('/seller/dedicate/{id}', [PackagesController::class, 'sellerPackageAssign'])->name('sellerPackageAssign');
             Route::post('/seller/dedicate', [PackagesController::class, 'sellerPackageDedicate'])->name('sellerPackageDedicate');
         });
     });

@@ -49,7 +49,7 @@ class SellerController extends Controller
 
         $request->validate([
             'image' => 'image|mimes:jpg,jpeg,|max:2048|min:15',
-            'userName' => 'required|unique:sellers|max:255',
+            'userName' => 'required|unique:sellers|max:15',
             'password' => 'required|',
             'fullName' => 'required|max:255',
             'nid' => 'required|max:19|unique:sellers',
@@ -89,7 +89,7 @@ class SellerController extends Controller
             'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            // 'email' => 'required|max:255|unique:users,email,' . $seller->email,
+            'email' => 'required|max:255|unique:users,email,' . $seller->email,
             'address' => 'required||max:255',
 
         ]);
