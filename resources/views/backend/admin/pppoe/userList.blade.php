@@ -25,7 +25,7 @@
                         <th>User Entry Date</th>
                         <th>User Active Date</th>
                         <th>Next Expired Date</th>
-                        <th>Online</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -36,14 +36,16 @@
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->password }}</td>
                         <td>{{ $item->service }}</td>
-                        <td>{{ date('d-M-Y',strtotime($item->active_date)) }}</td>
-                        <td>{{ date('d-M-Y',strtotime($item->package_active_date)) }}</td>
-                        <td>{{ date('d-M-Y',strtotime($item->package_expire_date)) }}</td>
+                        <td>{{ (isset($item->active_date) ? date('d-M-Y',strtotime($item->active_date)) : "") }}</td>
+                        <td>{{ (isset($item->package_active_date) ? date('d-M-Y',strtotime($item->package_active_date))
+                            : "") }}</td>
+                        <td>{{ (isset($item->package_expire_date) ? date('d-M-Y',strtotime($item->package_expire_date))
+                            : "") }}</td>
                         <td>
                             @if ($item->status == true)
-                            <span class="badge badge-success">Online</span>
+                            <span class="badge badge-success">Active</span>
                             @else
-                            <span class="badge badge-danger">Offline</span>
+                            <span class="badge badge-danger">Deactived</span>
                             @endif
                         </td>
                         <td class="d-flex justify-content-around">
@@ -75,9 +77,15 @@
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span
                                     class="svg-icon svg-icon-3"><i class="fas fa-edit"></i></span></a>
 
-                            <a class="btn btn-icon btn-bg-light btn-color-danger btn-sm me-1" href="#"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><span
-                                    class="svg-icon svg-icon-3"><i class="fas fa-trash"></i></span></a>
+                            <form action="{{route('admin.pppoe.delete',['id'=>$item->id])}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+
+                                <button class="btn btn-icon btn-bg-light btn-color-danger btn-sm me-1"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                    <span class="svg-icon svg-icon-3"><i class="fas fa-trash"></i></span>
+                                </button>
+                            </form>
                         </td>
 
                     </tr>

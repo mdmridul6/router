@@ -28,7 +28,7 @@ class PPPoESeeder extends Seeder
             $pppoe->package_active_date = Carbon::now();
             $pppoe->package_expire_date = Carbon::now()->addMonth(1);
             $pppoe->seller_id = null;
-            $pppoe->status = true;
+            $pppoe->status = ($users['profile'] == "Expired" ? false : true );
             $pppoe->save();
         }
     }

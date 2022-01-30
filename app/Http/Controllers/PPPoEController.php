@@ -66,6 +66,19 @@ class PPPoEController extends Controller
             $pppoe->seller_id = Seller::where('user_id', Auth::id())->get('id');
         }
         $pppoe->save();
+
+        $client = Connector::Connector();
+        $query =
+            (new Query('/ppp/secret/add'))
+            ->equal('name', $request->username)
+            ->equal('password', $request->password)
+            ->equal('service', 'pppoe')
+            ->equal('profile', 'Expired');
+
+        // Send query and read response from RouterOS (ordinary answer from update/create/delete queries has empty body)
+        $response = $client->query($query)->read();
+
+
         Session::flash('success', "PPPoe User Add Successfull");
         return redirect()->route('admin.pppoe.routerUser');
     }
@@ -90,18 +103,60 @@ class PPPoEController extends Controller
     }
 
 
+    public function destroy($id)
+    {
+        PPPoE::destroy($id);
+        Session::flash('error', "PPPoE User Delete Successfull");
+        return redirect()->back();
+    }
+
+
 
     public function active(int $id)
     {
         $pppoe = PPPoE::find($id);
         $pppoe->status = true;
+        $pppoe->package_active_date = Carbon::now();
+        $pppoe->package_expire_date = Carbon::now()->addMonth();
         $pppoe->save();
-        $this->view($id);
+
+        $client = Connector::Connector();
+        $query = new Query('/ppp/secret/print');
+        $query->where('name', $pppoe->username);
+        $secrets = $client->query($query)->read();
+        
+        $query = (new Query('/ppp/secret/set'))
+            ->equal('.id', $secrets[0]['.id'])
+            ->equal('profile', $pppoe->profile);
+
+        // Update query ordinary have no return
+        $client->query($query)->read();
+
+        return redirect()->back();
     }
 
 
     public function deactive(int $id)
     {
+        $pppoe = PPPoE::find($id);
+        $pppoe->status = false;
+        $pppoe->package_active_date = null;
+        $pppoe->package_expire_date = null;
+        $pppoe->save();
+
+        $client = Connector::Connector();
+        $query = new Query('/ppp/secret/print');
+        $query->where('name', $pppoe->username);
+        $secrets = $client->query($query)->read();
+
+        $query = (new Query('/ppp/secret/set'))
+            ->equal('.id', $secrets[0]['.id'])
+            ->equal('profile', $pppoe->profile);
+
+        // Update query ordinary have no return
+        $client->query($query)->read();
+
+        return redirect()->back();
     }
 
     public function isActive()

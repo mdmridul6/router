@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helper\Connector;
 use App\Models\AboutUs;
+use App\Models\PPPoE;
+use App\Models\Seller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -67,6 +69,9 @@ class AuthController extends Controller
             $data['identity'] = $client->query('/system/identity/print')->read();
 
             if (Auth::user()->role == "Admin") {
+                $data['total_Seller'] = Seller::count();
+                $data['total_user'] = PPPoE::count();
+                $data['total_active_user'] = PPPoE::where('status', true)->count();
                 return view('backend.admin.home.home', compact('data'));
             } else {
                 return view('backend.seller.home.home', compact('data'));

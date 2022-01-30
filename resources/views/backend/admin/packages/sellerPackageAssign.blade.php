@@ -99,6 +99,8 @@
 
     var amountArrayWithOutNull=$.grep(amount,function(n){ return n == null || n });
 
+    console.log(amountArrayWithOutNull);
+    console.log(packages);
             axios.post("{{route('admin.package.sellerPackageDedicate')}}",{
 
                     packages:packages,
@@ -106,7 +108,17 @@
                     seller:userid
 
             }).then(function(response){
-                console.log(response.data);
+                console.log();
+                if (response.data.status == "success") {
+
+                    toastr.options =
+                    {
+                        "closeButton" : true,
+                        "progressBar" : true
+                    }
+                    toastr.success(response.data.message);
+                }
+
             }).catch(function(error){
                 console.log(error);
             }).then(function(){

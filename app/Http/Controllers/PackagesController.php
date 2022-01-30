@@ -105,11 +105,11 @@ class PackagesController extends Controller
                 'amount' => $value[1]
             ];
         });
+
+        $seller->package()->detach();
         $seller->package()->sync($merged);
 
-        return response()->json("success", 200);
-        Session::flash('message', "Seller Package Assign Successful");
-        return redirect()->route('admin.package.sellerPackage');
+        return response()->json(array('status' => "success", 'message' => "Package Assign Successfull"), 200);
     }
 
     public function sellerPackages()

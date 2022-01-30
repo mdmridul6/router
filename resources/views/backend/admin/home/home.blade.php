@@ -66,10 +66,10 @@
             <div class="card bg-dark card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body my-3">
-                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <i class="fas fa-user-friends text-light fa-3x"></i>
                     <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total Seller</h3>
                     <div class="py-1">
-                        <span class="text-light fs-1 fw-bolder me-2" id="ram"></span>
+                        <span class="text-light fs-1 fw-bolder me-2" id="ram">{{$data['total_Seller']}}</span>
                     </div>
 
                     {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
@@ -86,10 +86,10 @@
             <div class="card bg-warning card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body my-3">
-                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <i class="fas fa-users text-light fa-3x"></i>
                     <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total User</h3>
                     <div class="py-1">
-                        <span class="text-light fs-1 fw-bolder me-2" id="ram"></span>
+                        <span class="text-light fs-1 fw-bolder me-2" id="ram">{{$data['total_user']}}</span>
                     </div>
 
                     {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
@@ -106,10 +106,11 @@
             <div class="card bg-primary card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body my-3">
-                    <i class="fas fa-hdd text-light fa-3x"></i>
+                    <i class="fas fa-user-check text-light fa-3x"></i>
+
                     <h3 class="card-title fw-bolder text-light fs-5 mb-3 d-block">Total Active User</h3>
                     <div class="py-1">
-                        <span class="text-light fs-1 fw-bolder me-2"></span>
+                        <span class="text-light fs-1 fw-bolder me-2">{{$data['total_active_user']}}</span>
                     </div>
 
                     {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">

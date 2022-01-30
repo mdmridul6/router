@@ -21,7 +21,7 @@
                         <label for="username">Password</label>
                         <input type="text" name="password" id="password" class="form-control" placeholder="Password">
                     </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
                         <label for="packages">Package</label>
                         <select name="packages" id="packages" class="form-control">
                             <option value="" disabled selected> Select Packages</option>
@@ -32,7 +32,14 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
+                        <label for="isFree">Free Connection</label>
+                        <select name="isFree" id="" class="form-control">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2">
                         <label for="packages">Seller</label>
                         <select name="seller" id="seller" class="form-control">
                             <option value="0" selected> Select seller</option>
@@ -43,11 +50,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                        <label for="seller">
 
-                        </label>
-                    </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-success btn-block w-25 mt-2" id="savebtn">Save</button>

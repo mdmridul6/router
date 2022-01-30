@@ -44,6 +44,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
             Route::get('/view/{id}', [PPPoEController::class, 'view'])->name('view');
+            Route::delete('/delete/{id}', [PPPoEController::class, 'destroy'])->name('delete');
             Route::post('/import', [PPPoEController::class, 'import'])->name('import');
             Route::get('/check', [PPPoEController::class, 'isActive'])->name('ActiveList');
             Route::post('/active/{id}', [PPPoEController::class, 'active'])->name('active');

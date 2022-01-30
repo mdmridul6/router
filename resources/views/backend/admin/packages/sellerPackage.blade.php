@@ -25,8 +25,10 @@
                         <td>
                             @foreach($details->package as $packages)
 
-                            <span class="badge badge-primary">{{$packages->name}}</span>
-                            <span class="badge badge-danger">{{$packages->pivot->amount}}</span>&emsp;
+                            <span class="badge badge-white">
+                                <span class="badge badge-primary">{{$packages->name}}</span>
+                                <span class="badge badge-danger">{{$packages->pivot->amount}}</span>&emsp;
+                            </span>
                             @endforeach
                         </td>
                         <td>
