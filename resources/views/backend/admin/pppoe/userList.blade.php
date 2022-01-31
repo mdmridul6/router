@@ -50,7 +50,7 @@
                         </td>
                         <td class="d-flex justify-content-around">
                             @if ($item->status == true)
-                            <form action="" method="POST">
+                            <form action="{{route('admin.pppoe.deactive',['id'=>$item->id])}}" method="POST">
                                 @csrf
                                 <button class="btn btn-icon btn-bg-light btn-color-danger btn-sm me-1"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Deactive">

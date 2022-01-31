@@ -124,7 +124,7 @@ class PPPoEController extends Controller
         $query = new Query('/ppp/secret/print');
         $query->where('name', $pppoe->username);
         $secrets = $client->query($query)->read();
-        
+
         $query = (new Query('/ppp/secret/set'))
             ->equal('.id', $secrets[0]['.id'])
             ->equal('profile', $pppoe->profile);
@@ -151,7 +151,7 @@ class PPPoEController extends Controller
 
         $query = (new Query('/ppp/secret/set'))
             ->equal('.id', $secrets[0]['.id'])
-            ->equal('profile', $pppoe->profile);
+            ->equal('profile', 'Expired');
 
         // Update query ordinary have no return
         $client->query($query)->read();
