@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/clear', function ($id) {
+    Artisan::call('cache:clear');
+    return "Cache Cleared";
+});
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('login', [AuthController::class, 'index'])->name('login');
@@ -91,10 +95,5 @@ Route::middleware(['auth', 'seller'])->group(function () {
         Route::prefix('package')->name('package.')->group(function () {
             Route::get('/', [PackagesController::class, 'sellerPackages'])->name('index');
         });
-    });
-
-    Route::get('clear', function ($id) {
-        Artisan::call('cache:clear');
-        return "Cache Cleared";
     });
 });
