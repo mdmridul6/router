@@ -89,7 +89,7 @@ class SellerController extends Controller
             'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255|unique:users,email,' . $seller->email,
+            'email' => 'required|max:255|unique:users,email,' . $seller->id,
             'address' => 'required||max:255',
 
         ]);
