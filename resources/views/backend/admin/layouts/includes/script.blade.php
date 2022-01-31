@@ -18,7 +18,7 @@
 @yield('js')
 <script>
     $(document).ready( function () {
-    $('table').DataTable({
+    $('#dataTable').DataTable({
     "language": {
     "lengthMenu": "Show _MENU_",
     },
