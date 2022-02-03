@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Models\PPPoE;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -109,6 +110,28 @@ class SellerController extends Controller
 
         Seller::destroy($seller->id);
         Session::flash('success', "Seller Delete Successful");
+        return redirect()->back();
+    }
+
+
+
+
+    public function pppoeAssign()
+    {
+        $data['app'] = $this->app;
+        $data['pppoeUsers'] = PPPoE::whereNull('seller_id')->get();
+        $data['seller'] = Seller::all();
+        return view('backend.admin.seller.pppoeAssign', compact('data'));
+    }
+
+    public function pppoeAssignPost(Request $request)
+    {
+        $request->validate([
+            'seller' => 'required',
+        ]);
+
+        $PPPoE = PPPoE::whereIn('id', $request->pppoeID)->update(['seller_id' => $request->seller]);
+        Session::flash('message', "PPPoe assign successfull");
         return redirect()->back();
     }
 

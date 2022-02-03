@@ -68,12 +68,16 @@ class AuthController extends Controller
             $data['interface'] = $client->query('/interface/ethernet/print')->read();
             $data['identity'] = $client->query('/system/identity/print')->read();
 
+
             if (Auth::user()->role == "Admin") {
                 $data['total_Seller'] = Seller::count();
                 $data['total_user'] = PPPoE::count();
                 $data['total_active_user'] = PPPoE::where('status', true)->count();
                 return view('backend.admin.home.home', compact('data'));
             } else {
+
+                $data['total_user'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->count();
+                $data['total_active_user'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->where('status', true)->count();
                 return view('backend.seller.home.home', compact('data'));
             }
             return redirect("login")->with('You do not have access');

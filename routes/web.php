@@ -66,6 +66,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/{seller}/edit', [SellerController::class, 'edit'])->name('edit');
             Route::put('/{seller}/update', [SellerController::class, 'update'])->name('update');
             Route::delete('/delete/{seller}', [SellerController::class, 'destroy'])->name('destroy');
+            Route::get('/pppoe/assign', [SellerController::class, 'pppoeAssign'])->name('pppoeAssign');
+            Route::Post('/pppoe/assign', [SellerController::class, 'pppoeAssignPost'])->name('pppoeAssign');
         });
         Route::prefix('package')->name('package.')->group(function () {
             Route::get('/', [PackagesController::class, 'index'])->name('index');
@@ -87,8 +89,13 @@ Route::middleware(['auth', 'seller'])->group(function () {
             Route::get('/', [PPPoEController::class, 'sellerPPPoeUsers'])->name('routerUser');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
+            Route::get('/view/{id}', [PPPoEController::class, 'view'])->name('view');
+            Route::post('/active/{id}', [PPPoEController::class, 'active'])->name('active');
+            Route::post('/deactive/{id}', [PPPoEController::class, 'deactive'])->name('deactive');
+            Route::delete('/delete/{id}', [PPPoEController::class, 'destroy'])->name('delete');
             Route::get('/check', [PPPoEController::class, 'isActiveSeller'])->name('ActiveList');
             Route::post('/check', [PPPoEController::class, 'activeCheckSeller'])->name('activeList');
+            Route::post('/check/db', [PPPoEController::class, 'pppoeExistcheckDB'])->name('DbPPPoeCheck');
         });
 
 

@@ -91,6 +91,16 @@
                             <span class="menu-title">All Seller</span>
                         </a>
                     </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('admin.seller.pppoeAssign')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Seller PPPoE Assign</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <div data-kt-menu-trigger="click"

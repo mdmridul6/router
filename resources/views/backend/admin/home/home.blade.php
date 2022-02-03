@@ -3,6 +3,7 @@
 
 <!--begin::Container-->
 <div id="kt_content_container" class="container-fluid">
+
     <!--begin::Row-->
     <div class="row">
 
@@ -187,16 +188,17 @@
         <!--end::Container-->
     </div> --}}
     <!--end::Content-->
-    @endsection
+</div>
+@endsection
 
-    @section('js')
-    {{-- <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
-    <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}">
-    </script>
-    <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}">
-    </script>
-    <script>
-        var chart;
+@section('js')
+{{-- <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts-more.js')}}">
+</script>
+<script type="text/javascript" src="{{asset('backend/assets/js/highcharts/modules/exporting.js')}}">
+</script>
+<script>
+    var chart;
 
     function requestDatta(interface) {
       $.ajax({
@@ -282,10 +284,10 @@
         }]
       });
 });
-    </script>
+</script>
 
-    <script>
-        function popup(url, name, windowWidth, windowHeight) {
+<script>
+    function popup(url, name, windowWidth, windowHeight) {
       myleft = (screen.width) ? (screen.width - windowWidth) / 2 : 100;
       mytop = (screen.height) ? (screen.height - windowHeight) / 2 : 100;
       properties = "width=" + windowWidth + ",height=" + windowHeight;
@@ -334,12 +336,12 @@
         return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
       }
     });
-    </script>
+</script>
 
-    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <!-- Script แสดงวันเวลา -->
-    <script type="text/javascript">
-        function date_time(id) {
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!-- Script แสดงวันเวลา -->
+<script type="text/javascript">
+    function date_time(id) {
       date = new Date;
       year = date.getFullYear();
       month = date.getMonth();
@@ -364,10 +366,10 @@
       setTimeout('date_time("' + id + '");', '1000');
       return true;
     }
-    </script>
+</script>
 
-    <script TYPE="text/javascript">
-        function popup(mylink, windowname) {
+<script TYPE="text/javascript">
+    function popup(mylink, windowname) {
       if (!window.focus) return true;
       var href;
       if (typeof(mylink) == 'string') href = mylink;
@@ -375,11 +377,11 @@
       window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
       return false;
     }
-    </script> --}}
+</script> --}}
 
 
-    <script>
-        setInterval(() => {
+<script>
+    setInterval(() => {
         $.ajax({
         url: "{{route('routerinfo')}}",
         datatype: "json",
@@ -406,5 +408,5 @@
     }, 1000);
 
 
-    </script>
-    @endsection
+</script>
+@endsection

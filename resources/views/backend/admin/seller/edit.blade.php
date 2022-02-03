@@ -80,8 +80,8 @@
 
                             <div class="mb-10">
                                 <label for="fullName" class="required form-label">Full Name</label>
-                                <input type="text" class="form-control form-control-solid" name="fullName"
-                                    placeholder="Input Seller Full Name"
+                                <input type="text" class="form-control form-control-solid text-capitalize"
+                                    name="fullName" placeholder="Input Seller Full Name"
                                     value="{{(old('fullName') ? old('fullName') : $data['sellerInfo']->fullName )}}" />
                             </div>
 

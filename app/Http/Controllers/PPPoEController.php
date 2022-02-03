@@ -293,9 +293,9 @@ class PPPoEController extends Controller
 
     public function sellerPPPoeUsers()
     {
-        $seller = Seller::where('user_id', Auth::id())->first('id');
-        $pppoeUsers = PPPoE::where('seller_id', $seller->id)->get();
-        return view('backend.seller.pppoe.list', compact('pppoeUsers'));
+        $data['pppoe'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->orderBy('created_at', 'desc')->get();
+        $data['app'] = $this->app;
+        return view('backend.seller.pppoe.list', compact('data'));
     }
 
 
