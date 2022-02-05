@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\Connector;
 use App\Models\Packages;
 use App\Models\PPPoE;
+use App\Models\pppoeUserDetails;
 use App\Models\Seller;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -37,10 +38,15 @@ class PPPoEController extends Controller
 
     public function create()
     {
-        $data['packages'] = Packages::all();
-        $data['seller']   = Seller::all();
+
         $data['app']   = $this->app;
-        return view('backend.admin.pppoe.create', compact('data'));
+        if (Auth::user()->role == "Admin") {
+            $data['packages'] = Packages::all();
+            return view('backend.admin.pppoe.create', compact('data'));
+        } else {
+            $data['packages'] = Seller::with('package')->where('id', Seller::where('user_id', Auth::id())->first('id')->id)->first();
+            return view('backend.seller.pppoe.create', compact('data'));
+        }
     }
 
 
@@ -49,7 +55,10 @@ class PPPoEController extends Controller
         $request->validate([
             'packages' => 'required',
             'password' => 'required',
-            'username' => 'required'
+            'username' => 'required',
+            'fullName' => 'required',
+            'phone'    => 'required',
+            'address'  => 'required',
         ]);
         $pppoe = new PPPoE();
         $pppoe->username = $request->username;
@@ -63,8 +72,9 @@ class PPPoEController extends Controller
         if (Auth::user()->role == "Admin") {
             $pppoe->seller_id = null;
         } else {
-            $pppoe->seller_id = Seller::where('user_id', Auth::id())->get('id');
+            $pppoe->seller_id = Seller::where('user_id', Auth::id())->first('id')->id;
         }
+
         $pppoe->save();
 
         $client = Connector::Connector();
@@ -76,28 +86,48 @@ class PPPoEController extends Controller
             ->equal('profile', 'Expired');
 
         // Send query and read response from RouterOS (ordinary answer from update/create/delete queries has empty body)
-        $response = $client->query($query)->read();
+        $client->query($query)->read();
+
+
+        $userDetails = new pppoeUserDetails();
+        $userDetails->pppoe_id = $pppoe->id;
+        $userDetails->name = $request->fullName;
+        $userDetails->phone = $request->phone;
+        $userDetails->mobile = $request->mobile;
+        $userDetails->address = $request->address;
+        $userDetails->save();
+
 
 
         Session::flash('success', "PPPoe User Add Successfull");
-        return redirect()->route('admin.pppoe.routerUser');
+        if (Auth::user()->role == "Admin") {
+
+            return redirect()->route('admin.pppoe.routerUser')->withInput();
+        } else {
+            return redirect()->route('seller.pppoe.index')->withInput();
+        }
     }
 
 
     public function view($id)
     {
-        $data['pppoeData'] = PPPoE::with('seller')->find($id);
-        $client = Connector::Connector();
-
-        // Create "where" Query object for RouterOS
-        $query =
-            (new Query('/ppp/active/print'))
-            ->where('name', $data['pppoeData']->username);
-
-        // Send query and read response from RouterOS
-        $response = $client->query($query)->read();
-        $data['remoteLink'] = $response[0]['address'];
         $data['app'] = $this->app;
+        $data['pppoeData'] = PPPoE::with(['seller', 'pppoeUserDetails'])->find($id);
+
+        if ($data['pppoeData']->status == true) {
+            # code...
+            $client = Connector::Connector();
+            // Create "where" Query object for RouterOS
+            $query =
+                (new Query('/ppp/active/print'))
+                ->where('name', $data['pppoeData']->username);
+
+            // Send query and read response from RouterOS
+            $response = $client->query($query)->read();
+            $data['remoteLink'] = $response[0]['address'];
+        } else {
+            $data['remoteLink'] = null;
+        }
 
         return view('backend.admin.pppoe.view', compact('data'));
     }
@@ -332,41 +362,6 @@ class PPPoEController extends Controller
             ];
         }
         return response()->json($data);
-
-        //        $client = Connector::Connector();
-        //
-        //        if (self::userCheck($request)){
-        //
-        //
-        //            // Create "where" Query object for RouterOS
-        //            $query =
-        //                (new Query('/ppp/active/print'))
-        //                    ->where('name', $request->name);
-        //
-        //            // Send query and read response from RouterOS
-        //            $response = $client->query($query)->read();
-        //            if (count($response) > 0) {
-        //                $data = [
-        //                    'status' => "User Online",
-        //                    'data' => $response,
-        //                    'icon' => 'success'
-        //                ];
-        //            } else {
-        //                $data = [
-        //                    'status' => "User Offline",
-        //                    'data' => null,
-        //                    'icon' => 'warning'
-        //                ];
-        //            }
-        //        }else{
-        //            $data = [
-        //                'status' => "User Not Found",
-        //                'data' => null,
-        //                'icon' => 'error'
-        //            ];
-        //        }
-        //
-        //        return response()->json($data);
     }
 
     public function pppoeExistcheckDB(Request $request)

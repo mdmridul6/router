@@ -86,6 +86,9 @@
                                 <!--end::Title-->
                             </div>
                             <!--end::Item-->
+
+                            @if ($data['pppoeData']->status)
+
                             <!--begin::Item-->
                             <div class="d-flex align-items-sm-center mb-7">
                                 <!--begin::Title-->
@@ -99,6 +102,7 @@
                                 </div>
                                 <!--end::Title-->
                             </div>
+                            @endif
                             <!--end::Item-->
                             <!--begin::Item-->
                             <div class="d-flex align-items-sm-center mb-7">
@@ -108,7 +112,8 @@
                                         <p class="text-gray-800 fw-bolder text-hover-primary fs-6">Active Date</p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$data['pppoeData']->active_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{($data['pppoeData']->active_date != null)
+                                        ? $data['pppoeData']->active_date->isoFormat('D-MMM-YYYY') : ""}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -122,7 +127,8 @@
                                         </p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$data['pppoeData']->package_active_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{($data['pppoeData']->package_active_date != null ) ?
+                                        $data['pppoeData']->package_active_date->isoFormat('D-MMM-YYYY') : ""}}</p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -136,7 +142,9 @@
                                         </p>
                                     </div>
                                     <p class="text-gray-800 fw-bolder text-hover-primary fs-6">
-                                        {{$data['pppoeData']->package_expire_date->isoFormat('D-MMM-YYYY')}}</p>
+                                        {{($data['pppoeData']->package_expire_date !=
+                                        null) ? $data['pppoeData']->package_expire_date->isoFormat('D-MMM-YYYY') : ""}}
+                                    </p>
                                 </div>
                                 <!--end::Title-->
                             </div>
@@ -178,6 +186,7 @@
 
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    @if ($data['pppoeData']->status)
                     <div class="card bg-light-info">
                         <div class="card-header">
                             <h3 class="card-title text-info">Morniter Traffic</h3>
@@ -220,11 +229,17 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <h3 class="text-danger text-center">Active The User First</h3>
+                    @endif
                 </div>
+
             </div>
         </div>
     </div>
     @endsection
+
+    @if ($data['pppoeData']->status)
 
     @section('js')
     <script type="text/javascript" src="{{asset('backend/assets/js/highcharts/highcharts.js')}}"></script>
@@ -428,3 +443,4 @@
     }
     </script>
     @endsection
+    @endif

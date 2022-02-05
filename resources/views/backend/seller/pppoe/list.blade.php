@@ -6,6 +6,9 @@
             <div class="card-title">
                 PPPoE Users
             </div>
+            <div class="card-title">
+                <a href="{{route('seller.pppoe.create')}}" class="btn btn-secondary btn-sm">Add Users</a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="dataTable">

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static where(string $string, mixed $name,mixed $name)
@@ -31,5 +32,10 @@ class PPPoE extends Model
     public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class, 'seller_id', 'id');
+    }
+
+    public function pppoeUserDetails(): HasOne
+    {
+        return $this->hasone(pppoeUserDetails::class, 'pppoe_id', 'id');
     }
 }
