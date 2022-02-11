@@ -26,7 +26,9 @@ class PPPoE extends Model
         'updated_at',
         'active_date',
         'package_active_date',
-        'package_expire_date'
+        'package_expire_date',
+        'active_after',
+        'deactive_after',
     ];
 
     public function seller(): BelongsTo

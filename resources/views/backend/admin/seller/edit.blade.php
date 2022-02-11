@@ -118,6 +118,36 @@
                             </div>
 
                             <div class="mb-10">
+                                <label for="deactiveAfter">Deactive After</label>
+
+                                <!--begin::Dialer-->
+                                <div class="input-group w-md-100" data-kt-dialer="true" data-kt-dialer-min="0"
+                                    data-kt-dialer-max="30" data-kt-dialer-step="1">
+
+                                    <!--begin::Decrease control-->
+                                    <button class=" btn btn-icon btn-outline btn-outline-secondary" type="button"
+                                        data-kt-dialer-control="decrease">
+                                        <i class="bi bi-dash fs-1"></i>
+                                    </button>
+                                    <!--end::Decrease control-->
+
+                                    <!--begin::Input control-->
+                                    <input type="text" class="form-control" name="deactiveAfter" readonly placeholder=""
+                                        value="{{(old('deactive_after') ? old('deactive_after') : (int)$data['sellerInfo']->deactive_after )}}"
+                                        data-kt-dialer-control="input" />
+                                    <!--end::Input control-->
+
+                                    <!--begin::Increase control-->
+                                    <button class="btn btn-icon btn-outline btn-outline-secondary" type="button"
+                                        data-kt-dialer-control="increase">
+                                        <i class="bi bi-plus fs-1"></i>
+                                    </button>
+                                    <!--end::Increase control-->
+                                </div>
+                                <!--end::Dialer-->
+                            </div>
+
+                            <div class="mb-10">
                                 <label for="address" class="required form-label">Address</label>
                                 <textarea name="address" class="form-control form-control-solid" id="" cols="30"
                                     rows="10">{{(old('address') ? old('address') : $data['sellerInfo']->address )}}</textarea>

@@ -26,6 +26,11 @@ class Seller extends Model
 
     public function pppoe(): HasMany
     {
-        return $this->hasMany(PPPoE::class, 'id', 'seller_id');
+        return $this->hasMany(PPPoE::class, 'seller_id', 'id');
+    }
+
+    public function pppoeExpired(): HasMany
+    {
+        return $this->hasMany(PPPoE::class, 'seller_id', 'id')->where('status', false);
     }
 }

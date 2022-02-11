@@ -23,8 +23,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $data['sellers'] = Seller::all();
         $data['app'] = $this->app;
+        $data['sellers'] = Seller::withCount(['pppoe', 'pppoeExpired'])->get();
         return view('backend.admin.seller.list', compact('data'));
     }
 
@@ -90,7 +90,7 @@ class SellerController extends Controller
             'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',
             'mobile' => 'max:11',
-            'email' => 'required|max:255|unique:users,email,' . $seller->id,
+            'email' => 'required|max:255|unique:users,email,' . $seller->user_id . '|unique:sellers,email,' . $seller->id,
             'address' => 'required||max:255',
 
         ]);
@@ -130,7 +130,7 @@ class SellerController extends Controller
             'seller' => 'required',
         ]);
 
-        $PPPoE = PPPoE::whereIn('id', $request->pppoeID)->update(['seller_id' => $request->seller]);
+        PPPoE::whereIn('id', $request->pppoeID)->update(['seller_id' => $request->seller]);
         Session::flash('message', "PPPoe assign successfull");
         return redirect()->back();
     }
@@ -157,6 +157,7 @@ class SellerController extends Controller
         $sellerData->email = $request->email;
         $sellerData->address = $request->address;
         $sellerData->user_id = $user->id;
+        $sellerData->deactive_after = $request->deactiveAfter;
         if ($request->hasFile('image')) {
             $path = Helper::imageUploader($request);
             $sellerData->image = $path;

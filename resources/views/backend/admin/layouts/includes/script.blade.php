@@ -58,5 +58,20 @@
     @endforeach
 @endif
 </script>
+
+<script>
+    $("#datePicker").daterangepicker({
+        autoUpdateInput: false,
+        singleDatePicker: true,
+        showDropdowns: false,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10)
+    });
+
+    $("#datePicker").on('apply.daterangepicker',function(ev, picker) {
+        $(this).val(picker.startDate.format('Y-M-D'));
+    });
+
+</script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->

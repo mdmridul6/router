@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 UserSeeder::class,
-//                SellerSeeder::class,
+                //                SellerSeeder::class,
                 PackageSeeder::class,
-                PPPoESeeder::class
+                PPPoESeeder::class,
+                SettingSeeder::class
             ]
         );
     }

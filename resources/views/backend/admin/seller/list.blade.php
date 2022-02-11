@@ -47,15 +47,15 @@
                         <td>{{$seller->phone}}</td>
                         <td>{{$seller->email}}</td>
 
-                        <td>{{$seller->balance }}</td>
-                        <td>{{$seller->balance }}</td>
+                        <td>{{$seller->pppoe_count }}</td>
+                        <td>{{$seller->pppoe_expired_count }}</td>
                         <td>{{$seller->balance }}</td>
                         <td>{{$seller->balance }}</td>
                         <td>
                             <div class="d-flex justify-content-evenly align-items-center">
 
                                 <a href="{{route('admin.seller.show',$seller->id)}}"
-                                    class="btn btn-icon btn-light-youtube me-5"><i class="fa fa-ban"></i></a>
+                                    class="btn btn-icon btn-light-info me-5"><i class="fa fa-eye"></i></a>
                                 <a href="{{route('admin.seller.edit',$seller->id)}}"
                                     class="btn btn-icon btn-light-twitter me-5"><i class="fa fa-edit"></i></a>
                                 <form action="{{route('admin.seller.destroy',$seller->id)}}" method="post">

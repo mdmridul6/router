@@ -73,9 +73,12 @@
                                 data-bs-placement="top" title="Show"><span class="svg-icon svg-icon-3"><i
                                         class="fas fa-eye"></i></span></a>
 
-                            <a class="btn btn-icon btn-bg-light btn-color-info btn-sm me-1" href="#"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span
-                                    class="svg-icon svg-icon-3"><i class="fas fa-edit"></i></span></a>
+                            <a class="btn btn-icon btn-bg-light btn-color-info btn-sm me-1"
+                                href="{{route('admin.pppoe.edit',['id'=>$item->id])}}" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Edit"><span class="svg-icon svg-icon-3"><i
+                                        class="fas fa-edit"></i></span></a>
+
+                            @if ($data['settings']->pppoe_delete)
 
                             <form action="{{route('admin.pppoe.delete',['id'=>$item->id])}}" method="POST">
                                 @method('DELETE')
@@ -86,6 +89,7 @@
                                     <span class="svg-icon svg-icon-3"><i class="fas fa-trash"></i></span>
                                 </button>
                             </form>
+                            @endif
                         </td>
 
                     </tr>

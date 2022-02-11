@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class pppoeUserDetails extends Model
 {
     use HasFactory;
+    protected $primaryKey = "pppoe_id";
 
     public function pppoe(): BelongsTo
     {

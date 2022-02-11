@@ -25,7 +25,7 @@ class CreateSellersTable extends Migration
             $table->string('address', 100);
             $table->string('image', 100)->nullable();
             $table->integer('balance', false, true)->default(0);
-            $table->date('deactive_after')->nullable();
+            $table->integer('deactive_after')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

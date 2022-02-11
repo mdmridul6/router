@@ -27,12 +27,14 @@ class PackageSeeder extends Seeder
     {
         $client = Connector::Connector();
         $packages = $client->query('/ppp/profile/print')->read();
-
-        foreach ($packages as $package){
-            $data=new Packages();
-            $data->name = $package['name'];
-            $data->ipAddress = $package['local-address'];
-            $data->save();
+        foreach ($packages as $package) {
+            if ($package['name'] != "default" || $package['name'] != "default-encryption") {
+                // continue;
+                $data = new Packages();
+                $data->name = $package['name'];
+                $data->ipAddress = $package['local-address'];
+                $data->save();
+            }
         }
     }
 }
