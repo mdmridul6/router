@@ -176,8 +176,16 @@ class PPPoEController extends Controller
         $pppoe->package_expire_date = Carbon::now()->addMonth();
         $pppoe->active_after = null;
         if ($pppoe->seller_id !== null) {
-            $seller = Seller::find($pppoe->seller_id);
-            $pppoe->deactive_after = Carbon::now()->addDay($seller->deactive_after);
+            $sellerDetails = Seller::find($pppoe->seller_id);
+            $seller = Seller::with('package')->find($pppoe->seller_id)->package->where('name', '300TK')->first();
+            $package_price = (int)$seller->pivot->amount;
+            if ((int)$sellerDetails->balance > 0 && (int)$sellerDetails->balance >= $package_price) {
+                $this->dicrementSellerBalence($sellerDetails->id, $package_price);
+            } else {
+                Session::flash('error', "Insufficient Balance");
+                return redirect()->back();
+            }
+            $pppoe->deactive_after = Carbon::now()->addDay($sellerDetails->deactive_after);
         }
         $pppoe->save();
 
@@ -435,6 +443,23 @@ class PPPoEController extends Controller
         }
 
         $pppoe->save();
+    }
+
+
+
+    public function incrementSellerBalence($sellerId, $balence)
+    {
+        $seller = Seller::find($sellerId);
+        $seller->balance = $seller->balance + $balence;
+        $seller->save();
+    }
+
+    public function dicrementSellerBalence($sellerId, $balence)
+    {
+
+        $seller = Seller::find($sellerId);
+        $seller->balance = $seller->balance - $balence;
+        $seller->save();
     }
 
     private function extendedPppoeUserDetails($userDetails, $pppoe, $request)

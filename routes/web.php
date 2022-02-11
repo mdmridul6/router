@@ -46,6 +46,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/', [SettingController::class, 'index'])->name('index');
             Route::post('create', [SettingController::class, 'store'])->name('store');
         });
+        Route::prefix('balence')->name('balence.')->group(function () {
+            Route::get('/add', [SellerController::class, 'balence'])->name('add');
+            Route::post('/add', [SellerController::class, 'addbalence'])->name('add');
+        });
+
         Route::get('interface/data', [AuthController::class, 'interfaceData'])->name('interfaceData');
 
 

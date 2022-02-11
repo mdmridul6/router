@@ -165,4 +165,19 @@ class SellerController extends Controller
 
         $sellerData->save();
     }
+
+
+    public function balence()
+    {
+        $data['app'] = $this->app;
+        $data['seller'] = Seller::all();
+        return view('backend.admin.account.index', compact('data'));
+    }
+    public function addbalence(Request $request)
+    {
+        $increment = new PPPoEController();
+        $increment->incrementSellerBalence($request->seller, $request->balence);
+        Session::flash('message', 'Balence Add Successfully');
+        return redirect()->back();
+    }
 }
