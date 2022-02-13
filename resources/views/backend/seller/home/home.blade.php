@@ -23,7 +23,7 @@
             <!--end: Statistics Widget 6-->
         </div>
 
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <!--begin: Statistics Widget 6-->
             <div class="card bg-danger card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
@@ -33,16 +33,16 @@
                     <div class="py-1">
                         <span class="text-light fs-1 fw-bolder me-2" id="cpu"></span>
                     </div>
-                    {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
+                    <div class="progress h-7px bg-light bg-opacity-50 mt-7">
                         <div class="progress-bar bg-light" id="cpuProgressbar" role="progressbar" style="width: 15%"
                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> --}}
+                    </div>
                 </div>
                 <!--end:: Body-->
             </div>
             <!--end: Statistics Widget 6-->
-        </div>
-        <div class="col-md-4">
+        </div> --}}
+        {{-- <div class="col-md-4">
             <!--begin: Statistics Widget 6-->
             <div class="card bg-info card-xl-stretch mb-xl-8">
                 <!--begin::Body-->
@@ -53,15 +53,15 @@
                         <span class="text-light fs-1 fw-bolder me-2" id="ram"></span>
                     </div>
 
-                    {{-- <div class="progress h-7px bg-light bg-opacity-50 mt-7">
+                    <div class="progress h-7px bg-light bg-opacity-50 mt-7">
                         <div class="progress-bar bg-light" id="ramProgressbar" role="progressbar" style="width: 15%"
                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> --}}
+                    </div>
                 </div>
                 <!--end:: Body-->
             </div>
             <!--end: Statistics Widget 6-->
-        </div>
+        </div> --}}
         <div class="col-md-4">
             <!--begin: Statistics Widget 6-->
             <div class="card bg-warning card-xl-stretch mb-xl-8">
@@ -175,7 +175,7 @@
 @endsection
 
 @section('js')
-<script>
+{{-- <script>
     setInterval(() => {
         $.ajax({
         url: "{{route('routerinfo')}}",
@@ -203,5 +203,5 @@
     }, 1000);
 
 
-</script>
+</script> --}}
 @endsection

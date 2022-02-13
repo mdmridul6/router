@@ -44,7 +44,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mt-5">
                     <button class="btn btn-success w-50">Save</button>
                 </div>
 
@@ -75,7 +75,6 @@
                 var jsonData=response.data.package;
                 for (let i = 0; i < jsonData.length; i++) {
                     const element = jsonData[i];
-                    console.log(element.pivot);
                     $('#activeInput_'+element.pivot.packages_id).prop('checked',true);
                     $('#amountInput'+element.pivot.packages_id).prop('disabled',false).val(element.pivot.amount);
 
@@ -99,8 +98,6 @@
 
     var amountArrayWithOutNull=$.grep(amount,function(n){ return n == null || n });
 
-    console.log(amountArrayWithOutNull);
-    console.log(packages);
             axios.post("{{route('admin.package.sellerPackageDedicate')}}",{
 
                     packages:packages,

@@ -177,17 +177,23 @@ class PPPoEController extends Controller
         $pppoe->active_after = null;
         if ($pppoe->seller_id !== null) {
             $sellerDetails = Seller::find($pppoe->seller_id);
-            $seller = Seller::with('package')->find($pppoe->seller_id)->package->where('name', '300TK')->first();
-            $package_price = (int)$seller->pivot->amount;
-            if ((int)$sellerDetails->balance > 0 && (int)$sellerDetails->balance >= $package_price) {
-                $this->dicrementSellerBalence($sellerDetails->id, $package_price);
+            $seller = Seller::with('package')->find($pppoe->seller_id)->package->where('name', $pppoe->profile)->first();
+            if (!is_null($seller)) {
+
+                $package_price = (int)$seller->pivot->amount;
+                if ((int)$sellerDetails->balance > 0 && (int)$sellerDetails->balance >= $package_price) {
+                    $this->dicrementSellerBalence($sellerDetails->id, $package_price);
+                } else {
+                    Session::flash('error', "Insufficient Balance");
+                    return redirect()->back();
+                }
+                $pppoe->deactive_after = Carbon::now()->addDay($sellerDetails->deactive_after);
+                $pppoe->save();
             } else {
-                Session::flash('error', "Insufficient Balance");
+                Session::flash('error', "Invalid Package Error!");
                 return redirect()->back();
             }
-            $pppoe->deactive_after = Carbon::now()->addDay($sellerDetails->deactive_after);
         }
-        $pppoe->save();
 
         $client = Connector::Connector();
         $query = new Query('/ppp/secret/print');

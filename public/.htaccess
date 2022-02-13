@@ -5,6 +5,15 @@
 
     RewriteEngine On
 
+#WWW REWRITE
+RewriteCond %{HTTP_HOST} ^example\.com$ [NC]
+RewriteRule ^(.*)$ https://router.minjuonline.com/$1 [L,R=301]
+
+#REDIRECT OLD PAGE
+RewriteCond %{HTTP_HOST} ^router.minjuonline.com$
+RewriteRule ^old-page.html$ https://router.minjuonline.com/new-page [R=301,L]
+
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

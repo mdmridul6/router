@@ -80,12 +80,17 @@ class SellerController extends Controller
     }
 
 
+    public function show($id)
+    {
+        dd($id);
+    }
+
+
     public function update(Request $request, Seller $seller): RedirectResponse
     {
         $request->validate([
             'image' => 'image|mimes:jpg,jpeg,|max:2048|min:15',
             'userName' => 'required|max:255|unique:sellers,userName,' . $seller->id,
-            'password' => 'required|',
             'fullName' => 'required|max:255',
             'nid' => 'required|max:19|unique:sellers,nid,' . $seller->id,
             'phone' => 'required|max:11',

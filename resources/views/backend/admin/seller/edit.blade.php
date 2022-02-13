@@ -19,8 +19,7 @@
                             style="background-image: url('{{asset('backend/assets/media/avatars/blank.png')}}')">
                             <!--begin::Image preview wrapper-->
                             <div class="image-input-wrapper w-125px h-125px"
-                                style="background-image: url('{{(isset($data['sellerInfo']->image)) ? asset($data['sellerInfo']->image) : asset("
-                                backend/assets/media/avatars/blank.png") }}')"></div>
+                                style="background-image: url('{{(isset($data['sellerInfo']->image)) ? asset($data['sellerInfo']->image) : asset("backend/assets/media/avatars/blank.png") }}')"></div>
                             <!--end::Image preview wrapper-->
 
                             <!--begin::Edit button-->

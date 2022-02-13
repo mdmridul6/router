@@ -21,10 +21,10 @@
                         <th>Full Name</th>
                         <th>Phone Number</th>
                         <th>Email</th>
+                        <th>Password</th>
                         <th>Total User</th>
                         <th>Suspend User</th>
                         <th>Total Balance</th>
-                        <th>Available Balance</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -46,22 +46,22 @@
                         <td>{{$seller->fullName}}</td>
                         <td>{{$seller->phone}}</td>
                         <td>{{$seller->email}}</td>
+                        <td>{{$seller->password }}</td>
 
                         <td>{{$seller->pppoe_count }}</td>
                         <td>{{$seller->pppoe_expired_count }}</td>
-                        <td>{{$seller->balance }}</td>
                         <td>{{$seller->balance }}</td>
                         <td>
                             <div class="d-flex justify-content-evenly align-items-center">
 
                                 <a href="{{route('admin.seller.show',$seller->id)}}"
-                                    class="btn btn-icon btn-light-info me-5"><i class="fa fa-eye"></i></a>
+                                    class="btn btn-icon btn-light-info btn-sm me-5"><i class="fa fa-eye"></i></a>
                                 <a href="{{route('admin.seller.edit',$seller->id)}}"
-                                    class="btn btn-icon btn-light-twitter me-5"><i class="fa fa-edit"></i></a>
+                                    class="btn btn-icon btn-light-twitter btn-sm me-5"><i class="fa fa-edit"></i></a>
                                 <form action="{{route('admin.seller.destroy',$seller->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-icon btn-light-youtube me-5"><i
+                                    <button type="submit" class="btn btn-icon btn-light-youtube btn-sm me-5"><i
                                             class="fa fa-trash-alt"></i></button>
                                 </form>
 
