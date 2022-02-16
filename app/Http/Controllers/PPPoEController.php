@@ -329,9 +329,9 @@ class PPPoEController extends Controller
      */
     public function activeCheck(Request $request): JsonResponse
     {
-        $client = Connector::Connector();
 
         if ($this->userCheck($request)) {
+            $client = Connector::Connector();
 
 
             // Create "where" Query object for RouterOS
@@ -411,7 +411,20 @@ class PPPoEController extends Controller
 
     public function isActiveSeller()
     {
-        return view('backend.seller.pppoe.active');
+        $data['allPPPoe'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->get();
+        $client = Connector::Connector();
+
+
+        $data['app'] = $this->app;
+
+        // Create "where" Query object for RouterOS
+        $query =
+            (new Query('/ppp/active/print'));
+
+        // Send query and read response from RouterOS
+        $data['pppoeActive'] = $client->query($query)->read();
+
+        return view('backend.seller.pppoe.active', compact('data'));
     }
 
 
@@ -426,19 +439,39 @@ class PPPoEController extends Controller
     public function activeCheckSeller(Request $request): JsonResponse
     {
         $seller = Seller::where('user_id', Auth::id())->first('id');
-        $userDataCheck = PPPoE::where('username', $request->name)->where('seller_id', $seller)->first();
+        $userDataCheck = PPPoE::where('username', $request->name)->where('seller_id', $seller->id)->first();
+
 
         if (!empty($userDataCheck) > 0) {
-            $data = [
-                'status' => "User Found",
-                'data' => $userDataCheck,
-                'icon' => 'success'
-            ];
+
+            $client = Connector::Connector();
+
+
+            // Create "where" Query object for RouterOS
+            $query =
+                (new Query('/ppp/active/print'))
+                ->where('name', $request->name);
+
+            // Send query and read response from RouterOS
+            $response = $client->query($query)->read();
+            if (count($response) > 0) {
+                $data = [
+                    'status' => "User Online",
+                    'data' => $response,
+                    'icon' => 'success'
+                ];
+            } else {
+                $data = [
+                    'status' => "User Offline",
+                    'data' => null,
+                    'icon' => 'warning'
+                ];
+            }
         } else {
             $data = [
                 'status' => "User Not Found",
                 'data' => null,
-                'icon' => 'success'
+                'icon' => 'error'
             ];
         }
         return response()->json($data);
