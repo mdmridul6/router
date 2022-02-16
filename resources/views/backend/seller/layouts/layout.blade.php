@@ -69,6 +69,7 @@
                     @yield('content')
                 </div>
                 <!--end::Post-->
+                @include('backend.seller.layouts.includes.footer')
             </div>
             <!--end::Wrapper-->
         </div>

@@ -75,7 +75,7 @@ class AuthController extends Controller
                 $data['total_active_user'] = PPPoE::where('status', true)->count();
                 return view('backend.admin.home.home', compact('data'));
             } else {
-
+                $data['seller'] = Seller::where('user_id', Auth::id())->first();
                 $data['total_user'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->count();
                 $data['total_active_user'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->where('status', true)->count();
                 return view('backend.seller.home.home', compact('data'));

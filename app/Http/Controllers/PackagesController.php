@@ -114,7 +114,8 @@ class PackagesController extends Controller
 
     public function sellerPackages()
     {
-        $packages = Seller::with('package')->where('user_id', Auth::id())->get();
-        return view('backend.seller.packages.list', compact('packages'));
+        $data['seller'] = Seller::where('user_id', Auth::id())->first();
+        $data['packages'] = Seller::with('package')->where('id', $data['seller']->id)->first();
+        return view('backend.seller.packages.list', compact('data'));
     }
 }

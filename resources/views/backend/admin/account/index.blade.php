@@ -28,11 +28,10 @@
                     </div>
                 </div>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class=" card-footer d-flex justify-content-center">
             <button type="submit" class="btn btn-success">Save</button>
         </div>
         </form>
     </div>
-</div>
 </div>
 @endsection

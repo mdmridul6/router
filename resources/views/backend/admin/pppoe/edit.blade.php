@@ -42,6 +42,12 @@
                                         placeholder="Active After" id="datePicker"
                                         value="{{old('active_after') ? old('active_after') : (isset($data['pppoeData']->active_after) ? $data['pppoeData']->active_after->isoFormat('YYYY-MM-D') : "")}}" />
                                 </div>
+                                <div class="my-0">
+                                    <label class="form-label">Detive/Edit After</label>
+                                    <input class="form-control form-control-solid" name="deactive_after"
+                                        placeholder="Active After" id="datePicker"
+                                        value="{{old('deactive_after') ? old('deactive_after') : (isset($data['pppoeData']->deactive_after) ? $data['pppoeData']->deactive_after->isoFormat('YYYY-MM-D') : "")}}" />
+                                </div>
 
                                 <div class="my-2">
                                     <label for="packages">Package <span class="text-danger">*</span></label>

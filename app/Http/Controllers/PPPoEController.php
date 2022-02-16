@@ -237,7 +237,22 @@ class PPPoEController extends Controller
 
     public function isActive()
     {
+
+        $data['allPPPoe'] = PPPoE::all();
+        $client = Connector::Connector();
+
+
         $data['app'] = $this->app;
+
+        // Create "where" Query object for RouterOS
+        $query =
+            (new Query('/ppp/active/print'));
+
+        // Send query and read response from RouterOS
+        $data['pppoeActive'] = $client->query($query)->read();
+
+
+
         return view('backend.admin.pppoe.active', compact('data'));
     }
 
@@ -249,6 +264,14 @@ class PPPoEController extends Controller
         return view('backend.admin.pppoe.userList', compact('data'));
     }
 
+    public function suspendUser()
+    {
+        $data['app'] = $this->app;
+        $data['pppoe'] = PPPoE::where('status', false)->orderBy('created_at', 'desc')->get();
+        $data['settings'] = setting::first();
+        return view('backend.admin.pppoe.suspend', compact('data'));
+    }
+
     public function import(): JsonResponse
     {
         $client = Connector::Connector();
@@ -257,7 +280,7 @@ class PPPoEController extends Controller
         foreach ($data as $users) {
             $checkUsers = PPPoE::where('username', $users['name'])->first();
 
-            if ($checkUsers->exist()) {
+            if (empty($checkUsers)) {
                 $pppoe = new PPPoE();
                 $pppoe->username = $users['name'];
                 $pppoe->password = $users['password'];
@@ -377,6 +400,15 @@ class PPPoEController extends Controller
     }
 
 
+    public function sellerPPPoeUsersSuspend()
+    {
+        $data['app'] = $this->app;
+        $data['settings'] = setting::first();
+        $data['pppoe'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->where('status', false)->orderBy('created_at', 'desc')->get();
+        return view('backend.seller.pppoe.suspend', compact('data'));
+    }
+
+
     public function isActiveSeller()
     {
         return view('backend.seller.pppoe.active');
@@ -446,6 +478,13 @@ class PPPoEController extends Controller
 
         if ($request->has('active_after')) {
             $pppoe->active_after = $request->active_after;
+        } else {
+            $pppoe->active_after = null;
+        }
+        if ($request->has('deactive_after')) {
+            $pppoe->deactive_after = $request->deactive_after;
+        } else {
+            $pppoe->deactive_after = null;
         }
 
         $pppoe->save();

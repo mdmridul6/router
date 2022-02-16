@@ -61,7 +61,8 @@
                             @if ($item->status == true)
                             <form action="{{route('seller.pppoe.deactive',['id'=>$item->id])}}" method="POST">
                                 @csrf
-                                <button @if(isset($item->deactive_after) && $item->deactive_after >= date("Y-m-d") ) disabled="disabled" @endif
+                                <button @if(isset($item->deactive_after) && $item->deactive_after >= date("Y-m-d") )
+                                    disabled="disabled" @endif
                                     class="btn btn-icon btn-bg-light btn-color-danger btn-sm me-1"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Deactive">
                                     <span class="svg-icon svg-icon-3"><i class="fas fa-stop-circle"></i></span>

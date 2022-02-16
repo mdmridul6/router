@@ -56,6 +56,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
             Route::get('/', [PPPoEController::class, 'routerUser'])->name('routerUser');
+            Route::get('/suspend', [PPPoEController::class, 'suspendUser'])->name('suspendUser');
             Route::get('/routerUser', [PPPoEController::class, 'index'])->name('index');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
@@ -100,6 +101,7 @@ Route::middleware(['auth', 'seller'])->group(function () {
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
             Route::get('/', [PPPoEController::class, 'sellerPPPoeUsers'])->name('routerUser');
+            Route::get('/suspend', [PPPoEController::class, 'sellerPPPoeUsersSuspend'])->name('routerUserSuspend');
             Route::get('/create', [PPPoEController::class, 'create'])->name('create');
             Route::post('/create', [PPPoEController::class, 'store'])->name('create');
             Route::get('/view/{id}', [PPPoEController::class, 'view'])->name('view');

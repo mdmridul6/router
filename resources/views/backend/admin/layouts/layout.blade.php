@@ -67,14 +67,18 @@
                 <!--begin::Post-->
                 <div class="post d-flex flex-column-fluid" id="kt_post">
                     @yield('content')
+
                 </div>
                 <!--end::Post-->
+                @include('backend.admin.layouts.includes.footer')
             </div>
             <!--end::Wrapper-->
         </div>
         <!--end::Page-->
     </div>
     <!--end::Root-->
+
+
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
         <!--begin::Svg Icon | path: icons/duotone/Navigation/Up-2.svg-->
         <span class="svg-icon">

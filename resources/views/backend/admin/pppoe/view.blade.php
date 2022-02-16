@@ -237,6 +237,7 @@
             </div>
         </div>
     </div>
+</div>
     @endsection
 
     @if ($data['pppoeData']->status)

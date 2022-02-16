@@ -29,7 +29,8 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Packages</span>
                 </div>
             </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion @if (Route::is('seller.package.*')) show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -41,7 +42,7 @@
                     <span class="menu-title">Packages</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('seller.package.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('seller.package.index')}}">
                             <span class="menu-bullet">
@@ -60,7 +61,8 @@
                 </div>
             </div>
 
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion @if (Route::is('seller.pppoe.*')) show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -73,7 +75,7 @@
                     <span class="menu-arrow"></span>
                 </span>
 
-                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('seller.pppoe.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('seller.pppoe.routerUser')}}">
                             <span class="menu-bullet">
@@ -90,6 +92,16 @@
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">PPPoE Active Check</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('seller.pppoe.routerUserSuspend')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">PPPoE Suspend User</span>
                         </a>
                     </div>
                 </div>
