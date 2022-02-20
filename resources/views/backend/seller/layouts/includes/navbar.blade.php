@@ -141,7 +141,7 @@
                             <img src="{{(isset($data['seller']->image)) ? asset($data['seller']->image) : asset("backend/assets/media/avatars/blank.png") }}" alt="metronic" />
                         </div>
                         <!--begin::Menu-->
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-300px"
                             data-kt-menu="true">
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
