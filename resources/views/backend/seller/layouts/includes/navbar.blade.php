@@ -38,6 +38,102 @@
                             <span class="text-center text-info">{{auth()->user()->seller->balance}} </span>
                         </h5>
                     </div>
+                    <div class="d-flex align-items-center ms-1 ms-lg-3">
+                        <!--begin::Menu- wrapper-->
+                        <div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px"
+                            data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+                            data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+                            <!--begin::Svg Icon | path: icons/duotone/Code/Compiling.svg-->
+                            <span class="svg-icon svg-icon-1">
+                                <img src="{{asset('backend/assets/media/icons/duotone/Code/Compiling.svg')}}" alt="">
+                            </span>
+                            <!--end::Svg Icon-->
+                        </div>
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top">
+                                <!--begin::Title-->
+                                <h3 class=" text-dark fw-bold px-9 mt-10 mb-6">Notifications
+                                    <span class="fs-8 opacity-75 ps-3">24 reports</span>
+                                </h3>
+                                <!--end::Title-->
+                                <!--begin::Tabs-->
+                                <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray opacity-75 opacity-state-100 pb-4 active"
+                                            data-bs-toggle="tab" href="#kt_topbar_notifications_1">Alerts</a>
+                                    </li>
+                                </ul>
+                                <!--end::Tabs-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Tab content-->
+                            <div class="tab-content">
+                                <!--begin::Tab panel-->
+                                <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                    <!--begin::Items-->
+                                    <div class="scroll-y mh-325px my-5 px-8">
+                                        @foreach (auth()->user()->notifications as $notifications)
+
+                                        <!--begin::Item-->
+                                        <div class="d-flex flex-stack py-4">
+                                            <!--begin::Section-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Symbol-->
+                                                <div class="symbol symbol-35px me-4">
+                                                    <span class="symbol-label bg-light-primary">
+                                                        <!--begin::Svg Icon | path: icons/duotone/Clothes/Crown.svg-->
+                                                        <span class="svg-icon svg-icon-2 svg-icon-primary">
+                                                            <img src="{{asset('backend/assets/media/icons/duotone/Clothes/Crown.svg')}}"
+                                                                alt="">
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <!--end::Symbol-->
+                                                <!--begin::Title-->
+                                                <div class="mb-0 me-2">
+                                                    <a href="#" class="fs-7 text-gray-400 ">Deacivate</a>
+                                                    <div class="text-gray-700 fs-6 text-hover-primary fw-bolder">
+                                                        {{$notifications->data['message']}}
+                                                    </div>
+                                                </div>
+                                                <!--end::Title-->
+                                            </div>
+                                            <!--end::Section-->
+                                            <!--begin::Label-->
+                                            <span
+                                                class="badge badge-light fs-8">{{$notifications->created_at->diffForHumans()}}</span>
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Item-->
+                                        @endforeach
+
+                                    </div>
+                                    <!--end::Items-->
+                                    <!--begin::View more-->
+                                    <div class="py-3 text-center border-top">
+                                        <a href="pages/profile/activity.html"
+                                            class="btn btn-color-gray-600 btn-active-color-primary">View
+                                            All
+                                            <!--begin::Svg Icon | path: icons/duotone/Navigation/Right-2.svg-->
+                                            <span class="svg-icon svg-icon-5">
+                                                <img src="{{asset('backend/assets/media/icons/duotone/Navigation/Right-2.svg')}}"
+                                                    alt="">
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                        </a>
+                                    </div>
+                                    <!--end::View more-->
+                                </div>
+                                <!--end::Tab panel-->
+                            </div>
+                            <!--end::Tab content-->
+                        </div>
+                        <!--end::Menu-->
+                        <!--end::Menu wrapper-->
+                    </div>
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click"

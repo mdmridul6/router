@@ -3,8 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\PPPoE;
+use App\Models\Seller;
+use App\Models\User;
+use App\Notifications\AdminNotify;
+use App\Notifications\SellerNotify;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class DeactivePPPoE extends Command
 {
@@ -39,10 +44,22 @@ class DeactivePPPoE extends Command
      */
     public function handle()
     {
-        PPPoE::where('package_expire_date', '<', Carbon::now())
-            ->update([
-                'status' => false,
-                'package_expire_date' => Carbon::now()
-            ]);
+        $pppoes = PPPoE::where('package_expire_date', '<', Carbon::now())->where('status', true)->get();
+        foreach ($pppoes as $pppoe) {
+            $pppoe = PPPoE::find($pppoe->id);
+            $pppoe->status = false;
+            $pppoe->package_active_date = null;
+            $pppoe->package_expire_date = null;
+            $pppoe->save();
+            if (isset($pppoe->seller_id)) {
+                $seller = Seller::where('user_id', $pppoe->seller_id)->first();
+                $user = User::find($seller->user_id);
+                $user->notify(new SellerNotify($pppoe));
+            } else {
+                $user = User::where('role', 'Admin')->first();
+
+                $user->notify(new AdminNotify($pppoe));
+            }
+        }
     }
 }
