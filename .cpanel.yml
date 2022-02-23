@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/minjuonl/public_html/Router
+    - export DEPLOYPATH=/home/minjuonl/Router
     - /bin/cp -R * $DEPLOYPATH
