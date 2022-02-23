@@ -98,6 +98,8 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::prefix('seller')->name('seller.')->group(function () {
 
         Route::get('dashboard', [AuthController::class, 'dashboard'])->name('home');
+        Route::get('interface/data', [AuthController::class, 'interfaceData'])->name('interfaceData');
+
 
         Route::prefix('pppoe')->name('pppoe.')->group(function () {
             Route::get('/', [PPPoEController::class, 'sellerPPPoeUsers'])->name('routerUser');

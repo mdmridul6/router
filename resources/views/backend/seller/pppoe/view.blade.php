@@ -251,7 +251,7 @@
 
     function requestDatta(interface) {
       $.ajax({
-        url: "{{route('admin.interfaceData')}}",
+        url: "{{route('seller.interfaceData')}}",
         data:{
             interface:interface
         },
