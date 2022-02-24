@@ -9,6 +9,7 @@ use App\Models\pppoeUserDetails;
 use App\Models\Seller;
 use App\Models\setting;
 use Carbon\Carbon;
+use Faker\Extension\Extension;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,44 +171,53 @@ class PPPoEController extends Controller
 
     public function active(int $id)
     {
-        $pppoe = PPPoE::find($id);
-        $pppoe->status = true;
-        $pppoe->package_active_date = Carbon::now();
-        $pppoe->package_expire_date = Carbon::now()->addMonth();
-        $pppoe->active_after = null;
-        if ($pppoe->seller_id !== null) {
-            $sellerDetails = Seller::find($pppoe->seller_id);
-            $seller = Seller::with('package')->find($pppoe->seller_id)->package->where('name', $pppoe->profile)->first();
-            if (!is_null($seller)) {
+        try {
+            //code...
 
-                $package_price = (int)$seller->pivot->amount;
-                if ((int)$sellerDetails->balance > 0 && (int)$sellerDetails->balance >= $package_price) {
-                    $this->dicrementSellerBalence($sellerDetails->id, $package_price);
+            $pppoe = PPPoE::find($id);
+            $pppoe->status = true;
+            $pppoe->package_active_date = Carbon::now();
+            $pppoe->package_expire_date = Carbon::now()->addMonth();
+            $pppoe->active_after = null;
+            if ($pppoe->seller_id !== null) {
+                $sellerDetails = Seller::find($pppoe->seller_id);
+                $seller = Seller::with('package')->find($pppoe->seller_id)->package->where('name', $pppoe->profile)->first();
+                if (!is_null($seller)) {
+
+                    $package_price = (int)$seller->pivot->amount;
+                    if ((int)$sellerDetails->balance > 0 && (int)$sellerDetails->balance >= $package_price) {
+                        $this->dicrementSellerBalence($sellerDetails->id, $package_price);
+                    } else {
+                        Session::flash('error', "Insufficient Balance");
+                        return redirect()->back();
+                    }
+                    $pppoe->deactive_after = Carbon::now()->addDay($sellerDetails->deactive_after);
+                    $pppoe->save();
                 } else {
-                    Session::flash('error', "Insufficient Balance");
+                    Session::flash('error', "Invalid Package Error!");
                     return redirect()->back();
                 }
-                $pppoe->deactive_after = Carbon::now()->addDay($sellerDetails->deactive_after);
-                $pppoe->save();
             } else {
-                Session::flash('error', "Invalid Package Error!");
-                return redirect()->back();
+                $pppoe->deactive_after = null;
+                $pppoe->save();
             }
+
+            $client = Connector::Connector();
+            $query = new Query('/ppp/secret/print');
+            $query->where('name', $pppoe->username);
+            $secrets = $client->query($query)->read();
+
+            $query = (new Query('/ppp/secret/set'))
+                ->equal('.id', $secrets[0]['.id'])
+                ->equal('profile', $pppoe->profile);
+
+            // Update query ordinary have no return
+            $client->query($query)->read();
+
+            return redirect()->back();
+        } catch (Extension $th) {
+            dd($th);
         }
-
-        $client = Connector::Connector();
-        $query = new Query('/ppp/secret/print');
-        $query->where('name', $pppoe->username);
-        $secrets = $client->query($query)->read();
-
-        $query = (new Query('/ppp/secret/set'))
-            ->equal('.id', $secrets[0]['.id'])
-            ->equal('profile', $pppoe->profile);
-
-        // Update query ordinary have no return
-        $client->query($query)->read();
-
-        return redirect()->back();
     }
 
 
