@@ -21,9 +21,6 @@ class Helper extends Controller
             $input['image'] = time() . '.' . $image->getClientOriginalExtension();
             $path = 'storage/images';
             $destinationPath = public_path($path);
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 666, true);
-            }
             $imgFile = Image::make($image->getRealPath());
             $imgFile->resize(150, 150, function ($constraint) {
                 $constraint->aspectRatio();
