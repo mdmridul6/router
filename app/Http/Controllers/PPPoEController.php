@@ -55,30 +55,36 @@ class PPPoEController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'packages' => 'required',
-            'password' => 'required',
-            'username' => 'required|unique:pppoe_users,username',
-            'fullName' => 'required',
-            'phone'    => 'required',
-            'address'  => 'required',
-        ]);
-        $pppoe = new PPPoE();
-        $this->extends($pppoe, $request);
+        try {
 
 
-        $userDetails = new pppoeUserDetails();
-        $this->extendedPppoeUserDetails($userDetails, $pppoe, $request);
+            $request->validate([
+                'packages' => 'required',
+                'password' => 'required',
+                'username' => 'required|unique:pppoe_users,username',
+                'fullName' => 'required',
+                'phone'    => 'required',
+                'address'  => 'required',
+            ]);
+            $pppoe = new PPPoE();
+            $this->extends($pppoe, $request);
 
 
-        $this->extendedAddToRouter($request);
+            $userDetails = new pppoeUserDetails();
+            $this->extendedPppoeUserDetails($userDetails, $pppoe, $request);
 
-        Session::flash('success', "PPPoe User Add Successfull");
-        if (Auth::user()->role == "Admin") {
 
-            return redirect()->route('admin.pppoe.routerUser')->withInput();
-        } else {
-            return redirect()->route('seller.pppoe.index')->withInput();
+            $this->extendedAddToRouter($request);
+
+            Session::flash('success', "PPPoe User Add Successfull");
+            if (Auth::user()->role == "Admin") {
+
+                return redirect()->route('admin.pppoe.routerUser')->withInput();
+            } else {
+                return redirect()->route('seller.pppoe.routerUser')->withInput();
+            }
+        } catch (\Exception $th) {
+            dd($th);
         }
     }
 
