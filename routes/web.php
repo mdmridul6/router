@@ -24,6 +24,10 @@ Route::get('/clear', function () {
     Artisan::call('cache:clear');
     return "Cache Cleared";
 });
+Route::get('/storage', function () {
+    Artisan::call('storage:link');
+    return "storage Linked";
+});
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('login', [AuthController::class, 'index'])->name('login');
