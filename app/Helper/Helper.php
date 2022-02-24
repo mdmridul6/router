@@ -19,8 +19,8 @@ class Helper extends Controller
         if ($request->has('image')) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
-            $path = $request->file('image')->store('uploads/images');
-            return 'storage/' . $path;
+            $path = $request->file('image')->storeAs('public/uploads/images', $filename);
+            return 'storage/uploads/images/'  . $filename;
         }
     }
 }
