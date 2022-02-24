@@ -36,7 +36,7 @@
                         <td>
                             <div class="symbol symbol-50px symbol-circle">
                                 <div class="symbol-label"
-                                    style='background: url("{{(isset($seller->image)) ? asset($seller->image) : asset("backend/assets/media/avatars/blank.png") }}");background-size:contain;'>
+                                    style='background: url("{{(isset($seller->image)) ? public_path($seller->image) : asset("backend/assets/media/avatars/blank.png") }}");background-size:contain;'>
                                 </div>
                             </div>
                         </td>

@@ -4,7 +4,6 @@ namespace App\Helper;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Image;
 
 class Helper extends Controller
@@ -19,8 +18,9 @@ class Helper extends Controller
         if ($request->has('image')) {
             $image = $request->file('image');
             $input['image'] = time() . '.' . $image->getClientOriginalExtension();
-            $path = 'storage/images';
+            $path = 'uploads/images';
             $destinationPath = public_path($path);
+
             $imgFile = Image::make($image->getRealPath());
             $imgFile->resize(150, 150, function ($constraint) {
                 $constraint->aspectRatio();
