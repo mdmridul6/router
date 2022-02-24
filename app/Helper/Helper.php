@@ -19,7 +19,7 @@ class Helper extends Controller
         if ($request->has('image')) {
             $image = $request->file('image');
             $input['image'] = time() . '.' . $image->getClientOriginalExtension();
-            $path = 'storage/uploads/images';
+            $path = 'storage/images';
             $destinationPath = public_path($path);
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 666, true);
