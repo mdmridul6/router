@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/clear', function ($id) {
+Route::get('/clear', function () {
     Artisan::call('cache:clear');
     return "Cache Cleared";
 });
