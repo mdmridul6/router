@@ -50,16 +50,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <div class="my-2">
-                                    <label for="isFree">Free Connection</label>
-                                    <select name="isFree" id="" class="form-control">
-                                        <option @if (old('ifFree')=='false' || $data['pppoeData']->is_free == 'false')
-                                            selected @endif value="false">No</option>
-                                        <option @if (old('ifFree')=='true' || $data['pppoeData']->is_free == 'true')
-                                            selected @endif value="true">Yes</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                     </div>

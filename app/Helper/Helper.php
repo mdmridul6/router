@@ -4,6 +4,7 @@ namespace App\Helper;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class Helper extends Controller
@@ -16,18 +17,10 @@ class Helper extends Controller
     {
 
         if ($request->has('image')) {
-            $image = $request->file('image');
-            $input['image'] = time() . '.' . $image->getClientOriginalExtension();
-            $path = 'uploads/images';
-            $destinationPath = public_path($path);
-
-            $imgFile = Image::make($image->getRealPath());
-            $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['image']);
-            $destinationPath = public_path($path);
-            $url = $image->move($destinationPath, $input['image']);
-            return $path . "/" . $input['image'];
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $path = $request->file('image')->store('uploads/images');
+            return 'storage/' . $path;
         }
     }
 }

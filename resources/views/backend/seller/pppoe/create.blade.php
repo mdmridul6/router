@@ -42,16 +42,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <div class="my-2">
-                                </div>
-                                <label for="isFree">Free Connection</label>
-                                <select name="isFree" id="" class="form-control">
-                                    <option value="false">No</option>
-                                    <option value="true">Yes</option>
-                                </select>
-
-
                             </div>
                         </div>
                     </div>
