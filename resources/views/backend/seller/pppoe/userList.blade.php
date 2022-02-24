@@ -1,4 +1,4 @@
-@extends('backend.admin.layouts.layout')
+@extends('backend.seller.layouts.layout')
 @section('content')
     <div id="kt_content_container" class="container">
         <div class="card  card-shadow-sm">

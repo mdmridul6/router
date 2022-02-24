@@ -50,6 +50,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/', [SettingController::class, 'index'])->name('index');
             Route::post('create', [SettingController::class, 'store'])->name('store');
         });
+
+        Route::prefix('cms')->name('cms.')->group(function () {
+            Route::get('/', [HomeController::class, 'edit'])->name('index');
+            Route::post('create', [HomeController::class, 'store'])->name('store');
+        });
+
+
         Route::prefix('balence')->name('balence.')->group(function () {
             Route::get('/add', [SellerController::class, 'balence'])->name('add');
             Route::post('/add', [SellerController::class, 'addbalence'])->name('add');

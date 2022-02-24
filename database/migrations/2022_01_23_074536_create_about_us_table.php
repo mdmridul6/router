@@ -21,7 +21,7 @@ class CreateAboutUsTable extends Migration
             $table->string('email', 22)->nullable();
             $table->string('address', 22)->nullable();
             $table->string('title', 50)->nullable();
-            $table->string('description', 255)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
