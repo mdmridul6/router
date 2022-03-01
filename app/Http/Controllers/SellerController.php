@@ -21,11 +21,15 @@ class SellerController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
         $data['app'] = $this->app;
         $data['sellers'] = Seller::withCount(['pppoe', 'pppoeExpired'])->get();
-        return view('backend.admin.seller.list', compact('data'));
+        if ($request->is('api/*')) {
+            return response()->json($data);
+        } else {
+            return view('backend.admin.seller.list', compact('data'));
+        }
     }
 
     /**

@@ -170,20 +170,25 @@ class PPPoEController extends Controller
 
     public function destroy($id)
     {
-        $pppoe = PPPoE::find($id);
-        $client = Connector::Connector();
-        $query = new Query('/ppp/secret/print');
-        $query->where('name', $pppoe->username);
-        $secrets = $client->query($query)->read();
+        try {
+            $pppoe = PPPoE::find($id);
+            $client = Connector::Connector();
+            $query = new Query('/ppp/secret/print');
+            $query->where('name', $pppoe->username);
+            $secrets = $client->query($query)->read();
 
-        $query = (new Query('/ppp/secret/remove'))
-            ->equal('.id', $secrets[0]['.id']);
+            $query = (new Query('/ppp/secret/remove'))
+                ->equal('.id', $secrets[0]['.id']);
 
-        // Update query ordinary have no return
-        $client->query($query)->read();
-        $pppoe->delete();
-        Session::flash('error', "PPPoE User Delete Successfull");
-        return redirect()->back();
+            // Update query ordinary have no return
+            $client->query($query)->read();
+            $pppoe->delete();
+            Session::flash('error', "PPPoE User Delete Successfull");
+            return redirect()->back();
+            //code...
+        } catch (Extension $e) {
+            dd($e);
+        }
     }
 
     public function active(int $id)
