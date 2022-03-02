@@ -33,7 +33,7 @@
                     <li><a href="#team">Team</a></li>
                     <li><a href="#price">pricing</a></li>
                     <li><a href="#contact">Contacts</a></li>
-                    <li><a href="#contact">FTP</a></li>
+                    <li><a href="{{route('home.ftp')}}">FTP</a></li>
                     <li><a href="{{route('login')}}">Login</a></li>
                 </ul>
             </nav>
@@ -326,7 +326,8 @@
                     </div>
                 </div> <!-- END OUR-TEAM -->
             </div> <!-- END COL -->
-        </div> <!-- END ROW -->
+        </div>
+        <!-- END ROW -->
     </div>
 </section>
 <!-- END TEAM -->

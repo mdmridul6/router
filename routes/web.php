@@ -30,6 +30,7 @@ Route::get('/storage', function () {
 });
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/ftp', [HomeController::class, 'ftp'])->name('home.ftp');
     Route::get('login', [AuthController::class, 'index'])->name('login');
     Route::post('login', [AuthController::class, 'postLogin'])->name('login');
 });

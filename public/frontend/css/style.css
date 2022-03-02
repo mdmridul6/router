@@ -828,6 +828,10 @@ ul {
     color: var(--primary-color);
     overflow: hidden;
 }
+.our-team:hover {
+    border: 1px solid var(--primary-color);
+}
+
 .our-team:hover .team-content {
     background: var(--primary-color);
     animation: fadeInUp 0.5s ease 0s;

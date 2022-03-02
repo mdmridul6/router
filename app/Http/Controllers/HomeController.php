@@ -14,6 +14,12 @@ class HomeController extends Controller
         return view('frontend.index', compact('data'));
     }
 
+    public function ftp()
+    {
+        $data = AboutUs::first();
+        return view('frontend.ftp', compact('data'));
+    }
+
     public function edit()
     {
         $data = AboutUs::first();
