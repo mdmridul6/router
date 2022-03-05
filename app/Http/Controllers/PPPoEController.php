@@ -132,6 +132,7 @@ class PPPoEController extends Controller
 
             return view('backend.admin.pppoe.edit', compact('data'));
         } else {
+            $data['packages'] = Seller::with('package')->where('id', Seller::where('user_id', Auth::id())->first('id')->id)->first();
             return view('backend.seller.pppoe.edit', compact('data'));
         }
     }
@@ -147,11 +148,8 @@ class PPPoEController extends Controller
             'address'  => 'required',
         ]);
         $pppoe = PPPoE::find($id);
-        if ($request->has('packages') && $pppoe->status) {
-            $this->extendedUpdateToRouter($request, $pppoe, $request->packages);
-        } else {
-            $this->extendedUpdateToRouter($request, $pppoe);
-        }
+
+        $this->extendedUpdateToRouter($request, $pppoe);
 
         $this->extends($pppoe, $request);
         $userDetails = pppoeUserDetails::find($id);

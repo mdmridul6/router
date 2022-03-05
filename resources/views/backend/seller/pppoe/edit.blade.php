@@ -42,7 +42,7 @@
                                         && $data['pppoeData']->deactive_after >= date("Y-m-d") ) disabled @endif
                                         class="form-control">
                                         <option value="" disabled selected> Select Packages</option>
-                                        @foreach ($data['packages'] as $package)
+                                        @foreach ($data['packages']->package as $package)
                                         <option value="{{$package->name}}" @if ($package->name ==
                                             $data['pppoeData']->profile || $package->name ==
                                             old('packages'))selected
