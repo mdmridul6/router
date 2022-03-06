@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
+use App\Models\FTPCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -17,7 +18,8 @@ class HomeController extends Controller
     public function ftp()
     {
         $data = AboutUs::first();
-        return view('frontend.ftp', compact('data'));
+        $ftps = FTPCategory::with('ftp')->get();
+        return view('frontend.ftp', compact(['data', 'ftps']));
     }
 
     public function edit()

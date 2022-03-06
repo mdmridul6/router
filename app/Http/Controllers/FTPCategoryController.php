@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FTPCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FTPCategoryController extends Controller
 {
@@ -14,7 +15,9 @@ class FTPCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['app'] = $this->app;
+        $data['ftpCategory'] = FTPCategory::all();
+        return view('backend.admin.ftpcategory.index', compact('data'));
     }
 
     /**
@@ -24,7 +27,8 @@ class FTPCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['app'] = $this->app;
+        return view('backend.admin.ftpcategory.create', compact('data'));
     }
 
     /**
@@ -35,19 +39,16 @@ class FTPCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $fTPCategory = new FTPCategory();
+        $fTPCategory->name = $request->name;
+        $fTPCategory->save();
+        Session::flash('message', "Category Save Succrssfull");
+        return redirect()->route('admin.ftp.category.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\FTPCategory  $fTPCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FTPCategory $fTPCategory)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +56,12 @@ class FTPCategoryController extends Controller
      * @param  \App\Models\FTPCategory  $fTPCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(FTPCategory $fTPCategory)
+    public function edit($fTPCategory)
     {
-        //
+        $data['app'] = $this->app;
+        $data['ftpCategory'] = FTPCategory::find($fTPCategory);
+
+        return view('backend.admin.ftpcategory.edit', compact('data'));
     }
 
     /**
@@ -67,9 +71,16 @@ class FTPCategoryController extends Controller
      * @param  \App\Models\FTPCategory  $fTPCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FTPCategory $fTPCategory)
+    public function update(Request $request, $fTPCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $fTPCategory = FTPCategory::find($fTPCategory);
+        $fTPCategory->name = $request->name;
+        $fTPCategory->save();
+        Session::flash('message', "Category Update Succrssfull");
+        return redirect()->route('admin.ftp.category.index');
     }
 
     /**
@@ -78,8 +89,9 @@ class FTPCategoryController extends Controller
      * @param  \App\Models\FTPCategory  $fTPCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FTPCategory $fTPCategory)
+    public function destroy($fTPCategory)
     {
-        //
+        $data['ftpCategory'] = FTPCategory::destroy($fTPCategory);
+        return redirect()->back();
     }
 }

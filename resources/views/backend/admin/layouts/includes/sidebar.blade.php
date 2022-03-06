@@ -197,7 +197,7 @@
             </div>
 
             <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion @if (Route::is('admin.cms.*')) hover show @endif">
+                class="menu-item menu-accordion @if (Route::is('admin.cms.*') || Route::is('admin.ftp.*')) hover show @endif">
                 <span class="menu-link">
                     <span class="menu-icon">
 
@@ -209,13 +209,30 @@
                     <span class="menu-title">Home Page</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.cms.*')) show @endif">
+                <div
+                    class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.cms.*') || Route::is('admin.ftp.*')) show @endif">
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('admin.cms.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Home Page Content</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('admin.ftp.category.index')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">FTP Category</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('admin.ftp.index')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">FTP Site</span>
                         </a>
                     </div>
                 </div>

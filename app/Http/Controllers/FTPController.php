@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\FTP;
+use App\Models\FTPCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FTPController extends Controller
 {
@@ -14,7 +16,10 @@ class FTPController extends Controller
      */
     public function index()
     {
-        //
+        $data['app'] = $this->app;
+        $data['ftp'] = FTP::with('category')->get();
+
+        return view('backend.admin.ftp.index', compact('data'));
     }
 
     /**
@@ -24,7 +29,9 @@ class FTPController extends Controller
      */
     public function create()
     {
-        //
+        $data['app'] = $this->app;
+        $data['ftpCategory'] = FTPCategory::all();
+        return view('backend.admin.ftp.create', compact('data'));
     }
 
     /**
@@ -35,19 +42,21 @@ class FTPController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'url' => 'required',
+        ]);
+        $fTP = new FTP();
+        $fTP->title = $request->name;
+        $fTP->category_id = $request->category;
+        $fTP->url = $request->url;
+        $fTP->save();
+        Session::flash('message', "FTP Save Successfull");
+        return redirect()->route('admin.ftp.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\FTP  $fTP
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FTP $fTP)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +64,12 @@ class FTPController extends Controller
      * @param  \App\Models\FTP  $fTP
      * @return \Illuminate\Http\Response
      */
-    public function edit(FTP $fTP)
+    public function edit($fTP)
     {
-        //
+        $data['app'] = $this->app;
+        $data['ftpCategory'] = FTPCategory::all();
+        $data['ftp'] = FTP::find($fTP);
+        return view('backend.admin.ftp.edit', compact('data'));
     }
 
     /**
@@ -67,9 +79,20 @@ class FTPController extends Controller
      * @param  \App\Models\FTP  $fTP
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FTP $fTP)
+    public function update(Request $request, $fTP)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'url' => 'required',
+        ]);
+        $fTP = FTP::find($fTP);
+        $fTP->title = $request->name;
+        $fTP->category_id = $request->category;
+        $fTP->url = $request->url;
+        $fTP->save();
+        Session::flash('message', "FTP Update Successfull");
+        return redirect()->route('admin.ftp.index');
     }
 
     /**
@@ -78,8 +101,10 @@ class FTPController extends Controller
      * @param  \App\Models\FTP  $fTP
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FTP $fTP)
+    public function destroy($ftp)
     {
-        //
+        FTP::destroy($ftp);
+        Session::flash('message', "FTP Delete Successfull");
+        return redirect()->route('admin.ftp.index');
     }
 }

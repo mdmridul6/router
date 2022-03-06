@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FTPCategoryController;
+use App\Http\Controllers\FTPController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\PPPoEController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SettingController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -103,8 +106,29 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/seller/dedicate/{id}', [PackagesController::class, 'sellerPackageAssign'])->name('sellerPackageAssign');
             Route::post('/seller/dedicate', [PackagesController::class, 'sellerPackageDedicate'])->name('sellerPackageDedicate');
         });
+
+
+        Route::prefix('ftp/category')->name('ftp.category.')->group(function () {
+            Route::get('/', [FTPCategoryController::class, 'index'])->name('index');
+            Route::get('/create', [FTPCategoryController::class, 'create'])->name('create');
+            Route::post('/create', [FTPCategoryController::class, 'store'])->name('store');
+            Route::get('/edit/{category}', [FTPCategoryController::class, 'edit'])->name('edit');
+            Route::put('/edit/{category}', [FTPCategoryController::class, 'update'])->name('update');
+            Route::delete('/delete/{category}', [FTPCategoryController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('ftp')->name('ftp.')->group(function () {
+            Route::get('/', [FTPController::class, 'index'])->name('index');
+            Route::get('/create', [FTPController::class, 'create'])->name('create');
+            Route::post('/create', [FTPController::class, 'store'])->name('store');
+            Route::get('/edit/{ftp}', [FTPController::class, 'edit'])->name('edit');
+            Route::put('/edit/{ftp}', [FTPController::class, 'update'])->name('update');
+            Route::delete('/delete/{ftp}', [FTPController::class, 'destroy'])->name('destroy');
+        });
     });
 });
+
+
 Route::middleware(['auth', 'seller'])->group(function () {
 
     Route::prefix('seller')->name('seller.')->group(function () {
