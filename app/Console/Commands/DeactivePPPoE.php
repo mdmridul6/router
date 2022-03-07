@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helper\Connector;
 use App\Models\PPPoE;
 use App\Models\Seller;
 use App\Models\User;
@@ -9,7 +10,8 @@ use App\Notifications\AdminNotify;
 use App\Notifications\SellerNotify;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
+use RouterOS\Query;
+
 
 class DeactivePPPoE extends Command
 {
@@ -60,6 +62,19 @@ class DeactivePPPoE extends Command
 
                 $user->notify(new AdminNotify($pppoe));
             }
+
+
+            $client = Connector::Connector();
+            $query = new Query('/ppp/secret/print');
+            $query->where('name', $pppoe->username);
+            $secrets = $client->query($query)->read();
+
+            $query = (new Query('/ppp/secret/set'))
+                ->equal('.id', $secrets[0]['.id'])
+                ->equal('profile', 'Expired');
+
+            // Update query ordinary have no return
+            $client->query($query)->read();
         }
     }
 }
