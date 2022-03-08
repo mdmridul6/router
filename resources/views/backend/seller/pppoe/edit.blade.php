@@ -35,19 +35,18 @@
                                         value="{{old('password') ? old('password') : $data['pppoeData']->password}}"
                                         required>
                                 </div>
-
                                 <div class="my-2">
                                     <label for="packages">Package <span class="text-danger">*</span></label>
-                                    <select name="packages" id="packages" @if (isset($data['pppoeData']->deactive_after)
-                                        && $data['pppoeData']->deactive_after >= date("Y-m-d") ) disabled @endif
-                                        class="form-control">
-                                        <option value="" disabled selected> Select Packages</option>
-                                        @foreach ($data['packages']->package as $package)
-                                        <option value="{{$package->name}}" @if ($package->name ==
-                                            $data['pppoeData']->profile || $package->name ==
-                                            old('packages'))selected
-                                            @endif>{{$package->name}}</option>
-                                        @endforeach
+                                    <select name="packages" id="packages" @if((isset($data['pppoeData']->deactive_after)
+                                        && $data['pppoeData']->deactive_after >= date("Y-m-d")) ||(date('d') > "07" &&
+                                        date('d')< "25" )) ) disabled @endif class="form-control">
+                                            <option value="" disabled selected> Select Packages</option>
+                                            @foreach ($data['packages']->package as $package)
+                                            <option value="{{$package->name}}" @if ($package->name ==
+                                                $data['pppoeData']->profile || $package->name ==
+                                                old('packages'))selected
+                                                @endif>{{$package->name}}</option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>

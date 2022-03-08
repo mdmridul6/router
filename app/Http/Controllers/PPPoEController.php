@@ -78,7 +78,6 @@ class PPPoEController extends Controller
 
             Session::flash('success', "PPPoe User Add Successfull");
             if (Auth::user()->role == "Admin") {
-
                 return redirect()->route('admin.pppoe.routerUser')->withInput();
             } else {
                 return redirect()->route('seller.pppoe.routerUser')->withInput();

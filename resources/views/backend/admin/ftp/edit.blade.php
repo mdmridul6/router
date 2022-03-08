@@ -21,7 +21,7 @@
 
                 <div class="col-auto">
                     <label for="url" class="visually-hidden">Ftp URL</label>
-                    <input type="url" name="url" class="form-control input-sm" id="name"
+                    <input type="text" name="url" class="form-control input-sm" id="name"
                         placeholder="URL Please add Http://" value="{{$data['ftp']->url}}">
                 </div>
 
