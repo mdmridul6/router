@@ -1,11 +1,9 @@
 # ![Laravel Example App](logo.png)
 
-> ### Example Laravel codebase containing real world examples (CRUD, auth, advanced patterns and more) that adheres to the [RealWorld](https://github.com/mdmridul6/router) spec and API.
 
 This repo is functionality complete — PRs and issues welcome!
 
 ----------
-
 # Getting started
 
 ## Installation
