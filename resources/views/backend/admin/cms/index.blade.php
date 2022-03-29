@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{route('admin.cms.store')}}" method="POST">
+            <form action="{{route('admin.cms.home.page.store')}}" method="POST">
                 <div class="row">
                     @csrf
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 com-xl-6 mb-5">

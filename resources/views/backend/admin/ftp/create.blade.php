@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form class="row g-3" action="{{route('admin.ftp.store')}}" method="POST">
+            <form class="row g-3" action="{{route('admin.cms.ftp.store')}}" method="POST">
                 @csrf
                 <div class="col-auto">
                     <label for="name" class="visually-hidden">Ftp name</label>

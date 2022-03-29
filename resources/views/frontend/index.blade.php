@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="index.html" class="navbar-brand">
-                <p>{{(isset($data->name) ? $data->name : "")}}</p>
+                <p>{{(isset($data['about']->name) ? $data['about']->name : "")}}</p>
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -48,9 +48,11 @@
     <div class="welcome-slider-area">
         <div id="welcome-slide-carousel" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
+                @foreach ($data['slider'] as $slider)
+
+                <div class="item @if ($loop->first) active @endif">
                     <div class="single-slide-item"
-                        style="background-image: url({{asset('frontend/images/slider/1.jpg')}}); background-size: cover;">
+                        style="background-image: url({{(isset($slider->images)) ? asset($slider->images) : '' }}); background-size: cover;">
                         <div class="single-slide-item-table">
                             <div class="single-slide-item-tablecell">
                                 <div class="container">
@@ -58,20 +60,18 @@
                                         <div class="col-md-12">
                                             <div class="slider_heading">
                                                 <h1 class="alt-font title-large font-weight-800 text-white text-uppercase animated fadeInUp"
-                                                    style="animation-delay: 500ms">Need to grow up your
-                                                    <span>business</span>
+                                                    style="animation-delay: 500ms">
+                                                    <span>{{$slider->title}}</span>
                                                 </h1>
                                                 <p class="text-white margin-50px-bottom animated fadeInDown"
-                                                    style="animation-delay: 1000ms">We are a new design studio based
-                                                    in USA. We have over 5 years experience,<br /> About designing
-                                                    websites and mobile apps.</p>
+                                                    style="animation-delay: 1000ms">{{$slider->content}}</p>
 
-                                                <div class="single_slide_item_button">
+                                                {{-- <div class="single_slide_item_button">
                                                     <a href="#" class="btn btn-default slider_btn animated fadeInUp"
                                                         style="animation-delay: 1400ms">Read More</a>
                                                     <a href="#" class="btn btn-default slider_btn animated fadeInUp"
                                                         style="animation-delay: 1400ms">Our Business</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -80,70 +80,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item"
-                    style="background-image: url({{asset('frontend/images/slider/2.jpg')}}); background-size: cover;">
-                    <div class="single-slide-item slide-2">
-                        <div class="single-slide-item-table">
-                            <div class="single-slide-item-tablecell">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="slider_heading">
-                                                <h1 class="alt-font title-large font-weight-800 text-extra-dark-gray text-uppercase animated fadeInUp"
-                                                    style="animation-delay: 500ms">We to Design and
-                                                    <span>Devolopment</span>
-                                                </h1>
-                                                <p class="text-extra-dark-gray margin-50px-bottom animated fadeInUp"
-                                                    style="animation-delay: 1000ms">We are a new design studio based
-                                                    in USA. We have over 5 years experience,<br /> About designing
-                                                    websites and mobile apps.</p>
+                @endforeach
 
-                                                <div class="single_slide_item_button">
-                                                    <a href="#" class="btn btn-default slider_btn animated fadeInUp"
-                                                        style="animation-delay: 1400ms">Read More</a>
-                                                    <a href="#" class="btn btn-default slider_btn animated fadeInUp"
-                                                        style="animation-delay: 1400ms">Our Business</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item"
-                    style="background-image: url({{asset('frontend/images/slider/3.jpg')}}); max-height: 100%; background-size: cover;">
-                    <div class="single-slide-item slide-3">
-                        <div class="single-slide-item-table">
-                            <div class="single-slide-item-tablecell">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="slider_heading">
-                                                <h1 class="alt-font title-large font-weight-800 text-white text-uppercase animated zoomIn"
-                                                    style="animation-delay: 500ms">We Have a Creative
-                                                    <span>Team</span>
-                                                </h1>
-                                                <p class="text-white margin-50px-bottom animated zoomIn"
-                                                    style="animation-delay: 1000ms">We are a new design studio based
-                                                    in USA. We have over 5 years experience,<br /> About designing
-                                                    websites and mobile apps.</p>
-
-                                                <div class="single_slide_item_button">
-                                                    <a href="#" class="btn btn-default slider_btn animated zoomIn"
-                                                        style="animation-delay: 1400ms">Read More</a>
-                                                    <a href="#" class="btn btn-default slider_btn animated zoomIn"
-                                                        style="animation-delay: 1400ms">Our Business</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Controls -->
             <a class="left carousel-control" href="#welcome-slide-carousel" role="button" data-slide="prev">
@@ -170,8 +108,8 @@
             <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft">
                 <div class="about_content">
                     <span>About Consultary</span>
-                    <h3>{{(isset($data->title) ? $data->title : "")}}</h3>
-                    <p>{{(isset($data->description) ? $data->description : "")}}</p>
+                    <h3>{{(isset($data['about']->title) ? $data['about']->title : "")}}</h3>
+                    <p>{{(isset($data['about']->description) ? $data['about']->description : "")}}</p>
 
 
 
@@ -250,82 +188,47 @@
     <div class="container">
         <div class="section_heading wow zoomIn text-center">
             <h2>our <span>team</span></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam <br /> ultrices sapien vel quam
-                luctus pulvinar.</p>
+            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam <br /> ultrices sapien vel quam
+                luctus pulvinar.</p> --}}
         </div> <!-- END HEADING -->
 
         <div class="row">
+            @forelse ($data['team'] as $team)
             <div class="col-md-3 col-sm-6">
                 <div class="our-team wow fadeInUp">
                     <div class="pic">
-                        <img src="{{asset('frontend/images/team/1.jpg')}}" alt="" />
+                        <img src="{{asset($team->image)}}" alt="" />
                         <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-google-plus"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="title">Solvina D Naliz</h3>
-                        <span class="post">Web Developer</span>
-                    </div>
-                </div> <!-- END OUR-TEAM -->
-            </div> <!-- END COL -->
+                            @if (isset($team->facebook))
+                            <li><a href="{{$team->facebook}}" target="_blank" class="fa fa-facebook"></a></li>
+                            @endif
+                            @if (isset($team->instagram))
+                            <li><a href="{{$team->instagram}}" target="_blank" class="fa fa-instagram"></a></li>
+                            @endif
+                            @if (isset($team->linkedin))
+                            <li><a href="{{$team->linkedin}}" target="_blank" class="fa fa-linkedin"></a></li>
+                            @endif
 
-            <div class="col-md-3 col-sm-6">
-                <div class="our-team wow fadeInUp">
-                    <div class="pic">
-                        <img src="{{asset('frontend/images/team/2.jpg')}}" alt="" />
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-google-plus"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
                         </ul>
                     </div>
                     <div class="team-content">
-                        <h3 class="title">Jerry D.Silva</h3>
-                        <span class="post">Ui Designer</span>
+                        <h3 class="title">{{$team->name}}</h3>
+                        <span class="post">{{$team->designation}}</span>
                     </div>
                 </div> <!-- END OUR-TEAM -->
             </div> <!-- END COL -->
+            @empty
 
-            <div class="col-md-3 col-sm-6">
-                <div class="our-team wow fadeInUp">
-                    <div class="pic">
-                        <img src="{{asset('frontend/images/team/3.jpg')}}" alt="" />
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-google-plus"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="title">David Walillams</h3>
-                        <span class="post">Sr Consultant</span>
-                    </div>
-                </div> <!-- END OUR-TEAM -->
-            </div> <!-- END COL -->
+            <h3 class="text-center text-active-danger">No Team Member Added</h3>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="our-team wow fadeInUp">
-                    <div class="pic">
-                        <img src="{{asset('frontend/images/team/4.jpg')}}" alt="" />
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-google-plus"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="title">Michel Z. Jones</h3>
-                        <span class="post">Web Developer</span>
-                    </div>
-                </div> <!-- END OUR-TEAM -->
-            </div> <!-- END COL -->
+            @endforelse
+
+
+
+
+
+
+
         </div>
         <!-- END ROW -->
     </div>
@@ -474,17 +377,17 @@
                     <div class="single_contact">
                         <i class="fa fa-map-marker"></i>
                         <h5>Address</h5>
-                        <p>{{(isset($data->address) ? $data->address : "")}}</p>
+                        <p>{{(isset($data['about']->address) ? $data['about']->address : "")}}</p>
                     </div>
                     <div class="single_contact">
                         <i class="fa fa-envelope"></i>
                         <h5>Email</h5>
-                        <p>{{(isset($data->email) ? $data->email : "")}}</p>
+                        <p>{{(isset($data['about']->email) ? $data['about']->email : "")}}</p>
                     </div>
                     <div class="single_contact">
                         <i class="fa fa-phone"></i>
                         <h5>Phone</h5>
-                        <p>+88 {{(isset($data->phone) ? $data->phone : "")}}</p>
+                        <p>+88 {{(isset($data['about']->phone) ? $data['about']->phone : "")}}</p>
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ class FTPCategoryController extends Controller
         $fTPCategory->name = $request->name;
         $fTPCategory->save();
         Session::flash('message', "Category Save Succrssfull");
-        return redirect()->route('admin.ftp.category.index');
+        return redirect()->route('admin.cms.ftp.category.index');
     }
 
 
@@ -80,7 +80,7 @@ class FTPCategoryController extends Controller
         $fTPCategory->name = $request->name;
         $fTPCategory->save();
         Session::flash('message', "Category Update Succrssfull");
-        return redirect()->route('admin.ftp.category.index');
+        return redirect()->route('admin.cms.ftp.category.index');
     }
 
     /**

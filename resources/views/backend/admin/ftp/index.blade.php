@@ -9,7 +9,7 @@
                 FTP List
             </div>
             <div class="card-toolbar">
-                <a href="{{route('admin.ftp.create')}}" class="btn btn-secondary btn-sm">Add FTP</a>
+                <a href="{{route('admin.cms.ftp.create')}}" class="btn btn-secondary btn-sm">Add FTP</a>
             </div>
         </div>
         <div class="card-body">
@@ -29,9 +29,9 @@
                         <td>{{$ftp->title}}</td>
                         <td>{{$ftp->category->name}}</td>
                         <td class="d-flex justify-content-around">
-                            <a class="btn btn-info btn-sm" href="{{route('admin.ftp.edit',['ftp'=>$ftp->id])}}"><i
+                            <a class="btn btn-info btn-sm" href="{{route('admin.cms.ftp.edit',['ftp'=>$ftp->id])}}"><i
                                     class="fas fa-edit"></i></a>
-                            <form action="{{route('admin.ftp.destroy',['ftp'=>$ftp->id])}}" method="POST">
+                            <form action="{{route('admin.cms.ftp.destroy',['ftp'=>$ftp->id])}}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>

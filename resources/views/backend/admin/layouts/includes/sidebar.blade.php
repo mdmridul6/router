@@ -209,10 +209,9 @@
                     <span class="menu-title">Home Page</span>
                     <span class="menu-arrow"></span>
                 </span>
-                <div
-                    class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.cms.*') || Route::is('admin.ftp.*')) show @endif">
+                <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.cms.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.index')}}">
+                        <a class="menu-link" href="{{route('admin.cms.home.page.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -220,7 +219,23 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.ftp.category.index')}}">
+                        <a class="menu-link" href="{{route('admin.cms.slider.index')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Sliders</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('admin.cms.team.index')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Teams</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{route('admin.cms.ftp.category.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -228,7 +243,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.ftp.index')}}">
+                        <a class="menu-link" href="{{route('admin.cms.ftp.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

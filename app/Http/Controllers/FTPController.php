@@ -53,7 +53,7 @@ class FTPController extends Controller
         $fTP->url = $request->url;
         $fTP->save();
         Session::flash('message', "FTP Save Successfull");
-        return redirect()->route('admin.ftp.index');
+        return redirect()->route('admin.cms.ftp.index');
     }
 
 
@@ -92,7 +92,7 @@ class FTPController extends Controller
         $fTP->url = $request->url;
         $fTP->save();
         Session::flash('message', "FTP Update Successfull");
-        return redirect()->route('admin.ftp.index');
+        return redirect()->route('admin.cms.ftp.index');
     }
 
     /**
@@ -105,6 +105,6 @@ class FTPController extends Controller
     {
         FTP::destroy($ftp);
         Session::flash('message', "FTP Delete Successfull");
-        return redirect()->route('admin.ftp.index');
+        return redirect()->route('admin.cms.ftp.index');
     }
 }

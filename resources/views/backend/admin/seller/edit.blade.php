@@ -19,8 +19,7 @@
                             style="background-image: url('{{asset('backend/assets/media/avatars/blank.png')}}')">
                             <!--begin::Image preview wrapper-->
                             <div class="image-input-wrapper w-125px h-125px"
-                                style="background-image: url('{{(isset($data['sellerInfo']->image)) ? asset($data['sellerInfo']->image) : asset("
-                                backend/assets/media/avatars/blank.png") }}')"></div>
+                                style="background-image: url('{{(isset($data['sellerInfo']->image)) ? asset($data['sellerInfo']->image) : asset("backend/assets/media/avatars/blank.png") }}')"></div>
                             <!--end::Image preview wrapper-->
 
                             <!--begin::Edit button-->
@@ -61,7 +60,7 @@
                     </div>
                     <div class="separator my-10"></div>
                     <div class="row">
-                
+
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
                             <div class="mb-10">

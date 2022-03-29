@@ -9,7 +9,7 @@
                 FTP Category List
             </div>
             <div class="card-toolbar">
-                <a class="btn btn-secondary btn-sm" href="{{route('admin.ftp.category.create')}}">Add</a>
+                <a class="btn btn-secondary btn-sm" href="{{route('admin.cms.ftp.category.create')}}">Add</a>
             </div>
         </div>
         <div class="card-body">
@@ -25,9 +25,9 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$ftpCategory->name}}</td>
                         <td class="d-flex justify-content-around">
-                            <a href="{{route('admin.ftp.category.edit',['category'=>$ftpCategory->id])}}"
+                            <a href="{{route('admin.cms.ftp.category.edit',['category'=>$ftpCategory->id])}}"
                                 class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                            <form action="{{route('admin.ftp.category.destroy',['category'=>$ftpCategory->id])}}"
+                            <form action="{{route('admin.cms.ftp.category.destroy',['category'=>$ftpCategory->id])}}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')

@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="card-body">
-            <form class="row g-3" action="{{route('admin.ftp.category.update',['category'=>$data['ftpCategory']->id])}}"
+            <form class="row g-3"
+                action="{{route('admin.cms.ftp.category.update',['category'=>$data['ftpCategory']->id])}}"
                 method="POST">
                 @csrf
                 @method('PUT')
