@@ -1,5 +1,3 @@
-# ![RouterOS](logo.png)
-----------
 # Getting started
 
 ## Installation
