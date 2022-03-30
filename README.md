@@ -1,9 +1,3 @@
-# ![Laravel Example App](logo.png)
-
-
-This repo is functionality complete — PRs and issues welcome!
-
-----------
 # Getting started
 
 ## Installation
