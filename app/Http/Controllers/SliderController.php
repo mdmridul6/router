@@ -43,7 +43,7 @@ class SliderController extends Controller
     {
         $request->validate([
             'image' => 'required',
-            'content' => 'required|max:114|min:40',
+            'content' => 'required|max:255|min:40',
             'title' => 'required|max:29|min:6',
         ]);
 
@@ -86,7 +86,7 @@ class SliderController extends Controller
     public function update(Request $request, $slider)
     {
         $request->validate([
-            'content' => 'required|max:114|min:40',
+            'content' => 'required|max:255|min:40',
             'title' => 'required|max:29|min:6',
         ]);
 
