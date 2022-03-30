@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Helper\Helper;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use PHPUnit\TextUI\Help;
 
 class SliderController extends Controller
@@ -102,7 +104,11 @@ class SliderController extends Controller
      */
     public function destroy($slider)
     {
-        Slider::destroy($slider);
+        $slider = Slider::find($slider);
+        if (File::exists(public_path($slider->images))) {
+            File::delete(public_path($slider->images));
+        }
+        $slider->delete();
         Session::flash('error', "Slider delete Successfull");
         return redirect()->back();
     }

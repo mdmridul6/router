@@ -48,8 +48,7 @@
     <div class="welcome-slider-area">
         <div id="welcome-slide-carousel" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                @foreach ($data['slider'] as $slider)
-
+                @forelse ($data['slider'] as $slider)
                 <div class="item @if ($loop->first) active @endif">
                     <div class="single-slide-item"
                         style="background-image: url({{(isset($slider->images)) ? asset($slider->images) : '' }}); background-size: cover;">
@@ -80,7 +79,39 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <div class="item active">
+                    <div class="single-slide-item"
+                        style="background-image: url({{asset('frontend/images/testi-bg.jpg')}}); background-size: cover;">
+                        <div class="single-slide-item-table">
+                            <div class="single-slide-item-tablecell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="slider_heading">
+                                                <h1 class="alt-font title-large font-weight-800 text-white text-uppercase animated fadeInUp"
+                                                    style="animation-delay: 500ms">
+                                                    <span>Lorem ipsum dolor sit.</span>
+                                                </h1>
+                                                <p class="text-white margin-50px-bottom animated fadeInDown"
+                                                    style="animation-delay: 1000ms">Lorem ipsum dolor sit amet
+                                                    consectetur adipisicing elit.</p>
+
+                                                {{-- <div class="single_slide_item_button">
+                                                    <a href="#" class="btn btn-default slider_btn animated fadeInUp"
+                                                        style="animation-delay: 1400ms">Read More</a>
+                                                    <a href="#" class="btn btn-default slider_btn animated fadeInUp"
+                                                        style="animation-delay: 1400ms">Our Business</a>
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforelse
 
             </div>
             <!-- Controls -->
@@ -108,8 +139,9 @@
             <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft">
                 <div class="about_content">
                     <span>About Consultary</span>
-                    <h3>{{(isset($data['about']->title) ? $data['about']->title : "")}}</h3>
-                    <p>{{(isset($data['about']->description) ? $data['about']->description : "")}}</p>
+                    <h3>{{(isset($data['about']->title) ? $data['about']->title : "No About Us Title")}}</h3>
+                    <p>{{(isset($data['about']->description) ? $data['about']->description : "No About Us content")}}
+                    </p>
 
 
 
@@ -121,16 +153,8 @@
             <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight text-center">
                 <div class="about_slider owl-carousel">
                     <div class="about_image">
-                        <img src="{{asset('frontend/images/about/1.jpg')}}"
-                            alt="{{asset('frontend/images/about/1.jpg')}}" />
-                    </div>
-                    <div class="about_slider">
                         <img src="{{asset('frontend/images/about/2.jpg')}}"
                             alt="{{asset('frontend/images/about/2.jpg')}}" />
-                    </div>
-                    <div class="about_slider">
-                        <img src="{{asset('frontend/images/about/3.jpg')}}"
-                            alt="{{asset('frontend/images/about/3.jpg')}}" />
                     </div>
                 </div>
             </div> <!-- END COL -->
