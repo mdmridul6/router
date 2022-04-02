@@ -151,8 +151,13 @@ class PPPoEController extends Controller
         $this->extendedUpdateToRouter($request, $pppoe);
 
         $this->extends($pppoe, $request);
+
         $userDetails = pppoeUserDetails::find($id);
-        $this->extendedPppoeUserDetails($userDetails, $pppoe, $request);
+        if (!isset($userDetails)) {
+            $userDetails = new pppoeUserDetails();
+        } else {
+            $this->extendedPppoeUserDetails($userDetails, $pppoe, $request);
+        }
 
         Session::flash('success', "PPPoe User Update Successfull");
         if (Auth::user()->role == "Admin") {
@@ -571,6 +576,7 @@ class PPPoEController extends Controller
 
     private function extendedPppoeUserDetails($userDetails, $pppoe, $request)
     {
+
         $userDetails->pppoe_id = $pppoe->id;
         $userDetails->name = $request->fullName;
         $userDetails->phone = $request->phone;
