@@ -11,6 +11,7 @@ use App\Notifications\SellerNotify;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use RouterOS\Query;
+use Illuminate\Support\Facades\Log;
 
 
 class DeactivePPPoE extends Command
@@ -46,7 +47,8 @@ class DeactivePPPoE extends Command
      */
     public function handle()
     {
-        $pppoes = PPPoE::where('package_expire_date', '<', Carbon::now())->where('status', true)->get();
+        
+        $pppoes = PPPoE::whereDate('package_expire_date', '<', Carbon::today()->toDateString())->where('status', 1)->get();
         foreach ($pppoes as $pppoe) {
             $pppoe = PPPoE::find($pppoe->id);
             $pppoe->status = false;
@@ -54,7 +56,7 @@ class DeactivePPPoE extends Command
             $pppoe->package_expire_date = null;
             $pppoe->save();
             if (isset($pppoe->seller_id)) {
-                $seller = Seller::where('user_id', $pppoe->seller_id)->first();
+                $seller = Seller::where('id', $pppoe->seller_id)->first();
                 $user = User::find($seller->user_id);
                 $user->notify(new SellerNotify($pppoe));
             } else {
