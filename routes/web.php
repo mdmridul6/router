@@ -91,6 +91,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/create', [SellerController::class, 'store'])->name('store');
             Route::get('/{seller}/show', [SellerController::class, 'show'])->name('show');
             Route::get('/{seller}/edit', [SellerController::class, 'edit'])->name('edit');
+            Route::post('/{seller}/addPermission', [SellerController::class, 'permission'])->name('permission');
             Route::put('/{seller}/update', [SellerController::class, 'update'])->name('update');
             Route::delete('/delete/{seller}', [SellerController::class, 'destroy'])->name('destroy');
             Route::get('/pppoe/assign', [SellerController::class, 'pppoeAssign'])->name('pppoeAssign');

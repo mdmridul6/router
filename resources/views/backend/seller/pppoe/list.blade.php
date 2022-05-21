@@ -8,11 +8,15 @@
             <div class="card-title">
                 PPPoE Users
             </div>
+            @if ($data['seller']->can_add)
+
             <div class="card-toolbar">
                 <a href="{{route('seller.pppoe.create')}}" class="btn btn-sm btn-secondary">
                     Add Users
                 </a>
             </div>
+            @endif
+
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="dataTable">

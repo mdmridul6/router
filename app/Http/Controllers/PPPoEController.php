@@ -47,8 +47,14 @@ class PPPoEController extends Controller
             $data['seller'] = Seller::all();
             return view('backend.admin.pppoe.create', compact('data'));
         } else {
-            $data['packages'] = Seller::with('package')->where('id', Seller::where('user_id', Auth::id())->first('id')->id)->first();
-            return view('backend.seller.pppoe.create', compact('data'));
+            $seller = Seller::where('user_id', Auth::id())->first();
+            if ($seller->can_add) {
+                
+                $data['packages'] = Seller::with('package')->where('id', Seller::where('user_id', Auth::id())->first('id')->id)->first();
+                return view('backend.seller.pppoe.create', compact('data'));
+            } else {
+                return redirect()->back();
+            }
         }
     }
 
@@ -428,7 +434,9 @@ class PPPoEController extends Controller
     {
         $data['app'] = $this->app;
         $data['settings'] = setting::first();
+        $data['seller'] = Seller::where('user_id', Auth::id())->first();
         $data['pppoe'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->orderBy('created_at', 'desc')->get();
+
         return view('backend.seller.pppoe.list', compact('data'));
     }
 

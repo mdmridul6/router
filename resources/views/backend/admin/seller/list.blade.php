@@ -6,6 +6,7 @@
             <div class="card-title">
                 Seller Users
             </div>
+
             <div class="card-toolbar">
                 <a href="{{route('admin.seller.create')}}" class="btn btn-sm btn-secondary">
                     Add Seller
@@ -20,7 +21,7 @@
                         <th>User Name</th>
                         <th>Full Name</th>
                         <th>Phone Number</th>
-                        <th>Email</th>
+                        {{-- <th>Email</th> --}}
                         <th>Password</th>
                         <th>Total User</th>
                         <th>Suspend User</th>
@@ -45,7 +46,7 @@
                         <td>{{$seller->userName}}</td>
                         <td>{{$seller->fullName}}</td>
                         <td>{{$seller->phone}}</td>
-                        <td>{{$seller->email}}</td>
+                        {{-- <td>{{$seller->email}}</td> --}}
                         <td>{{$seller->password }}</td>
 
                         <td>{{$seller->pppoe_count }}</td>
@@ -63,6 +64,14 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-icon btn-light-youtube btn-sm me-5"><i
                                             class="fa fa-trash-alt"></i></button>
+                                </form>
+                                <form action="{{route('admin.seller.permission',$seller->id)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-icon @if ($seller->can_add)
+                                        btn-light-success
+                                    @else
+                                        btn-light-warning
+                                    @endif btn-sm me-5"><i class="fa fa-minus"></i></button>
                                 </form>
 
 

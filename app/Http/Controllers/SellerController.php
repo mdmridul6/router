@@ -84,9 +84,12 @@ class SellerController extends Controller
     }
 
 
-    public function show($id)
+    public function permission(Seller $seller)
     {
-        dd($id);
+        $sellerData = Seller::find($seller->id);
+        $sellerData->can_add = !$sellerData->can_add;
+        $sellerData->save();
+        return redirect()->back();
     }
 
 
