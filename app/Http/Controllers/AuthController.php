@@ -82,6 +82,7 @@ class AuthController extends Controller
             }
             return redirect("login")->with('You do not have access');
         } catch (Exception $th) {
+            dd($th);
             return abort(404);
         }
     }

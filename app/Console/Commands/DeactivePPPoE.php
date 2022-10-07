@@ -51,6 +51,7 @@ class DeactivePPPoE extends Command
         $pppoes = PPPoE::whereDate('package_expire_date', '<', Carbon::today()->toDateString())->where('status', 1)->get();
         foreach ($pppoes as $pppoe) {
             $pppoe = PPPoE::find($pppoe->id);
+            Log::alert("PPPoE Deactive",$pppoe->username);
             $pppoe->status = false;
             $pppoe->package_active_date = null;
             $pppoe->package_expire_date = null;

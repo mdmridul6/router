@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $data['about'] = AboutUs::first();
         $data['slider'] = Slider::take(5)->get();
-        $data['team'] = Team::take(4)->get();
+        $data['team'] = Team::all();
         return view('frontend.index', compact('data'));
     }
 

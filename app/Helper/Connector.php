@@ -23,12 +23,13 @@ class Connector extends Controller
     {
         try {
             return new Client(array(
-                'host' => '58.84.34.200',
+                'host' => '103.189.246.27',
                 'user' => 'maruf',
                 'pass' => 'haxorMs00',
                 'port' => 9320,
             ));
         } catch (ConnectException $exception) {
+            dd($exception);
             return abort(400);
         }
     }
