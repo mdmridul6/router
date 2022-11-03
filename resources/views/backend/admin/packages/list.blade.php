@@ -27,7 +27,7 @@
                     <tr class="text-center">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$package['name']}}</td>
-                        <td>{{$package['local-address']}}</td>
+                        <td>{{$package['local-address'] ?? ""}}</td>
                     </tr>
 
                     @endforeach
