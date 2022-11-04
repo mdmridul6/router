@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
@@ -51,8 +52,9 @@ class PackagesController extends Controller
 
         $packages = $client->query('/ppp/profile/print')->read();
         $routerPackagesArray = [];
+        Schema::disableForeignKeyConstraints();
         Packages::truncate();
-
+        Schema::enableForeignKeyConstraints();
         foreach ($packages as $package) {
             array_push($routerPackagesArray, $package["name"]);
             $checkPackage = Packages::where('name', $package["name"])->first();
