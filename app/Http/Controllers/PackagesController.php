@@ -6,10 +6,12 @@ use App\Helper\Connector;
 use App\Models\AboutUs;
 use App\Models\Packages;
 use App\Models\Seller;
+use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
@@ -46,21 +48,35 @@ class PackagesController extends Controller
     public function create(): JsonResponse
     {
         $client = Connector::Connector();
+
         $packages = $client->query('/ppp/profile/print')->read();
+        $routerPackagesArray = [];
+        Packages::truncate();
+
         foreach ($packages as $package) {
-            $checkPackage = Packages::where('name', $packages["name"])->first();
-            if (is_null($checkPackage)) {
+            array_push($routerPackagesArray, $package["name"]);
+            $checkPackage = Packages::where('name', $package["name"])->first();
+
+            if (!isset($checkPackage)) {
                 $packageData = new Packages();
-                $packageData->name = $package['name'];
-                $packageData->ipAddress = $package['local-address'];
+                $packageData->name = $package['name'] ?? "";
+                $packageData->ipAddress = $package['local-address'] ?? "";
                 $packageData->save();
-            } elseif ($checkPackage->name == $package['name']) {
-                $packageData = new Packages();
-                $packageData->name = $package['name'];
-                $packageData->ipAddress = $package['local-address'];
-                $packageData->save();
+            } elseif (isset($checkPackage)) {
+                $checkPackage->name = $package['name'] ?? "";
+                $checkPackage->ipAddress = $package['local-address'] ?? "";
+                $checkPackage->save();
             }
         }
+
+        $dataPackages = Packages::all();
+        $dataPackagesArray = [];
+        foreach ($dataPackages as $dataPackage) {
+            array_push($dataPackagesArray, $dataPackage->name);
+        }
+        $deleteTest = array_diff($dataPackagesArray, $routerPackagesArray);
+
+        Packages::whereIn('name', $deleteTest)->delete();
         $data = [
             'status' => "Import Successful",
             'data' => "Import Successful",
