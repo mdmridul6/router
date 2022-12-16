@@ -63,10 +63,10 @@
 
             let state = $(this).is(":checked");
             let id = $(this).data('id');
-            console.dir {
+            console.dir({
                 state,
                 id
-            }
+            });
 
             axios.post("{{ route('admin.cms.ftp.statusChange') }}", {
                     state: state,

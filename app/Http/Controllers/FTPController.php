@@ -17,8 +17,7 @@ class FTPController extends Controller
     public function index()
     {
         $data['app'] = $this->app;
-        $data['ftp'] = FTP::with('category')->get();
-
+        $data['ftp'] = FTP::with('category')->where('status', true)->get();
         return view('backend.admin.ftp.index', compact('data'));
     }
 
