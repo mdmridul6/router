@@ -30,9 +30,9 @@
                                 <td>{{ $ftp->title }}</td>
                                 <td>{{ $ftp->category->name }}</td>
                                 <td>
-                                    <label class="switch">
+                                    <label class="switch" for="link_{{ $ftp->id }}">
                                         <input type="checkbox" @if ($ftp->status) checked @endif
-                                            name="link" id="link" data-id="{{ $ftp->id }}">
+                                            name="link" id="link_{{ $ftp->id }}" data-id="{{ $ftp->id }}">
                                         <span class="slider round"></span>
                                     </label>
                                 </td>
@@ -59,7 +59,7 @@
 
 @section('js')
     <script>
-        $('#link').change(function(event) {
+        $($("[name='link']")).change(function(event) {
 
             let state = $(this).is(":checked");
             let id = $(this).data('id');
