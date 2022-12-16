@@ -63,6 +63,10 @@
 
             let state = $(this).is(":checked");
             let id = $(this).data('id');
+            console.dir {
+                state,
+                id
+            }
 
             axios.post("{{ route('admin.cms.ftp.statusChange') }}", {
                     state: state,
@@ -72,6 +76,7 @@
                     const {
                         data
                     } = response;
+                    console.log(data);
                     if (data) {
                         toastr.success("Ftp Activate")
                     } else {
