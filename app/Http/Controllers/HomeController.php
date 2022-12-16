@@ -22,7 +22,9 @@ class HomeController extends Controller
     public function ftp()
     {
         $data = AboutUs::first();
-        $ftps = FTPCategory::with('ftp')->get();
+        $ftps = FTPCategory::with(['ftp' => function ($q) {
+            return $q->where('status', true);
+        }])->get();
         return view('frontend.ftp', compact(['data', 'ftps']));
     }
 
