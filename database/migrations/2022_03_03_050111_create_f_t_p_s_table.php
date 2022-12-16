@@ -19,6 +19,7 @@ class CreateFTPSTable extends Migration
             $table->string('title');
             $table->string('url');
             $table->foreign('category_id')->references('id')->on('f_t_p_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

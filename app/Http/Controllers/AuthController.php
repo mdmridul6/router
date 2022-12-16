@@ -63,10 +63,16 @@ class AuthController extends Controller
     {
         try {
 
-            $data['app'] = $this->app;
-            $client = Connector::Connector();
-            $data['interface'] = $client->query('/interface/ethernet/print')->read();
-            $data['identity'] = $client->query('/system/identity/print')->read();
+            try {
+                $data['app'] = $this->app;
+                $client = Connector::Connector();
+                $data['interface'] = $client->query('/interface/ethernet/print')->read();
+                $data['identity'] = $client->query('/system/identity/print')->read();
+            } catch (\Throwable $th) {
+                Auth::logout();
+                Session::flash("error", "Router Connection Faild");
+                return redirect()->route('login');
+            }
 
 
             if (Auth::user()->role == "Admin") {

@@ -129,6 +129,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
                 Route::get('/edit/{ftp}', [FTPController::class, 'edit'])->name('edit');
                 Route::put('/edit/{ftp}', [FTPController::class, 'update'])->name('update');
                 Route::delete('/delete/{ftp}', [FTPController::class, 'destroy'])->name('destroy');
+                Route::post('/status/change', [FTPController::class, 'statusChange'])->name('statusChange');
             });
 
             Route::prefix('slider')->name('slider.')->group(function () {

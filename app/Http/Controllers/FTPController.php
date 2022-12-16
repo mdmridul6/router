@@ -107,4 +107,12 @@ class FTPController extends Controller
         Session::flash('message', "FTP Delete Successfull");
         return redirect()->route('admin.cms.ftp.index');
     }
+
+    public function statusChange(Request $request)
+    {
+        $ftp = Ftp::find($request->id);
+        $ftp->status = $request->state;
+        $ftp->save();
+        return response()->json($ftp->status);
+    }
 }
