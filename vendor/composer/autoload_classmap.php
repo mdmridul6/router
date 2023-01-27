@@ -38,6 +38,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\AboutUs' => $baseDir . '/app/Models/AboutUs.php',
+    'App\\Models\\CmsPackage' => $baseDir . '/app/Models/CmsPackage.php',
     'App\\Models\\FTP' => $baseDir . '/app/Models/FTP.php',
     'App\\Models\\FTPCategory' => $baseDir . '/app/Models/FTPCategory.php',
     'App\\Models\\PPPoE' => $baseDir . '/app/Models/PPPoE.php',

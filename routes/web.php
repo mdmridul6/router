@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CmsPackageController;
 use App\Http\Controllers\FTPCategoryController;
 use App\Http\Controllers\FTPController;
 use App\Http\Controllers\HomeController;
@@ -149,6 +150,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
                 Route::put('/edit/{ftp}', [TeamController::class, 'update'])->name('update');
                 Route::delete('/delete/{ftp}', [TeamController::class, 'destroy'])->name('destroy');
             });
+            Route::resource('cms-package', CmsPackageController::class);
         });
     });
 });

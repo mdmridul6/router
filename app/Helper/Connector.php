@@ -25,7 +25,7 @@ class Connector extends Controller
     {
         try {
             return new Client(array(
-                'host' => '103.189.246.27',
+                'host' => '103.189.247.27',
                 'user' => 'maruf',
                 'pass' => 'haxorMs00',
                 'port' => 9320,

@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.home')}}">
+                <a class="menu-link" href="{{ route('admin.home') }}">
                     <span class="menu-icon">
                         <span class="svg-icon svg-icon-2">
                             <i class="fas fa-home"></i>
@@ -45,7 +45,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.balence.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.balence.add')}}">
+                        <a class="menu-link" href="{{ route('admin.balence.add') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -76,7 +76,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.package.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.package.index')}}">
+                        <a class="menu-link" href="{{ route('admin.package.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.package.sellerPackage')}}">
+                        <a class="menu-link" href="{{ route('admin.package.sellerPackage') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -116,7 +116,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.seller.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.seller.index')}}">
+                        <a class="menu-link" href="{{ route('admin.seller.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.seller.pppoeAssign')}}">
+                        <a class="menu-link" href="{{ route('admin.seller.pppoeAssign') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -150,7 +150,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.pppoe.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.index')}}">
+                        <a class="menu-link" href="{{ route('admin.pppoe.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.routerUser')}}">
+                        <a class="menu-link" href="{{ route('admin.pppoe.routerUser') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.ActiveList')}}">
+                        <a class="menu-link" href="{{ route('admin.pppoe.ActiveList') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.pppoe.suspendUser')}}">
+                        <a class="menu-link" href="{{ route('admin.pppoe.suspendUser') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -211,7 +211,7 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg @if (Route::is('admin.cms.*')) show @endif">
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.home.page.index')}}">
+                        <a class="menu-link" href="{{ route('admin.cms.home.page.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -219,7 +219,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.slider.index')}}">
+                        <a class="menu-link" href="{{ route('admin.cms.slider.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -227,7 +227,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.team.index')}}">
+                        <a class="menu-link" href="{{ route('admin.cms.team.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -235,7 +235,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.ftp.category.index')}}">
+                        <a class="menu-link" href="{{ route('admin.cms.ftp.category.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -243,11 +243,19 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('admin.cms.ftp.index')}}">
+                        <a class="menu-link" href="{{ route('admin.cms.ftp.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">FTP Site</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.cms.cms-package.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Packages</span>
                         </a>
                     </div>
                 </div>

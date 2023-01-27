@@ -265,122 +265,35 @@
         <div class="container">
             <div class="section_heading wow zoomIn text-center">
                 <h2>our <span>pricing</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam <br /> ultrices sapien vel quam
-                    luctus pulvinar.</p>
+
             </div> <!-- END HEADING -->
 
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-                    data-wow-offset="0">
-                    <div class="pricingTable">
-                        <div class="pricingTable-header">
-                            <div class="heading">
-                                <h3>STANDARD</h3>
-                                <span class="subtitle">Lorem ipsum dolor</span>
-                            </div>
-                            <span class="price-value"><i class="fa fa-usd"></i><span>10</span><span
-                                    class="mo">/year</span></span>
-                        </div> <!-- END PRICING HEADER -->
+                @foreach ($data['package'] as $package)
+                    <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
+                        data-wow-offset="0">
+                        <div class="pricingTable">
+                            <div class="pricingTable-header">
+                                <div class="heading">
+                                    <h3>{{ $package->name }}</h3>
+                                    <span class="subtitle">{{ $package->sort_desc }}</span>
+                                </div>
+                                <span class="price-value">৳<span>{{ $package->price }}</span><span
+                                        class="mo">/month</span></span>
+                            </div> <!-- END PRICING HEADER -->
 
-                        <div class="pricingContent">
-                            <ul>
-                                <li>50GB Disk Space</li>
-                                <li>50 Email Accounts</li>
-                                <li>50GB Monthly Bandwidth</li>
-                                <li>50 Domains</li>
-                                <li>Unlimited Subdomains</li>
-                            </ul>
-                        </div> <!-- END PRICING CONTENT -->
+                            <div class="pricingContent">
+                                <ul>
+                                    @for ($i = 0; $i < count($package->benifit); $i++)
+                                        <li class="text-capitalize">{{ $package->benifit[$i] }}</li>
+                                    @endfor
 
-                        <div class="pricingTable-sign-up">
-                            <a href="#" class="btn btn-default main_btn">sign up</a>
-                        </div> <!-- END BUTTON BOX-->
-                    </div> <!-- END PRICING TABLE -->
-                </div> <!-- END COL -->
+                                </ul>
+                            </div> <!-- END PRICING CONTENT -->
 
-                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s"
-                    data-wow-offset="0">
-                    <div class="pricingTable">
-                        <div class="pricingTable-header">
-                            <div class="heading">
-                                <h3>BUSINESS</h3>
-                                <span class="subtitle">Lorem ipsum dolor</span>
-                            </div>
-                            <span class="price-value"><i class="fa fa-usd"></i><span>20</span><span
-                                    class="mo">/year</span></span>
-                        </div> <!-- END PRICING HEADER -->
-
-                        <div class="pricingContent">
-                            <ul>
-                                <li>50GB Disk Space</li>
-                                <li>50 Email Accounts</li>
-                                <li>50GB Monthly Bandwidth</li>
-                                <li>50 Domains</li>
-                                <li>Unlimited Subdomains</li>
-                            </ul>
-                        </div> <!-- END PRICING CONTENT -->
-
-                        <div class="pricingTable-sign-up">
-                            <a href="#" class="btn btn-default main_btn">sign up</a>
-                        </div> <!-- END BUTTON BOX-->
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s"
-                    data-wow-offset="0">
-                    <div class="pricingTable">
-                        <div class="pricingTable-header">
-                            <div class="heading">
-                                <h3>PREMIUM</h3>
-                                <span class="subtitle">Lorem ipsum dolor</span>
-                            </div>
-                            <span class="price-value"><i class="fa fa-usd"></i><span>30</span><span
-                                    class="mo">/year</span></span>
-                        </div> <!-- END PRICING HEADER -->
-
-                        <div class="pricingContent">
-                            <ul>
-                                <li>50GB Disk Space</li>
-                                <li>50 Email Accounts</li>
-                                <li>50GB Monthly Bandwidth</li>
-                                <li>50 Domains</li>
-                                <li>Unlimited Subdomains</li>
-                            </ul>
-                        </div> <!-- END PRICING CONTENT -->
-
-                        <div class="pricingTable-sign-up">
-                            <a href="#" class="btn btn-default main_btn">sign up</a>
-                        </div> <!-- END BUTTON BOX-->
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.7s"
-                    data-wow-offset="0">
-                    <div class="pricingTable">
-                        <div class="pricingTable-header">
-                            <div class="heading">
-                                <h3>EXTRA</h3>
-                                <span class="subtitle">Lorem ipsum dolor</span>
-                            </div>
-                            <span class="price-value"><i class="fa fa-usd"></i><span>40</span><span
-                                    class="mo">/year</span></span>
-                        </div> <!-- END PRICING HEADER -->
-
-                        <div class="pricingContent">
-                            <ul>
-                                <li>50GB Disk Space</li>
-                                <li>50 Email Accounts</li>
-                                <li>50GB Monthly Bandwidth</li>
-                                <li>50 Domains</li>
-                                <li>Unlimited Subdomains</li>
-                            </ul>
-                        </div> <!-- END PRICING CONTENT -->
-
-                        <div class="pricingTable-sign-up">
-                            <a href="#" class="btn btn-default main_btn">sign up</a>
-                        </div> <!-- END BUTTON BOX-->
-                    </div>
-                </div>
+                        </div> <!-- END PRICING TABLE -->
+                    </div> <!-- END COL -->
+                @endforeach
             </div>
         </div>
     </section>

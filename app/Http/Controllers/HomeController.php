@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
+use App\Models\CmsPackage;
 use App\Models\FTPCategory;
 use App\Models\Slider;
 use App\Models\Team;
@@ -16,6 +17,8 @@ class HomeController extends Controller
         $data['about'] = AboutUs::first();
         $data['slider'] = Slider::take(5)->get();
         $data['team'] = Team::all();
+        $data['package'] = CmsPackage::where('status', true)->where('show_in_home', true)->limit(4)->get();
+
         return view('frontend.index', compact('data'));
     }
 

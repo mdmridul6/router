@@ -569,6 +569,7 @@ class ComposerStaticInit5539bbe1c48aeeddff1cf20ee59dbe6a
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\AboutUs' => __DIR__ . '/../..' . '/app/Models/AboutUs.php',
+        'App\\Models\\CmsPackage' => __DIR__ . '/../..' . '/app/Models/CmsPackage.php',
         'App\\Models\\FTP' => __DIR__ . '/../..' . '/app/Models/FTP.php',
         'App\\Models\\FTPCategory' => __DIR__ . '/../..' . '/app/Models/FTPCategory.php',
         'App\\Models\\PPPoE' => __DIR__ . '/../..' . '/app/Models/PPPoE.php',
