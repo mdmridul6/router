@@ -31,6 +31,13 @@ class HomeController extends Controller
         return view('frontend.ftp', compact(['data', 'ftps']));
     }
 
+
+    public function packages()
+    {
+        $data['package'] = CmsPackage::where('status', true)->get();
+        return view('frontend.package', compact('data'));
+    }
+
     public function edit()
     {
         $data = AboutUs::first();
