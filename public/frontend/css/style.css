@@ -941,8 +941,8 @@ ul {
   display: block;
 }
 .pricingTable-header > .price-value {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   border: 2px solid #555;
   transition: 0.4s;
@@ -957,6 +957,9 @@ ul {
 }
 .price-value > span {
   font-size: 40px;
+  position: relative;
+  top: 20%;
+  right: 7px;
 }
 .price-value > .mo {
   display: inline-block;

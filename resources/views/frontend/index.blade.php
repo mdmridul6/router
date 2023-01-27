@@ -280,7 +280,7 @@
                                         <h3>{{ $package->name }}</h3>
                                         <span class="subtitle">{{ $package->sort_desc }}</span>
                                     </div>
-                                    <span class="price-value">৳<span>{{ $package->price }}</span><span
+                                    <span class="price-value"><span>৳{{ $package->price }}</span><span
                                             class="mo">/month</span></span>
                                 </div> <!-- END PRICING HEADER -->
 
