@@ -288,10 +288,21 @@ class PPPoEController extends Controller
         return redirect()->back();
     }
 
-    public function     isActive()
+    public function isActive()
     {
 
-        $data['allPPPoe'] = PPPoE::all();
+        $all = PPPoE::all();
+
+        $data['allPPPoe'] = $all->map(function ($value) {
+
+            if (isset($value->username)) {
+                return $value;
+            }
+        })->pluck('username')->toArray();
+
+
+
+
         $client = Connector::Connector();
 
 
@@ -303,6 +314,7 @@ class PPPoEController extends Controller
 
         // Send query and read response from RouterOS
         $data['pppoeActive'] = $client->query($query)->read();
+
 
 
 
@@ -466,7 +478,16 @@ class PPPoEController extends Controller
 
     public function isActiveSeller()
     {
-        $data['allPPPoe'] = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->get();
+        $all = PPPoE::where('seller_id', Seller::where('user_id', Auth::id())->first('id')->id)->get();
+
+
+        $data['allPPPoe'] = $all->map(function ($value) {
+
+            if (isset($value->username)) {
+                return $value;
+            }
+        })->pluck('username')->toArray();
+
         $client = Connector::Connector();
 
 

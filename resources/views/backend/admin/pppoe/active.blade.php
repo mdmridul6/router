@@ -39,19 +39,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data['allPPPoe'] as $allPPPoeE)
-                                @foreach ($data['pppoeActive'] as $pppoeActive)
-                                    @if ($allPPPoeE->username == $pppoeActive['name'])
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pppoeActive['name'] ?? '' }}</td>
-                                            <td>{{ $pppoeActive['service'] ?? '' }}</td>
-                                            <td>{{ $pppoeActive['address'] ?? '' }}</td>
-                                            <td>{{ $pppoeActive['caller-id'] ?? '' }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+
+                            @foreach ($data['pppoeActive'] as $pppoeActive)
+                                @if (in_array($pppoeActive['name'], $data['allPPPoe']))
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $pppoeActive['name'] ?? '' }}</td>
+                                        <td>{{ $pppoeActive['service'] ?? '' }}</td>
+                                        <td>{{ $pppoeActive['address'] ?? '' }}</td>
+                                        <td>{{ $pppoeActive['caller-id'] ?? '' }}</td>
+                                    </tr>
+                                @endif
                             @endforeach
+
                         </tbody>
                     </table>
 
