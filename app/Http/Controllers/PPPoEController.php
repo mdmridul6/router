@@ -117,7 +117,7 @@ class PPPoEController extends Controller
 
             // Send query and read response from RouterOS
             $data['pppoeUserData'] = $client2->query($query2)->read();
-            
+
 
             if (empty($response)) {
                 $data['remoteLink'] = null;
@@ -288,7 +288,7 @@ class PPPoEController extends Controller
         return redirect()->back();
     }
 
-    public function isActive()
+    public function     isActive()
     {
 
         $data['allPPPoe'] = PPPoE::all();
@@ -478,6 +478,8 @@ class PPPoEController extends Controller
 
         // Send query and read response from RouterOS
         $data['pppoeActive'] = $client->query($query)->read();
+
+
 
         return view('backend.seller.pppoe.active', compact('data'));
     }
