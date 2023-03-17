@@ -49,7 +49,7 @@ class PPPoEController extends Controller
         } else {
             $seller = Seller::where('user_id', Auth::id())->first();
             if ($seller->can_add) {
-                
+
                 $data['packages'] = Seller::with('package')->where('id', Seller::where('user_id', Auth::id())->first('id')->id)->first();
                 return view('backend.seller.pppoe.create', compact('data'));
             } else {
@@ -109,7 +109,21 @@ class PPPoEController extends Controller
 
             // Send query and read response from RouterOS
             $response = $client->query($query)->read();
-            $data['remoteLink'] = $response[0]['address'];
+            $client2 = Connector::Connector();
+            // Create "where" Query object for RouterOS
+            $query2 =
+                (new Query('/ppp/secret/print'))
+                ->where('name', $data['pppoeData']->username);
+
+            // Send query and read response from RouterOS
+            $data['pppoeUserData'] = $client2->query($query2)->read();
+            
+
+            if (empty($response)) {
+                $data['remoteLink'] = null;
+            } else {
+                $data['remoteLink'] = $response[0]['address'];
+            }
         } else {
             $data['remoteLink'] = null;
         }
