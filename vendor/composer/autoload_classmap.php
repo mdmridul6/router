@@ -16,6 +16,7 @@ return array(
     'App\\Http\\Controllers\\AboutUsController' => $baseDir . '/app/Http/Controllers/AboutUsController.php',
     'App\\Http\\Controllers\\ApiAuthController' => $baseDir . '/app/Http/Controllers/ApiAuthController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
+    'App\\Http\\Controllers\\CmsPackageController' => $baseDir . '/app/Http/Controllers/CmsPackageController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FTPCategoryController' => $baseDir . '/app/Http/Controllers/FTPCategoryController.php',
     'App\\Http\\Controllers\\FTPController' => $baseDir . '/app/Http/Controllers/FTPController.php',

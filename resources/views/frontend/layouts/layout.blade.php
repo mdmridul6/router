@@ -8,9 +8,10 @@
     <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     @include('frontend.layouts.style')
+    @stack('css')
     <style>
         :root {
-        --primary-color: #fd3300;
+        --primary-color: {{setting('site_color') ?? "#007fc4"}};
         }
     </style>
 

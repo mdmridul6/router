@@ -13,7 +13,7 @@ class Controller extends BaseController
     public $app;
     public function __construct()
     {
-        $this->app = AboutUs::first(['name', 'image']);
+        $this->app = AboutUs::first(['name', 'logo']);
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

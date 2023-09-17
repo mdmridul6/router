@@ -37,6 +37,7 @@ class ComposerStaticInit5539bbe1c48aeeddff1cf20ee59dbe6a
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '2d03ba4be77685c1178be93681e7c2ed' => __DIR__ . '/../..' . '/app/Helper/Functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -547,6 +548,7 @@ class ComposerStaticInit5539bbe1c48aeeddff1cf20ee59dbe6a
         'App\\Http\\Controllers\\AboutUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutUsController.php',
         'App\\Http\\Controllers\\ApiAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiAuthController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
+        'App\\Http\\Controllers\\CmsPackageController' => __DIR__ . '/../..' . '/app/Http/Controllers/CmsPackageController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FTPCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/FTPCategoryController.php',
         'App\\Http\\Controllers\\FTPController' => __DIR__ . '/../..' . '/app/Http/Controllers/FTPController.php',

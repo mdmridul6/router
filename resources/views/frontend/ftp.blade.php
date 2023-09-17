@@ -1,6 +1,15 @@
 @extends('frontend.layouts.layout')
-
+@push('css')
+    <style>
+        .logo{
+            width: 75px;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+@endpush
 @section('content')
+
 
 <!-- START PRELOADER -->
 <div class="preloader">
@@ -21,8 +30,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="index.html" class="navbar-brand">
-                <p>{{(isset($data->name) ? $data->name : "")}}</p>
+            <a href="{{route('home')}}" class="navbar-brand">
+                @if(setting('use_logo') && setting('logo'))
+                    <img class="logo" src="{{asset(setting('logo'))}}" alt="{{asset(setting('logo'))}}">
+                @elseif (setting('name') !== null )
+                    <h2 class="fs-2 text-gray ">{{setting('name')}}</h2>
+                @else
+                    <h2 class="fs-2 text-gray ">{{config('app.title')}}</h2>
+                @endisset
             </a>
         </div>
         <div class="navbar-collapse collapse">

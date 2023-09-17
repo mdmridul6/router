@@ -1,5 +1,13 @@
 @extends('frontend.layouts.layout')
-
+@push('css')
+    <style>
+        .logo {
+            width: 75px;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+@endpush
 @section('content')
     <!-- START PRELOADER -->
     <div class="preloader">
@@ -20,14 +28,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html" class="navbar-brand">
-                    <p>{{ isset($data['about']->name) ? $data['about']->name : '' }}</p>
+                <a href="{{route('home')}}" class="navbar-brand">
+                    @if(setting('use_logo') && setting('logo'))
+                        <img class="logo" src="{{asset(setting('logo'))}}" alt="{{asset(setting('logo'))}}">
+                    @elseif (setting('name') !== null )
+                        <h2 class="fs-2 text-gray ">{{setting('name')}}</h2>
+                    @else
+                        <h2 class="fs-2 text-gray ">{{config('app.title')}}</h2>
+                    @endisset
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <nav>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#home">Home</a></li>
+                        <li><a href="{{route('home')}}#home">Home</a></li>
                         <li><a href="#about_us">About</a></li>
                         <li><a href="#team">Team</a></li>
                         <li><a href="#price">pricing</a></li>
@@ -51,7 +65,7 @@
                     @forelse ($data['slider'] as $slider)
                         <div class="item @if ($loop->first) active @endif">
                             <div class="single-slide-item"
-                                style="background-image: url({{ isset($slider->images) ? asset($slider->images) : '' }}); background-size: cover;">
+                                 style="background-image: url({{ isset($slider->images) ? asset($slider->images) : '' }}); background-size: cover;">
                                 <div class="single-slide-item-table">
                                     <div class="single-slide-item-tablecell">
                                         <div class="container">
@@ -63,7 +77,7 @@
                                                             <span>{{ $slider->title }}</span>
                                                         </h1>
                                                         <p class="text-white margin-50px-bottom animated fadeInDown"
-                                                            style="animation-delay: 1000ms">{{ $slider->content }}</p>
+                                                           style="animation-delay: 1000ms">{{ $slider->content }}</p>
 
                                                         {{-- <div class="single_slide_item_button">
                                                     <a href="#" class="btn btn-default slider_btn animated fadeInUp"
@@ -82,7 +96,7 @@
                     @empty
                         <div class="item active">
                             <div class="single-slide-item"
-                                style="background-image: url({{ asset('frontend/images/testi-bg.jpg') }}); background-size: cover;">
+                                 style="background-image: url({{ asset('frontend/images/testi-bg.jpg') }}); background-size: cover;">
                                 <div class="single-slide-item-table">
                                     <div class="single-slide-item-tablecell">
                                         <div class="container">
@@ -91,11 +105,7 @@
                                                     <div class="slider_heading">
                                                         <h1 class="alt-font title-large font-weight-800 text-white text-uppercase animated fadeInUp"
                                                             style="animation-delay: 500ms">
-                                                            <span>Lorem ipsum dolor sit.</span>
                                                         </h1>
-                                                        <p class="text-white margin-50px-bottom animated fadeInDown"
-                                                            style="animation-delay: 1000ms">Lorem ipsum dolor sit amet
-                                                            consectetur adipisicing elit.</p>
 
                                                         {{-- <div class="single_slide_item_button">
                                                     <a href="#" class="btn btn-default slider_btn animated fadeInUp"
@@ -144,7 +154,6 @@
                         </p>
 
 
-
                         {{-- <div class="about_button">
                         <a href="#" class="btn btn-sm main_btn">Read More</a>
                     </div> --}}
@@ -154,7 +163,7 @@
                     <div class="about_slider owl-carousel">
                         <div class="about_image">
                             <img src="{{ asset('frontend/images/about/2.jpg') }}"
-                                alt="{{ asset('frontend/images/about/2.jpg') }}" />
+                                 alt="{{ asset('frontend/images/about/2.jpg') }}"/>
                         </div>
                     </div>
                 </div> <!-- END COL -->
@@ -221,7 +230,7 @@
                     <div class="col-md-3 col-sm-6 ">
                         <div class="our-team wow fadeInUp">
                             <div class="pic">
-                                <img src="{{ asset($team->image) }}" alt="" style="height:265px;width:100%;" />
+                                <img src="{{ asset($team->image) }}" alt="" style="height:265px;width:100%;"/>
                                 <ul class="social">
                                     @if (isset($team->facebook))
                                         <li><a href="{{ $team->facebook }}" target="_blank" class="fa fa-facebook"></a>
@@ -229,7 +238,7 @@
                                     @endif
                                     @if (isset($team->instagram))
                                         <li><a href="{{ $team->instagram }}" target="_blank"
-                                                class="fa fa-instagram"></a></li>
+                                               class="fa fa-instagram"></a></li>
                                     @endif
                                     @if (isset($team->linkedin))
                                         <li><a href="{{ $team->linkedin }}" target="_blank" class="fa fa-linkedin"></a>
@@ -248,11 +257,6 @@
 
                     <h3 class="text-center text-active-danger">No Team Member Added</h3>
                 @endforelse
-
-
-
-
-
 
 
             </div>
@@ -274,7 +278,7 @@
                 <div class="row">
                     @foreach ($data['package'] as $package)
                         <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s"
-                            data-wow-delay="0.1s" data-wow-offset="0">
+                             data-wow-delay="0.1s" data-wow-offset="0">
                             <div class="pricingTable">
                                 <div class="pricingTable-header">
                                     <div class="heading">
@@ -282,7 +286,7 @@
                                         <span class="subtitle">{{ $package->sort_desc }}</span>
                                     </div>
                                     <span class="price-value"><span>৳{{ $package->price }}</span><span
-                                            class="mo">/month</span></span>
+                                                class="mo">/month</span></span>
                                 </div> <!-- END PRICING HEADER -->
 
                                 <div class="pricingContent">
@@ -309,8 +313,6 @@
         <div class="container">
             <div class="section_heading wow zoomIn text-center">
                 <h2>contact <span>us</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam <br /> ultrices sapien vel quam
-                    luctus pulvinar.</p>
             </div> <!-- END HEADING -->
 
             <div class="row">
@@ -341,25 +343,27 @@
                                 <div class="input_padding text-center">
                                     <div class="form-group col-sm-6">
                                         <input type="text" name="name" class="form-control" id="first-name"
-                                            placeholder="Name *" required="required">
+                                               placeholder="Name *" required="required">
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <input type="email" name="email" class="form-control" id="email"
-                                            placeholder="Email *" required="required">
+                                               placeholder="Email *" required="required">
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <input type="text" name="subject" class="form-control" id="subject"
-                                            placeholder="Subject *" required="required">
+                                               placeholder="Subject *" required="required">
                                     </div>
                                     <div class="form-group col-sm-12 mab-none">
-                                        <textarea rows="8" name="message" class="form-control" id="description" placeholder="Your Message Here ..."
-                                            required="required"></textarea>
+                                        <textarea rows="8" name="message" class="form-control" id="description"
+                                                  placeholder="Your Message Here ..."
+                                                  required="required"></textarea>
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <div class="actions">
                                             <button type="submit" value="Send Your Message" name="submit"
-                                                id="submitButton" class="btn btn-default main_btn"
-                                                title="Click here to submit your message!">Send Your Message</button>
+                                                    id="submitButton" class="btn btn-default main_btn"
+                                                    title="Click here to submit your message!">Send Your Message
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -376,7 +380,7 @@
     <div class="copyright">
         <div class="copyright wow zoomIn text-center">
             <div class="copy_text">
-                <p>Copyright © 2019 Minju Online All Rights Reserved</p>
+                <p>Copyright © {{date("Y")}} {{setting('name') !== null ? setting('name') : "" }} All Rights Reserved</p>
             </div>
         </div>
     </div>

@@ -5,28 +5,30 @@
 <head>
 
     <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8"/>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="{{asset('backend/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
-    <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}"/>
 </head>
 
 <div class="d-flex flex-column flex-root">
     <!--begin::Authentication - Sign-in -->
     <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
-        style="background-image: url({{asset('backend/assets/media/illustrations/development-hd.png')}})">
+         style="background-image: url({{asset('backend/assets/media/illustrations/development-hd.png')}})">
         <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
-            {{-- <a href="../../demo1/dist/index.html" class="mb-12">
-                <img alt="Logo" src="assets/media/logos/logo-2-dark.svg" class="h-45px" />
-            </a> --}}
+            <a href="{{route('home')}}" class="mb-12">
+                @if(setting('logo') !== null)
+                    <img alt="Logo" src="{{asset(setting('logo'))}}" class="h-100px rounded"/>
+                @endif
+            </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
@@ -36,7 +38,7 @@
                     <!--begin::Heading-->
                     <div class="text-center mb-10">
                         <!--begin::Title-->
-                        <h1 class="text-dark mb-3">Sign In to {{ config('app.name') }}</h1>
+                        <h1 class="text-dark mb-3">Sign In to {{setting('name') !== null ? setting('name') : config('app.name') }}</h1>
                         <!--end::Title-->
                         <!--begin::Link-->
                         {{-- <div class="text-gray-400 fw-bold fs-4">New Here?
@@ -54,7 +56,7 @@
                         <!--end::Label-->
                         <!--begin::Input-->
                         <input class="form-control form-control-lg form-control-solid" type="text" name="email"
-                            autocomplete="off" />
+                               autocomplete="off"/>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -70,13 +72,13 @@
                         <!--end::Wrapper-->
                         <!--begin::Input-->
                         <input class="form-control form-control-lg form-control-solid" type="password" name="password"
-                            autocomplete="off" />
+                               autocomplete="off"/>
                         <!--end::Input-->
 
                     </div>
                     <div class="form-check form-check-custom form-check-solid mb-10">
                         <input class="form-check-input" type="checkbox" value="" name="remember"
-                            id="flexCheckDefault" />
+                               id="flexCheckDefault"/>
                         <label class="form-check-label" for="flexCheckDefault">
                             Remember Me
                         </label>
@@ -94,13 +96,13 @@
                 </form>
                 <!--end::Form-->
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li class="list-item">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="list-item">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             </div>
             <!--end::Wrapper-->
@@ -121,22 +123,22 @@
 <!--end::Javascript-->
 <script>
     @if(Session::has('message'))
-    toastr.options =
+        toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.success("{{ session('message') }}");
     @endif
 
-    @if(Session::has('error'))
-    toastr.options =
+            @if(Session::has('error'))
+        toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.error("{{ session('error') }}");
-@endif
+    @endif
 </script>
 </body>
 <!--end::Body-->

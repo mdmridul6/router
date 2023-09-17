@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/clear', function () {
-    Artisan::call('cache:clear');
+    Artisan::call('optimize:clear');
     return "Cache Cleared";
 });
 Route::get('/storage', function () {

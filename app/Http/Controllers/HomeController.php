@@ -47,13 +47,11 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        $about = AboutUs::find(1);
+        $about = AboutUs::first();
         if ($about == null) {
             $about = new AboutUs();
-            $this->createOrUpdate($about, $request);
-        } else {
-            $this->createOrUpdate($about, $request);
         }
+        $this->createOrUpdate($about, $request);
         Session::flash('message', "Home Page Updated");
         return redirect()->back();
     }
@@ -62,6 +60,13 @@ class HomeController extends Controller
     public function createOrUpdate($about, $request)
     {
 
+        if ($request->has('image')){
+            $path=uploadImage($request->image,'logo',200,200,false);
+            $about->logo = $path;
+
+        }
+        $about->use_logo = $request->use_logo;
+        $about->site_color = $request->site_color;
         $about->name = $request->name;
         $about->phone = $request->phone;
         $about->email = $request->email;
