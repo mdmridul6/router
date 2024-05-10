@@ -74,7 +74,7 @@ class DeactivePPPoE extends Command
 
             $query = (new Query('/ppp/secret/set'))
                 ->equal('.id', $secrets[0]['.id'])
-                ->equal('profile', 'Expired');
+                ->equal('profile', 'Block');
 
             // Update query ordinary have no return
             $client->query($query)->read();

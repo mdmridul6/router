@@ -280,7 +280,7 @@ class PPPoEController extends Controller
 
         $query = (new Query('/ppp/secret/set'))
             ->equal('.id', $secrets[0]['.id'])
-            ->equal('profile', 'Expired');
+            ->equal('profile', 'Block');
 
         // Update query ordinary have no return
         $client->query($query)->read();
@@ -630,7 +630,7 @@ class PPPoEController extends Controller
     }
 
 
-    private function extendedAddToRouter($request, $profile = 'Expired')
+    private function extendedAddToRouter($request, $profile = 'Block')
     {
         $client = Connector::Connector();
         $query =
@@ -643,7 +643,7 @@ class PPPoEController extends Controller
         // Send query and read response from RouterOS (ordinary answer from update/create/delete queries has empty body)
         $client->query($query)->read();
     }
-    private function extendedUpdateToRouter($request, $pppoe, $profile = 'Expired')
+    private function extendedUpdateToRouter($request, $pppoe, $profile = 'Block')
     {
 
         $client = Connector::Connector();
