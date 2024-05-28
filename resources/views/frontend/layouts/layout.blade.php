@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Router OS</title>
+    <title>{{setting('name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="{{asset('backend/assets/media/logos/favicon.ico')}}" />
@@ -19,8 +19,8 @@
 
 <body>
     @yield('content')
+    @include('frontend.layouts.script')
 </body>
 
-@include('frontend.layouts.script')
 
 </html>
