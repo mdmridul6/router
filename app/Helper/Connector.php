@@ -28,7 +28,7 @@ class Connector extends Controller
                 'host' => '103.189.247.27',
                 'user' => 'routerOs',
                 'pass' => 'Ms828ms2',
-                'port' => 9328,
+                'port' => 9320,
             ));
         } catch (ConnectException $exception) {
             // dd($exception->getMessage());
