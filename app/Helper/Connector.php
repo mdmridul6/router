@@ -25,10 +25,10 @@ class Connector extends Controller
     {
         try {
             return new Client(array(
-                'host' => '103.189.246.27',
+                'host' => '103.189.247.27',
                 'user' => 'routerOs',
                 'pass' => 'Ms828ms2',
-                'port' => 9320,
+                'port' => 9328,
             ));
         } catch (ConnectException $exception) {
             // dd($exception->getMessage());
